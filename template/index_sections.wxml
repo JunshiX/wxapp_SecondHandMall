@@ -1,0 +1,10 @@
+<template name="index_sections">
+  <view class="section">
+    <view class="section_container">
+      <view class="section_img">
+        <image src="{{item.url}}" style="width:80rpx;height:80rpx;display:flex" bindtap='onSectionTap'></image>
+      </view>
+      <text class="section_name">{{item.title}}</text>
+    </view>
+  </view>
+</template>

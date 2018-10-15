@@ -1,0 +1,2 @@
+<!--pages/sections/sections.wxml-->
+<text>{{json_data}}</text>

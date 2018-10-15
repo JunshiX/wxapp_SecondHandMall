@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import "./template/index_sections.wxss";
+
 .container {
   height: 100%;
   display: flex;

@@ -1,68 +1,30 @@
+<import src="../../template/index_sections.wxml"/>
+
 <view style="display:none">
   <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
 </view>
 
 <scroll-view scroll-y="true" style="height:{{scrollH}}px">
 <!-- bindscrolltolower="loadImages"> -->
+  
+<!--显示首页img-->
   <view class="img_top">
     <image src="/images/top_img.png" style="width:720rpx" mode="widthFix"></image>
   </view>
+<!---->
 
+<!--显示分类-->
   <view style="width:720rpx;margin:10rpx 15rpx 7.5rpx 15rpx;display:flex">
-    <view class="section">
-      <view class="section_container">
-        <view class="section_img">
-          <image src="/images/section/s_1.jpg" style="width:80rpx;height:80rpx;display:flex"></image>
-        </view>
-        <text class="section_name">学习用品</text>
-      </view>
-    </view>
-    <view class="section">
-      <view class="section_container">
-        <view class="section_img">
-          <image src="/images/section/s_2.jpg" style="width:80rpx;height:80rpx;display:flex"></image>
-        </view>
-        <text class="section_name">动植物</text>
-      </view>
-    </view>
-    <view class="section">
-      <view class="section_container">
-        <view class="section_img">
-          <image src="/images/section/s_3.jpg" style="width:80rpx;height:80rpx;display:flex"></image>
-        </view>
-        <text class="section_name">生活美妆</text>
-      </view>
-    </view>
+    <template wx:for="{{sections1}}" is="index_sections" data="{{item}}" key="idx"></template>
   </view>
 
   <view style="width:720rpx;margin:7.5rpx 15rpx 10rpx 15rpx;display:flex">
-    <view class="section">
-      <view class="section_container">
-        <view class="section_img">
-          <image src="/images/section/s_4.jpg" style="width:80rpx;height:80rpx;display:flex"></image>
-        </view>
-        <text class="section_name">交通出行</text>
-      </view>
-    </view>
-    <view class="section">
-      <view class="section_container">
-        <view class="section_img">
-          <image src="/images/section/s_5.jpg" style="width:80rpx;height:80rpx;display:flex"></image>
-        </view>
-        <text class="section_name">电子设备</text>
-      </view>
-    </view>
-    <view class="section">
-      <view class="section_container">
-        <view class="section_img">
-          <image src="/images/section/s_6.jpg" style="width:80rpx;height:80rpx;display:flex"></image>
-        </view>
-        <text class="section_name">穿搭</text>
-      </view>
-    </view>
+    <template wx:for="{{sections2}}" is="index_sections" data="{{item}}" key="idx"></template>
   </view>
+<!---->
 
   <view class="home_img_container" style="width:750">
+    <!--商品左列-->
     <view class="img_col1">
       <view class="img_col_item" wx:for="{{col1}}" wx:key="id">
         <view class="img_item_index">
@@ -73,6 +35,9 @@
         <image class="img-item" src="{{item.pic}}" style="width:100%;height:{{item.height}}px" mode="aspectFill"></image>
       </view>
     </view>
+    <!---->
+
+    <!--商品右列-->
     <view class="img_col2">
       <view class="img_col_item" wx:for="{{col2}}" wx:key="id">
         <view class="img_item_index">
@@ -83,5 +48,6 @@
         <image class="img-item" src="{{item.pic}}" style="width:100%;height:{{item.height}}px" mode="aspectFill"></image>
       </view>
     </view>
+    <!---->
   </view>
 </scroll-view>

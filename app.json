@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/sections/sections"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -12,7 +12,7 @@
   "tabBar": {
     "list": [
       {
-        "selectedIconPath":"images/tabbar/buy.jpg",
+        "selectedIconPath": "images/tabbar/buy.jpg",
         "iconPath": "images/tabbar/buy.jpg",
         "pagePath": "pages/index/index",
         "text": "首页"

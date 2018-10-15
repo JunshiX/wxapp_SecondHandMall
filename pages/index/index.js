@@ -5,7 +5,6 @@ let col2H = 0;
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -16,52 +15,50 @@ Page({
     images: [],
     img_avatars:[],
     col1: [],
-    col2: []
+    col2: [],
+    sections1:[
+      { url: "/images/section/s_1.jpg", title: "学习用品",idx:0 },
+      { url: "/images/section/s_2.jpg", title: "动植物" ,idx:1},
+      { url: "/images/section/s_3.jpg", title: "生活美妆" ,idx:2},
+    ],
+    sections2: [
+      { url: "/images/section/s_4.jpg", title: "交通出行" ,idx:3},
+      { url: "/images/section/s_5.jpg", title: "电子设备" ,idx:4},
+      { url: "/images/section/s_6.jpg", title: "穿搭" ,idx:5},
+    ]
+
   },
 
   onLoad: function() {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    var that = this;
     wx.getSystemInfo({
       success: (res) => {         //初始化
         let ww = res.windowWidth;
         let wh = res.windowHeight;
         let imgWidth = ww * 0.46;
         let scrollH = wh;
-
         this.setData({
           scrollH: scrollH,
           imgWidth: imgWidth
         });
-
         this.loadImages();
       }
     })
+    
+    wx.request({                //获取json api
+      url: 'http://127.0.0.1:3000/goods',
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        that.setData({
+          json_data: res.data
+        })
+      },
+    })
   },
+
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -70,14 +67,13 @@ Page({
       hasUserInfo: true
     })
   },
-  onImageLoad: function(e) {
+
+  onImageLoad: function(e) {          //图片分栏
     let imageId = e.currentTarget.id;
     let oImgW = e.detail.width; //图片原始宽度
     let oImgH = e.detail.height; //图片原始高度
     let imgWidth = this.data.imgWidth; //图片设置的宽度
-    //let scale = imgWidth / oImgW; //比例计算
-    //let imgHeight = oImgH * scale; //自适应高度
-    let imgHeight=imgWidth*0.69;
+    let imgHeight=imgWidth*0.69;//设置图片高度
     
 
     let images = this.data.images;
@@ -118,6 +114,10 @@ Page({
   },
 
   loadImages: function() {      //加载资源
+    //let images=[];
+    //for (let i=0;i<json_data.length;i++){
+
+    //}
     let images = [
       {pic: "../../images/1.jpg",height: 0},
       {pic: "../../images/2.jpg",height: 0},
@@ -135,5 +135,11 @@ Page({
       loadingCount: images.length,
       images: images
     });
-  }
+  },
+
+  onSectionTap: function(){
+    wx.navigateTo({
+      url: '../sections/sections'
+    })
+  },
 })
