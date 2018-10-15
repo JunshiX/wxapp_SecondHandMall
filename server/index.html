@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    　<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <script>
+        $(function(){
+            console.log(1);
+            //get请求
+            $.ajax({
+                type:'get',
+                url:'http://127.0.0.1:3000/api/v1/tasks',
+                success:function(data){
+                    console.log(data);
+                    alert(JSON.stringify(data));
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+            
+        })
+    </script>
+</body>
+</html>

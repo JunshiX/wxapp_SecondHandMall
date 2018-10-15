@@ -16,6 +16,7 @@ Page({
     img_avatars:[],
     col1: [],
     col2: [],
+    json_data:[],
     sections1:[
       { url: "/images/section/s_1.jpg", title: "学习用品",idx:0 },
       { url: "/images/section/s_2.jpg", title: "动植物" ,idx:1},

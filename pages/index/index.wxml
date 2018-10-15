@@ -15,11 +15,11 @@
 
 <!--显示分类-->
   <view style="width:720rpx;margin:10rpx 15rpx 7.5rpx 15rpx;display:flex">
-    <template wx:for="{{sections1}}" is="index_sections" data="{{item}}" key="idx"></template>
+    <template wx:for="{{sections1}}"  wx:key="idx" is="index_sections" data="{{item}}"></template>
   </view>
 
   <view style="width:720rpx;margin:7.5rpx 15rpx 10rpx 15rpx;display:flex">
-    <template wx:for="{{sections2}}" is="index_sections" data="{{item}}" key="idx"></template>
+    <template wx:for="{{sections2}}" wx:key="idx" is="index_sections" data="{{item}}" ></template>
   </view>
 <!---->
 
