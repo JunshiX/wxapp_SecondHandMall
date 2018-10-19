@@ -12,9 +12,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
+    var that=this;
     wx.request({
-      url: 'http://127.0.0.1:3000/goods',
+      url: 'http://127.0.0.1:3000/sections?id='+options.id,
       method: 'GET',
       header: {
         'content-type': 'application/json'

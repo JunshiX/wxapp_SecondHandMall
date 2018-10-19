@@ -18,39 +18,3 @@
   margin: 10rpx 15rpx 0 10rpx;
   display: inline-block;
 }
-
-.img_col_item {
-  margin: 10rpx 0 0 0;
-  border-radius: 5%;
-}
-
-.img_item_index {
-  background-color: #fff;
-  display: block;
-}
-
-.user_avatar {
-  display: inline-block;
-  vertical-align: middle;
-  width: 60rpx;
-  height: 60rpx;
-  margin: 10rpx 10rpx 10rpx 10rpx;
-  border-radius: 50%;
-}
-
-.user_index {
-  display: inline-block;
-  vertical-align: middle;
-  width: 200rpx;
-  font-size: 13px;
-  margin: 10rpx 0 10rpx 0;
-}
-
-.user_location {
-  display: inline-block;
-  vertical-align: middle;
-  width: 60rpx;
-  color: #e74552;
-  margin: 10rpx 0 10rpx 0;
-}
-

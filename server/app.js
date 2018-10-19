@@ -49,6 +49,7 @@ app.use(methodOverride());
 //var env = process.env.NODE_ENV || 'development';
 var env='development';
 
+
 if ('development' == env) {
     app.use(errorHandler({ dumpExceptions: true, showStack: true }));
     mongoose.connect('mongodb://localhost:27017/goods', { useNewUrlParser: true });
@@ -56,12 +57,23 @@ if ('development' == env) {
     console.log("server is listening in 3000");
 }
 
-
+if ('test' == env) {
+    mongoose.connect('mongodb://localhost:27017/todo_development', { useNewUrlParser: true });
+    app.listen(3001);
+};
 
 app.get('/goods', function (req, res, next) {
     goodModel.find({}, function (err, docs) {
-        console.log(docs);
         res.json(docs);
     });
+});
+
+app.get('/sections',function(req,res){
+    var SectionId=req.query.id;
+    console.log(SectionId);
+    goodModel.find({'SectionId':SectionId},function(err,docs){
+        res.json(docs);
+    });
+
 });
 

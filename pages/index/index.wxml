@@ -1,7 +1,8 @@
 <import src="../../template/index_sections.wxml"/>
+<import src="../../template/img_col.wxml"/>
 
 <view style="display:none">
-  <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
+  <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.GoodImage}}" bindload="onImageLoad"></image>
 </view>
 
 <scroll-view scroll-y="true" style="height:{{scrollH}}px">
@@ -26,27 +27,13 @@
   <view class="home_img_container" style="width:750">
     <!--商品左列-->
     <view class="img_col1">
-      <view class="img_col_item" wx:for="{{col1}}" wx:key="id">
-        <view class="img_item_index">
-          <image class="user_avatar" src="/images/ava_1.jpg"></image>
-          <text class="user_index">土木一枝花</text>
-          <text class="user_location">牌区</text>
-        </view>
-        <image class="img-item" src="{{item.pic}}" style="width:100%;height:{{item.height}}px" mode="aspectFill"></image>
-      </view>
+      <template is="img_col" data="{{col:col1,imgHeight}}"></template>
     </view>
     <!---->
 
     <!--商品右列-->
     <view class="img_col2">
-      <view class="img_col_item" wx:for="{{col2}}" wx:key="id">
-        <view class="img_item_index">
-          <image class="user_avatar" src="/images/ava_1.jpg"></image>
-          <text class="user_index">土木一枝花</text>
-          <text class="user_location">牌区</text>
-        </view>
-        <image class="img-item" src="{{item.pic}}" style="width:100%;height:{{item.height}}px" mode="aspectFill"></image>
-      </view>
+      <template is="img_col" data="{{col:col2,imgHeight}}"></template>
     </view>
     <!---->
   </view>

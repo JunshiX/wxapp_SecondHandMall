@@ -1,2 +1,2 @@
 <!--pages/sections/sections.wxml-->
-<text>{{json_data}}</text>
+<text>{{json_data[0]._id}}</text>

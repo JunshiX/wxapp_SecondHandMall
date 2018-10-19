@@ -1,10 +1,10 @@
 <template name="img_col">
-  <view class="img_col_item" wx:for="{{col1}}" wx:key="id">
+  <view class="img_col_item" wx:for="{{col}}" wx:key="id">
     <view class="img_item_index">
-      <image class="user_avatar" src="{{item.avatar}}"></image>
-      <text class="user_nickname">{{item.nickname}}</text>
-      <text class="user_location">{{item.location}}</text>
+      <image class="user_avatar" src="{{item.UserAvatar}}"></image>
+      <text class="user_nickname">{{item.UserNickname}}</text>
+      <text class="user_location">{{item.UserLocation}}</text>
     </view>
-    <image class="img-item" src="{{item.pic}}" style="width:100%;height:{{item.height}}px" mode="aspectFill"></image>
+    <image class="img-item" src="{{item.GoodImage}}" style="width:100%;height:{{imgHeight}}px" mode="aspectFill"></image>
   </view>
 </template>
