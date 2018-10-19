@@ -1,2 +1,8 @@
 <!--pages/sections/sections.wxml-->
-<text>{{json_data[0]._id}}</text>
+<import src="../../template/img_col.wxml" />
+
+<scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:#f5f5f5">
+  <!--两栏展示商品-->
+  <template is="img_col" data="{{col1,col2,imgHeight}}"></template>
+  <!--两栏展示商品-->
+</scroll-view>

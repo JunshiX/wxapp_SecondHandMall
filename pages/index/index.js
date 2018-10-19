@@ -12,9 +12,7 @@ Page({
     scrollH: 0, //瀑布流
     imgWidth: 0,
     imgHeight: 0,
-    loadingCount: 0,
     images: [],
-    img_avatars: [],
     col1: [],
     col2: [],
     json_data: [],
@@ -94,59 +92,23 @@ Page({
       hasUserInfo: true
     })
   },
-
-  onImageLoad: function(e) { //图片分栏
-    let imageId = e.currentTarget.id;
-    let imgHeight = this.data.imgHeight; //图片高度
-
-    let images = this.data.images;
-    let imageObj = null;
-
-    for (let i = 0; i < images.length; i++) {
-      let img = images[i];
-      if (img.id === imageId) {
-        imageObj = img;
-        break;
-      }
-    }
-
-    imageObj.height = imgHeight;
-    let loadingCount = this.data.loadingCount - 1;
+  //加载商品信息
+  loadImages: function() { 
+    let images = this.data.json_data;
+    let baseId = "img-" + (+new Date());
     let col1 = this.data.col1;
     let col2 = this.data.col2;
 
-    if (col1H <= col2H) {
-      col1H += imgHeight;
-      col1.push(imageObj);
-    } else {
-      col2H += imgHeight;
-      col2.push(imageObj);
-    }
-
-    let data = {
-      loadingCount: loadingCount,
-      col1: col1,
-      col2: col2
-    };
-
-    if (loadingCount == 0) {
-      data.images = [];
-    }
-
-    this.setData(data);
-  },
-
-  loadImages: function() { //加载资源
-    let images = this.data.json_data;
-    let baseId = "img-" + (+new Date());
-
     for (let i = 0; i < images.length; i++) {
       images[i].id = baseId + "-" + i;
+      if (i % 2==0) col1.push(images[i]);
+      else col2.push(images[i]);
     }
 
     this.setData({
-      loadingCount: images.length,
-      images: images
+      images: images,
+      col1:col1,
+      col2:col2
     });
   },
 

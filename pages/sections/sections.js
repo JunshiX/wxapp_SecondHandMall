@@ -6,6 +6,12 @@ Page({
    */
   data: {
     json_data:[],
+    scrollH: 0, 
+    imgWidth: 0,
+    imgHeight: 0,
+    images: [],
+    col1: [],
+    col2: [],
   },
 
   /**
@@ -13,6 +19,22 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
+
+    wx.getSystemInfo({
+      success: (res) => { //初始化
+        let ww = res.windowWidth;
+        let wh = res.windowHeight;
+        let imgWidth = ww * 0.46;
+        let imgHeight = imgWidth * 0.69; //设置图片高度
+        let scrollH = wh;
+        this.setData({
+          scrollH: scrollH,
+          imgWidth: imgWidth,
+          imgHeight: imgHeight
+        });
+      },
+    }),
+    //请求某分类下的商品
     wx.request({
       url: 'http://127.0.0.1:3000/sections?id='+options.id,
       method: 'GET',
@@ -23,9 +45,30 @@ Page({
         that.setData({
           json_data: res.data
         })
+        that.loadImages();
       },
     })
   },
+  //加载商品信息
+  loadImages: function () { 
+    let images = this.data.json_data;
+    let baseId = "img-" + (+new Date());
+    let col1 = this.data.col1;
+    let col2 = this.data.col2;
+
+    for (let i = 0; i < images.length; i++) {
+      images[i].id = baseId + "-" + i;
+      if (i % 2 == 0) col1.push(images[i]);
+      else col2.push(images[i]);
+    }
+
+    this.setData({
+      images: images,
+      col1: col1,
+      col2: col2
+    });
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

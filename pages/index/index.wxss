@@ -3,18 +3,4 @@
   margin: 7.5rpx 15rpx 7.5rpx 15rpx;
 }
 
-.home_img_container {
-  background-color: #f5f5f5;
-}
 
-.img_col1 {
-  width: 350rpx;
-  margin: 10rpx 10rpx 0 15rpx; /*上右下左*/
-  display: inline-block;
-}
-
-.img_col2 {
-  width: 350rpx;
-  margin: 10rpx 15rpx 0 10rpx;
-  display: inline-block;
-}
