@@ -1,0 +1,2 @@
+<!--pages/goods/goods.wxml-->
+<image src="{{json_data[0].GoodImage}}"></image>

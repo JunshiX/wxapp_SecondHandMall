@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/sections/sections"
+    "pages/sections/sections",
+    "pages/goods/goods",
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",

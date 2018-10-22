@@ -15,6 +15,7 @@ Page({
     images: [],
     col1: [],
     col2: [],
+    hasGood:false,
     json_data: [],
     sections1: [{
         url: "/images/section/s_1.jpg",
@@ -99,6 +100,9 @@ Page({
     let baseId = "img-" + (+new Date());
     let col1 = this.data.col1;
     let col2 = this.data.col2;
+    let hasGood=this.data.hasGood;
+
+    if (images.length!=0) hasGood=true;
 
     for (let i = 0; i < images.length; i++) {
       images[i].id = baseId + "-" + i;
@@ -107,6 +111,7 @@ Page({
     }
 
     this.setData({
+      hasGood:hasGood,
       images: images,
       col1:col1,
       col2:col2
@@ -119,4 +124,11 @@ Page({
       url: '../sections/sections?id=' + id
     });
   },
+
+  onGoodTap:function(e){
+    let _id=e.currentTarget.id;
+    wx.navigateTo({
+      url: '../goods/goods?_id='+_id,
+    })
+  }
 })

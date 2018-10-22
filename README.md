@@ -32,7 +32,7 @@ var MyModel = mongoose.model('MyModel', schema);
 ---
 
 ## <font color=red>**Express4.x新特性**</font>
->参考文档：<a herf="http://www.expressjs.com.cn/guide/migrating-4.html">Moving to Express 4</a>  
+>参考文档：Moving to Express 4 http://www.expressjs.com.cn/guide/migrating-4.html  
 
 * **更新所有依赖**  
 手动修改dependencies中包的版本号太过麻烦，所以需要借助**npm-check-updates**工具将package.json中的依赖包更新到最新版本。  
@@ -120,7 +120,7 @@ onLoad: function () {
 
 ---
 ## <font color=red>**Template的使用**</font>  
->参考文档：<a herf="https://blog.csdn.net/m0_38082783/article/details/78909416">CSDN Blog：微信小程序----模板（template）</a>  
+>参考文档：Blog：微信小程序----模板 https://blog.csdn.net/m0_38082783/article/details/78909416CSDN   
 
 &emsp;&emsp;由于在同一个项目中需要在多处页面使用到类似的模块，这个时候创建模版就有助于减少代码量，使得代码高度复用。同一个WXML文件中创建多个类似模板用**name**属性来区分，模板的WXSS可以在全局引入也可以在使用页面引入。通过**template**标签使用模板，template标签的**is**属性与模板的name属性对应，**data**属性为传入模板的数据。
 ```javascript
@@ -139,3 +139,8 @@ onLoad: function () {
     <template wx:for="{{sections1}}" is="index_sections" data="{{item}}"></template>
 </view>
 ```
+
+---
+## <font color=red>**小程序的页面跳转和传值**</font>  
+
+&emsp;&emsp;小程序中

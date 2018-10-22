@@ -1,6 +1,6 @@
 <template name="index_sections">
   <view class="section">
-    <view class="section_container"bindtap='onSectionTap' id="{{item.idx}}">
+    <view class="section_container" bindtap='onSectionTap' id="{{item.idx}}">
       <view class="section_img">
         <image src="{{item.url}}" style="width:80rpx;height:80rpx;display:flex"></image>
       </view>
