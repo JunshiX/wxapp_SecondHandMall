@@ -76,7 +76,8 @@ service mongod restart
 
 &emsp;&emsp;Centos7取消了iptables的配置，默认安装了firewalld，配置指令为firewall-cmd：
 ```
-firewall-cmd --zone=public --permanent -add-port=27017/tcp       //--permanent参数将端口永久打开
+firewall-cmd --zone=public --permanent --add-port=27017/tcp       //--permanent参数将端口永久打开
+firewall-cmd --permanent --zone=public --list-ports   //查看已经开启的端口
 firewall-cmd --reload     //重启firewall
 ```
 * 最后，还需要设置阿里云的安全组  

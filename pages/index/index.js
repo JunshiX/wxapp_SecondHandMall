@@ -70,6 +70,7 @@ Page({
     }),
 
     wx.request({ //获取json api
+      //url: 'http://106.14.3.13:3000/goods',
       url: 'http://127.0.0.1:3000/goods',
       method: 'GET',
       header: {
