@@ -63,14 +63,22 @@ if ('test' == env) {
 };
 
 app.get('/goods', function (req, res, next) {
-    goodModel.find({}, function (err, docs) {
-        res.json(docs);
-    });
+    var _id=req.query._id;
+    if (!_id){
+        goodModel.find({}, function (err, docs) {
+            res.json(docs);
+        });
+    }else{
+        goodModel.find({'_id':_id}, function (err, docs) {
+            res.json(docs);
+        });
+    }
+    
+    
 });
 
 app.get('/sections',function(req,res){
     var SectionId=req.query.id;
-    console.log(SectionId);
     goodModel.find({'SectionId':SectionId},function(err,docs){
         res.json(docs);
     });
