@@ -142,5 +142,28 @@ onLoad: function () {
 
 ---
 ## <font color=red>**小程序的页面跳转和传值**</font>  
+>参考文档：小程序官方开发文档——事件 https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html  
 
-&emsp;&emsp;小程序中
+&emsp;&emsp;在小程序中：事件是视图层到逻辑层的通讯方式。事件可以将用户的行为反馈到逻辑层进行处理。事件可以绑定在组件上，当达到触发事件，就会执行逻辑层中对应的事件处理函数。事件对象可以携带额外信息，如id、dataset、touches。  
+&emsp;&emsp;具体事件的应用如下：
+* 首先在组件中绑定一个事件处理函数。
+```javascript
+<image src="{{item.img}}" bindtap='onGoodTap' id='{{item.id}}' data-hi="11"></image>
+```
+* 在相应的Page定义中写上相应的事件处理函数，参数是event。
+```javascript
+onGoodTap:function(e){
+    let id=e.currentTarget.id;
+    wx.navigateTo({
+      url: '../goods/goods?id='+id,
+    })
+}
+```
+&emsp;&emsp;其中**currentTarget**是一个事件对象，它包含了id（当前组件的id）、tagName（当前组件的类型）以及dataset（当前组件上由data-开头的自定义属性组合的集合，在上面的例子中即为hi=11）。  
+&emsp;&emsp;在视图层和逻辑层之间的传值完成后，**wx.navigateTo**方法利用url的方式即可完成页面的跳转并可以携带部分信息到新的页面。
+* 传递的参数通过新的Pages里面的onLoad函数的参数**options**返回。
+```javascript
+onLoad: function (options) {
+  console.log(options.id);  //得到前一个Pages传递的数据
+}
+```
