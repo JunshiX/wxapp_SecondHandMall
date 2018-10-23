@@ -2,17 +2,21 @@
 
 
 ## <font color=red>**创建JSON API** </font>
->参考文档：Node.js入门经典2013版  
+>参考文档：
+>>Node.js入门经典2013版  
+>>阮一峰的网络日志：理解RESTful架构 http://www.ruanyifeng.com/blog/2011/09/restful.html  
+>>阮一峰的网络日志：RESTful API设计指南 http://www.ruanyifeng.com/blog/2014/05/restful_api.html
 
-&emsp;&emsp;创建基于JSON(JavaScript Object Notation)的API使浏览器能和服务交互。API应具备如下功能。
+
+&emsp;&emsp;创建基于**JSON**(JavaScript Object Notation)的**RESTful**(Representational State Transfer) API，使软件能和服务交互。API应具备如下功能。
 * 能够创建、更新、删除和读取数据。
 * 数据储存在MongoDB中。
-* 可以通过浏览器更新数据。
+
 
 ---
 ## <font color=red>**Mongoose的model和Schema** </font>
 
-&emsp;&emsp;**Schema**主要用于定义MongoDB中集合Collection里文档document的结构，通过mongoose.Schema来调用Schema，然后使用new方法来创建schema对象.
+&emsp;&emsp;**Schema**主要用于定义MongoDB中集合Collection里文档document的结构，通过`mongoose.Schema`来调用Schema，然后使用new方法来创建schema对象.
 ```javascript
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -20,8 +24,8 @@ var mySchema = new Schema({
   // value
 });
 ```
-&emsp;&emsp;模型**Model**是根据Schema编译出的构造器，或者称为类，通过Model可以实例化出文档对象document,文档document的创建和检索都需要通过模型Model来处理。使用model()方法，将Schema编译为Model。  
-&emsp;&emsp;model()方法的第一个参数是模型名称。Mongoose会将集合名称设置为模型名称的小写版。如果名称的最后一个字符是字母，则会变成复数；如果名称的最后一个字符是数字，则不变；如果模型名称为"MyModel"，则集合名称为"mymodels"；如果模型名称为"Model1"，则集合名称为"model1"。
+&emsp;&emsp;模型**Model**是根据Schema编译出的构造器，或者称为类，通过Model可以实例化出文档对象document,文档document的创建和检索都需要通过模型Model来处理。使用`model()`方法，将Schema编译为Model。  
+&emsp;&emsp;`model()`方法的第一个参数是模型名称。Mongoose会将集合名称设置为模型名称的小写版。如果名称的最后一个字符是字母，则会变成复数；如果名称的最后一个字符是数字，则不变；如果模型名称为"MyModel"，则集合名称为"mymodels"；如果模型名称为"Model1"，则集合名称为"model1"。
 ```javascript
 //注意：一定要将模型名称与返回值一致，否则会出现一些错误。即 a=mongoose.model('a',schema);
 //在下面这个例子中，生成的集合名称为mymodels
@@ -43,7 +47,7 @@ nuc -u      //更新dependencies到新版本
 
 
 * **移除内置中间件**  
-4.x版本将之前内置的所有中间件除了**static**都分离为单独的模块。4.x中各个模块需要单独安装，并在js文件中导入依赖。  
+4.x版本将之前内置的所有中间件除了`static`都分离为单独的模块。4.x中各个模块需要单独安装，并在js文件中导入依赖。  
 
 ```javascript
 //3.x代码
@@ -70,7 +74,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride());
 ```
 * **移除app.configure方法**  
-使用process.env.NODE_ENV或者app.get('env')来检测环境并相应的配置应用程序。  
+使用`process.env.NODE_ENV`或者`app.get('env')`来检测环境并相应的配置应用程序。  
 
 ```javascript
 //3.x代码
@@ -98,7 +102,7 @@ app.get('/tasks',function(req,res,next){
     });
 });
 ```
-&emsp;&emsp;然后在微信小程序中使用wx.request访问这个api(注意由于小程序不能使用端口访问，所以本地测试的时候需要勾选不校验合法域名、web-view、TLS版本以及HTTPS证书选项).
+&emsp;&emsp;然后在微信小程序中使用`wx.request`访问这个api(注意由于小程序不能使用端口访问，所以本地测试的时候需要勾选不校验合法域名、web-view、TLS版本以及HTTPS证书选项).
 ```javascript
 onLoad: function () {
     var that=this;
@@ -116,7 +120,7 @@ onLoad: function () {
     })
   },
 ```
-**注意**：由于wx.request方法之后会生成新的对象，所以要想传值给page的初始数据，需要在刚开始将this对象赋值给一个that对象。
+**注意**：由于`wx.request`方法之后会生成新的对象，所以要想传值给page的初始数据，需要在刚开始将this对象赋值给一个that对象。
 
 ---
 ## <font color=red>**Template的使用**</font>  
