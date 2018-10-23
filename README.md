@@ -159,9 +159,9 @@ onGoodTap:function(e){
     })
 }
 ```
-&emsp;&emsp;其中**currentTarget**是一个事件对象，它包含了id（当前组件的id）、tagName（当前组件的类型）以及dataset（当前组件上由data-开头的自定义属性组合的集合，在上面的例子中即为hi=11）。  
-&emsp;&emsp;在视图层和逻辑层之间的传值完成后，**wx.navigateTo**方法利用url的方式即可完成页面的跳转并可以携带部分信息到新的页面。
-* 传递的参数通过新的Pages里面的onLoad函数的参数**options**返回。
+&emsp;&emsp;其中`currentTarget`是一个事件对象，它包含了id（当前组件的id）、tagName（当前组件的类型）以及dataset（当前组件上由data-开头的自定义属性组合的集合，在上面的例子中即为hi=11）。  
+&emsp;&emsp;在视图层和逻辑层之间的传值完成后，`wx.navigateTo`方法利用url的方式即可完成页面的跳转并可以携带部分信息到新的页面。
+* 传递的参数通过新的Pages里面的`onLoad()`函数的参数`options`返回。
 ```javascript
 onLoad: function (options) {
   console.log(options.id);  //得到前一个Pages传递的数据
