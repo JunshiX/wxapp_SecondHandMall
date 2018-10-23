@@ -1,9 +1,9 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var router = express.Router();
-var bodyParser = require('body-parser')
-var errorHandler = require('errorhandler');
-var methodOverride = require('method-override');
+var express = require('express'),
+    mongoose = require('mongoose'),
+    router = express.Router(),
+    bodyParser = require('body-parser'),
+    errorHandler = require('errorhandler'),
+    methodOverride = require('method-override');
 
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
@@ -46,9 +46,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 
-//var env = process.env.NODE_ENV || 'development';
 var env='development';
-
 
 if ('development' == env) {
     app.use(errorHandler({ dumpExceptions: true, showStack: true }));
@@ -57,10 +55,7 @@ if ('development' == env) {
     console.log("server is listening in 3000");
 }
 
-if ('test' == env) {
-    mongoose.connect('mongodb://localhost:27017/todo_development', { useNewUrlParser: true });
-    app.listen(3001);
-};
+
 
 app.get('/goods', function (req, res, next) {
     var _id=req.query._id;
@@ -72,9 +67,7 @@ app.get('/goods', function (req, res, next) {
         goodModel.find({'_id':_id}, function (err, docs) {
             res.json(docs);
         });
-    }
-    
-    
+    }  
 });
 
 app.get('/sections',function(req,res){

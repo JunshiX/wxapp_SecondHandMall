@@ -9,14 +9,15 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
-    scrollH: 0, //瀑布流
+    scrollpage:0,
+    scrollH: 0,
     imgWidth: 0,
     imgHeight: 0,
     images: [],
     col1: [],
     col2: [],
     hasGood:false,
-    json_data: [],
+    json_data: [],//获取的json数据
     sections1: [{
         url: "/images/section/s_1.jpg",
         title: "学习用品",
