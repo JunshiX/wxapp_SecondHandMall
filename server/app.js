@@ -34,7 +34,11 @@ if ('development' == env) {
     console.log("server is listening in 3000");
 }
 
-app.use('/query',queryRouter);
-app.use('/insert',insertRouter);
-app.use('/del',delRouter);
-app.use('/update',updateRouter);
+//查询路由
+app.use('/',queryRouter);
+//插入路由
+app.use('/',insertRouter);
+//删除路由
+app.use('/',delRouter);
+//更新路由
+app.use('/',updateRouter);

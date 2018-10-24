@@ -85,10 +85,63 @@ var mySchema = new Schema({
 var MyModel = mongoose.model('MyModel', schema); 
 ```
 ---
-## <font color=red>**express的路由分离**</font>
->参考文档：express框架的路由模块化 https://www.cnblogs.com/lewis-messi/p/9087258.html  
+## <font color=red>**Express的路由分离**</font>
+>参考文档：  
+>express框架的路由模块化 https://www.cnblogs.com/lewis-messi/p/9087258.html  
 
-&emsp;&emsp;在使用Express写代码的过程中
+&emsp;&emsp;路由是由一个**URL**和一个特定的**HTTP**方法（GET、POST等）组成的，它涉及到应用如何响应客户端对某个资源的访问。  
+&emsp;&emsp;在使用Express写代码的过程中，会根据类别，将路由分为多个不同的文件，然后在项目的入口文件（例如app.js）中将其依次挂载，例如：
+```javascript
+var index=require('./routes/index),
+    user=require('./routes/user');
+app.use('/',index);
+app.use('/user',user);
+```
+&emsp;&emsp;但是随着项目的不断完善，一个后端程序会提供很多的数据接口，即会配置很多不同的路由，如果将这些功能接口都放在项目的入口文件里，会使得程序变得臃肿且难以维护，所以需要将路由分离进行管理。  
+&emsp;&emsp;因为数据接口需要执行的操作主要是**CRUD**，所以很自然的想到分模块来管理，项目结构如下：
+```
+├─server
+│  │  app.js
+│  │  package.json
+│  │
+│  ├─models
+│  │      model.js
+│  │
+│  └─routes
+│          delete.js
+│          insert.js
+│          query.js
+│          update.js
+```
+&emsp;&emsp;在routes文件夹下，query.js、insert.js、update.js、delete.js分别对应GET、POST、PUT、DELETE这四个HTTP动词。
+```javascript
+//query.js
+var express = require('express'),
+var router = express.Router();
+
+router.get('/goods', function (req,res) {
+  //function
+});
+
+router.get('/sections', function (req, res) {
+  //function
+});
+
+module.exports = router;
+```
+&emsp;&emsp;在对路由模块化后，需要在程序入口将这些路由关联起来。
+```javascript
+//app.js
+var queryRouter=require('./routes/query'),
+    insertRouter=require('./routes/insert'),
+    delRouter=require('./routes/delete'),
+    updateRouter=require('./routes/update');
+app.use('/',queryRouter);
+app.use('/',insertRouter);
+app.use('/',delRouter);
+app.use('/',updateRouter);
+```
+**注**：`app.use(path,callback)`中的`callback`既可以是`router`对象也可以是函数，但是`app.get(path,callback)`中的`callback`只能是函数。`router`代表一个由`express.Router()`创建的对象，在路由对象中可以定义多个路由规则。
 
 ---
 ## <font color=red>**微信小程序访问API接口**</font>
@@ -175,6 +228,3 @@ onLoad: function (options) {
   console.log(options.id);  //得到前一个Pages传递的数据
 }
 ```
-
-http://www.php.cn/js-tutorial-386926.html
-https://www.cnblogs.com/lewis-messi/p/9087258.html

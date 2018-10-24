@@ -1,14 +1,8 @@
 var express = require('express'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
     Model = require('../models/model');//调用自定义的Mongoose Model
 
 var router = express.Router();
 var goodModel = Model.goodModel;
-
-express().use(bodyParser.json());
-express().use(bodyParser.urlencoded({ extended: true }));
-express().use(methodOverride());
 
 router.get('/goods', function (req,res) {
     goodModel.find({}, function (err, docs) {
