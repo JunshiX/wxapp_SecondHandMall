@@ -1,40 +1,16 @@
-# 微信小程序  
+# 微信小程序设计日志  
+## <font color=red>**设计说明**</font>
+>参考文档：  
+>1.Node.js入门经典2013版  
+>2.阮一峰的网络日志：理解RESTful架构 http://www.ruanyifeng.com/blog/2011/09/restful.html    
 
-
-## <font color=red>**创建JSON API** </font>
->参考文档：
->>Node.js入门经典2013版  
->>阮一峰的网络日志：理解RESTful架构 http://www.ruanyifeng.com/blog/2011/09/restful.html  
->>阮一峰的网络日志：RESTful API设计指南 http://www.ruanyifeng.com/blog/2014/05/restful_api.html
-
-
-&emsp;&emsp;创建基于**JSON**(JavaScript Object Notation)的**RESTful**(Representational State Transfer) API，使软件能和服务交互。API应具备如下功能。
+&emsp;&emsp;本次小程序的开发采用前后端分离的思想。  
+&emsp;&emsp;前端直接使用小程序官方的**WXML+WXSS+JS**框架；  
+&emsp;&emsp;后端利用**NodeJS**的**Express**框架，创建基于**JSON**(JavaScript Object Notation)的**RESTful**(Representational State Transfer) API，使软件能和服务交互。API应具备如下功能。
 * 能够创建、更新、删除和读取数据。
-* 数据储存在MongoDB中。
-
-
----
-## <font color=red>**Mongoose的model和Schema** </font>
-
-&emsp;&emsp;**Schema**主要用于定义MongoDB中集合Collection里文档document的结构，通过`mongoose.Schema`来调用Schema，然后使用new方法来创建schema对象.
-```javascript
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var mySchema = new Schema({
-  // value
-});
-```
-&emsp;&emsp;模型**Model**是根据Schema编译出的构造器，或者称为类，通过Model可以实例化出文档对象document,文档document的创建和检索都需要通过模型Model来处理。使用`model()`方法，将Schema编译为Model。  
-&emsp;&emsp;`model()`方法的第一个参数是模型名称。Mongoose会将集合名称设置为模型名称的小写版。如果名称的最后一个字符是字母，则会变成复数；如果名称的最后一个字符是数字，则不变；如果模型名称为"MyModel"，则集合名称为"mymodels"；如果模型名称为"Model1"，则集合名称为"model1"。
-```javascript
-//注意：一定要将模型名称与返回值一致，否则会出现一些错误。即 a=mongoose.model('a',schema);
-//在下面这个例子中，生成的集合名称为mymodels
-var MyModel = mongoose.model('MyModel', schema); 
-```
-
+* 数据储存在**MongoDB**中。
 
 ---
-
 ## <font color=red>**Express4.x新特性**</font>
 >参考文档：Moving to Express 4 http://www.expressjs.com.cn/guide/migrating-4.html  
 
@@ -91,6 +67,30 @@ if ('test' == env) {
 }
 ```
 ---
+## <font color=red>**Mongoose的model和Schema** </font>
+
+&emsp;&emsp;**Schema**主要用于定义MongoDB中集合Collection里文档document的结构，通过`mongoose.Schema`来调用Schema，然后使用new方法来创建schema对象.
+```javascript
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var mySchema = new Schema({
+  // value
+});
+```
+&emsp;&emsp;模型**Model**是根据Schema编译出的构造器，或者称为类，通过Model可以实例化出文档对象document,文档document的创建和检索都需要通过模型Model来处理。使用`model()`方法，将Schema编译为Model。  
+&emsp;&emsp;`model()`方法的第一个参数是模型名称。Mongoose会将集合名称设置为模型名称的小写版。如果名称的最后一个字符是字母，则会变成复数；如果名称的最后一个字符是数字，则不变；如果模型名称为"MyModel"，则集合名称为"mymodels"；如果模型名称为"Model1"，则集合名称为"model1"。
+```javascript
+//注意：一定要将模型名称与返回值一致，否则会出现一些错误。即 a=mongoose.model('a',schema);
+//在下面这个例子中，生成的集合名称为mymodels
+var MyModel = mongoose.model('MyModel', schema); 
+```
+---
+## <font color=red>**express的路由分离**</font>
+>参考文档：express框架的路由模块化 https://www.cnblogs.com/lewis-messi/p/9087258.html  
+
+&emsp;&emsp;在使用Express写代码的过程中
+
+---
 ## <font color=red>**微信小程序访问API接口**</font>
 &emsp;&emsp;首先新建服务器工程,安装完依赖之后在app.js中写入读取数据库的api.
 ```javascript
@@ -145,6 +145,10 @@ onLoad: function () {
 ```
 
 ---
+## <font color=red>**flex属性的使用**</font>  
+
+
+---
 ## <font color=red>**小程序的页面跳转和传值**</font>  
 >参考文档：小程序官方开发文档——事件 https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html  
 
@@ -171,3 +175,6 @@ onLoad: function (options) {
   console.log(options.id);  //得到前一个Pages传递的数据
 }
 ```
+
+http://www.php.cn/js-tutorial-386926.html
+https://www.cnblogs.com/lewis-messi/p/9087258.html

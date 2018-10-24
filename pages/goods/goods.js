@@ -20,8 +20,7 @@ Page({
     }),
       //请求某分类下的商品
       wx.request({
-        //url: 'http://106.14.3.13:3000/sections?id=' + options.id,
-        url: 'http://127.0.0.1:3000/goods?_id=' + options._id,
+        url: 'http://127.0.0.1:3000/good?_id=' + options._id,
         method: 'GET',
         header: {
           'content-type': 'application/json'
