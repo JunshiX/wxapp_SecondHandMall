@@ -18,7 +18,7 @@
 手动修改dependencies中包的版本号太过麻烦，所以需要借助**npm-check-updates**工具将package.json中的依赖包更新到最新版本。  
 ```
 npm install -g npm-check-updates        //安装
-nuc -u      //更新dependencies到新版本
+ncu -u      //更新dependencies到新版本
 ```
 
 
@@ -92,7 +92,7 @@ var MyModel = mongoose.model('MyModel', schema);
 &emsp;&emsp;路由是由一个**URL**和一个特定的**HTTP**方法（GET、POST等）组成的，它涉及到应用如何响应客户端对某个资源的访问。  
 &emsp;&emsp;在使用Express写代码的过程中，会根据类别，将路由分为多个不同的文件，然后在项目的入口文件（例如app.js）中将其依次挂载，例如：
 ```javascript
-var index=require('./routes/index),
+var index=require('./routes/index'),
     user=require('./routes/user');
 app.use('/',index);
 app.use('/user',user);
