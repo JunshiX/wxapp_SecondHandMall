@@ -14,13 +14,13 @@
   "tabBar": {
     "list": [
       {
-        "selectedIconPath": "images/tabbar/home-fill.png",
+        "selectedIconPath": "images/tabbar/home_selected.png",
         "iconPath": "images/tabbar/home.png",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "selectedIconPath": "images/tabbar/mine-fill.png",
+        "selectedIconPath": "images/tabbar/mine_selected.png",
         "iconPath": "images/tabbar/mine.png",
         "pagePath": "pages/index/index",
         "text": "我的"
