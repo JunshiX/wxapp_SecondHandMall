@@ -14,14 +14,14 @@
   "tabBar": {
     "list": [
       {
-        "selectedIconPath": "images/tabbar/buy.jpg",
-        "iconPath": "images/tabbar/buy.jpg",
+        "selectedIconPath": "images/tabbar/home-fill.png",
+        "iconPath": "images/tabbar/home.png",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "selectedIconPath": "images/tabbar/mine.jpg",
-        "iconPath": "images/tabbar/mine.jpg",
+        "selectedIconPath": "images/tabbar/mine-fill.png",
+        "iconPath": "images/tabbar/mine.png",
         "pagePath": "pages/index/index",
         "text": "我的"
       }

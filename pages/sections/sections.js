@@ -7,127 +7,146 @@ Page({
    * 页面的初始数据
    */
   data: {
-    json_data:[],
-    scrollH: 0, 
+    Loading: false, //上拉加载变量
+    LoadingComplete: false, //加载完成
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    scrollPage: 0,
+    scrollH: 0,
+    scrollNum: 8,//每次加载的数据量
     imgWidth: 0,
     imgHeight: 0,
-    images: [],
+    sectionsId:0,
     col1: [],
     col2: [],
-    hasGood:false,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    var that=this;
+  onLoad: function(options) {
+    var that = this;
 
     wx.getSystemInfo({
-      success: (res) => { //初始化
-        let ww = res.windowWidth;
-        let wh = res.windowHeight;
-        let imgWidth = ww * 0.46;
-        let imgHeight = imgWidth * 0.69; //设置图片高度
-        let scrollH = wh;
-        this.setData({
-          scrollH: scrollH,
-          imgWidth: imgWidth,
-          imgHeight: imgHeight
-        });
-      },
-    }),
-    //请求某分类下的商品
-    wx.request({
-      //url: 'http://106.14.3.13:3000/sections?id=' + options.id,
-      url: 'http://127.0.0.1:3000/sections?id='+options.id,
+        success: (res) => { //初始化
+          let ww = res.windowWidth;
+          let wh = res.windowHeight;
+          let imgWidth = ww * 0.46;
+          let imgHeight = imgWidth * 0.69; //设置图片高度
+          let scrollH = wh;
+          this.setData({
+            scrollH: scrollH,
+            imgWidth: imgWidth,
+            imgHeight: imgHeight,
+            scrollPage: 0,
+            sectionsId:options.id,
+          });
+        },
+      }),
+    
+      this.loadImages();
+    
+  },
+  //加载商品信息
+
+  loadImages: function(options) {
+    var scrollPage = this.data.scrollPage;
+    var col1 = this.data.col1;
+    var col2 = this.data.col2;
+    let Loading = this.data.Loading;
+    let LoadingComplete = this.data.LoadingComplete;
+    let sectionsId=this.data.sectionsId;
+    let scrollNum=this.data.scrollNum;
+    var that = this;
+
+    if (LoadingComplete) return;
+
+    wx.request({ //获取json api
+      url: 'http://127.0.0.1:3000/sections?page=' + scrollPage + '&id=' + sectionsId,
       method: 'GET',
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
+        console.log(scrollPage);
+        let images = res.data;
+        console.log(images);
+        let baseId = "img-" + (+new Date());
+
+        if (images.length == scrollNum) {
+          Loading = true;
+        } else {
+          Loading = false;
+          LoadingComplete = true;
+        }
+
+        for (let i = 0; i < images.length; i++) {
+          images[i].id = baseId + "-" + i;
+          if (i % 2 == 0) col1.push(images[i]);
+          else col2.push(images[i]);
+        }
+
         that.setData({
-          json_data: res.data
-        })
-        that.loadImages();
+          scrollPage: scrollPage + 1,
+          Loading: Loading,
+          LoadingComplete: LoadingComplete,
+          col1: col1,
+          col2: col2
+        });
       },
-    })
-  },
-  //加载商品信息
-  loadImages: function () { 
-    let images = this.data.json_data;
-    let baseId = "img-" + (+new Date());
-    let col1 = this.data.col1;
-    let col2 = this.data.col2;
-    let hasGood=this.data.hasGood;
-
-    if (images.length!=0) hasGood=true;
-
-    for (let i = 0; i < images.length; i++) {
-      images[i].id = baseId + "-" + i;
-      if (i % 2 == 0) col1.push(images[i]);
-      else col2.push(images[i]);
-    }
-
-    this.setData({
-      hasGood:hasGood,
-      images: images,
-      col1: col1,
-      col2: col2
     });
   },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
-  onGoodTap: function (e) {
+  onGoodTap: function(e) {
     let _id = e.currentTarget.id;
     wx.navigateTo({
       url: '../goods/goods?_id=' + _id,

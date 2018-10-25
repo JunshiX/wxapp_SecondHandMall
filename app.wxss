@@ -1,6 +1,6 @@
 /**app.wxss**/
-@import "./template/index_sections.wxss";
-@import "./template/img_col.wxss";
+@import "./template/index_sections/index_sections.wxss";
+@import "./template/img_col/img_col.wxss";
 
 .container {
   height: 100%;

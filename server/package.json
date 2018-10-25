@@ -7,11 +7,5 @@
         "express": "4.16.4",
         "method-override": "^3.0.0",
         "mongoose": ">=2.3.1"
-    },
-    "scripts": {
-        "test": "./node_modules/.bin/mocha"
-    },
-    "devDependencies": {
-        "mocha": "5.2.x"
     }
 }

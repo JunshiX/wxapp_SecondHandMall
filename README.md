@@ -5,10 +5,20 @@
 >2.阮一峰的网络日志：理解RESTful架构 http://www.ruanyifeng.com/blog/2011/09/restful.html    
 
 &emsp;&emsp;本次小程序的开发采用前后端分离的思想。  
-&emsp;&emsp;前端直接使用小程序官方的**WXML+WXSS+JS**框架；  
-&emsp;&emsp;后端利用**NodeJS**的**Express**框架，创建基于**JSON**(JavaScript Object Notation)的**RESTful**(Representational State Transfer) API，使软件能和服务交互。API应具备如下功能。
-* 能够创建、更新、删除和读取数据。
-* 数据储存在**MongoDB**中。
+* 前端直接使用小程序官方的**WXML+WXSS+JS**框架。小程序框架如下：
+```
+─images //图像资源
+│  └─...
+├─pages //视图资源
+│  └─...
+├─template  //模板资源
+│  └─...
+└─utils //工具
+```  
+* 后端利用**NodeJS**的**Express**框架，创建基于**JSON**(JavaScript Object Notation)的**RESTful**(Representational State Transfer) API，使软件能和服务交互。  
+API应具备如下功能：  
+  1. 能够创建、更新、删除和读取数据。
+  2. 数据储存在**MongoDB**中。  
 
 ---
 ## <font color=red>**Express4.x新特性**</font>
@@ -87,7 +97,7 @@ var MyModel = mongoose.model('MyModel', schema);
 ---
 ## <font color=red>**Express的路由分离**</font>
 >参考文档：  
->express框架的路由模块化 https://www.cnblogs.com/lewis-messi/p/9087258.html  
+>博客园：express框架的路由模块化 https://www.cnblogs.com/lewis-messi/p/9087258.html  
 
 &emsp;&emsp;路由是由一个**URL**和一个特定的**HTTP**方法（GET、POST等）组成的，它涉及到应用如何响应客户端对某个资源的访问。  
 &emsp;&emsp;在使用Express写代码的过程中，会根据类别，将路由分为多个不同的文件，然后在项目的入口文件（例如app.js）中将其依次挂载，例如：
@@ -144,7 +154,7 @@ app.use('/',updateRouter);
 **注**：`app.use(path,callback)`中的`callback`既可以是`router`对象也可以是函数，但是`app.get(path,callback)`中的`callback`只能是函数。`router`代表一个由`express.Router()`创建的对象，在路由对象中可以定义多个路由规则。
 
 ---
-## <font color=red>**微信小程序访问API接口**</font>
+## <font color=red>**访问API接口**</font>
 &emsp;&emsp;首先新建服务器工程,安装完依赖之后在app.js中写入读取数据库的api.
 ```javascript
 mongoose.connect('mongodb://localhost:27017/todo_development',{useNewUrlParser:true});
@@ -176,8 +186,104 @@ onLoad: function () {
 **注意**：由于`wx.request`方法之后会生成新的对象，所以要想传值给page的初始数据，需要在刚开始将this对象赋值给一个that对象。
 
 ---
+## <font color=red>**分页加载**</font>  
+>参考文档：  
+>1.博客园：Mongoose分页查询优化 https://www.cnblogs.com/fayin/p/7028466.html  
+>2.CSDN：微信小程序之加载更多(分页加载)实例 https://blog.csdn.net/michael_ouyang/article/details/56846185  
+>3.CSDN：微信小程序中使用wxss加载图片并实现动画 https://blog.csdn.net/yaodong379/article/details/78848072?_u_u_u=0.19657183531671762  
+
+&emsp;&emsp;随着后端的数据量越来越大，在前端和后端交互的过程中，一次性返回所有数据会使得页面的打开速度有所下降，同时也增大了前端渲染的难度，而且实际上用户只需要看到页面的部分数据而不需要看到所有的数据，所以需要对数据进行分页。
+
+### **后端处理**  
+&emsp;&emsp;分页的方案大概有三种：前端分页、后端分页以及数据库查询分页。很显然由于数据库查询的性能是优于前端和后端操作数据的性能，所以在后端直接采用**mongoose**的查询分页，利用`skip`和`limit`来进行分页，在前端传入当前视图的页数和每一页的最大数据长度，从而在每次查询只返回局部的数据量，从而实现分流。
+```js
+//后端查询语句
+goodModel.find({}, function (err, docs) {
+  res.json(docs);
+}).limit(pageNum).skip(scrollPage*pageNum);
+```
+### **前端处理**  
+&emsp;&emsp;处理完后端的数据之后，还需要在前端实现对数据的渲染，基本的实现如下：  
+&emsp;&emsp;设置`Loading`和`LoadingComplete`两个参数分别来控制“上拉加载”和“已加载全部”两种状态，设置`scrollPage`和`scrollNum`两个参数来控制当前视图的页数以及每一页最大数据量。
+```js
+//index.js
+onLoad: function() {
+  this.setData({
+    scrollPage: 0,
+    LoadingComplete: false//初始设置未加载完成
+  });
+  this.loadImages(); //加载图片数据
+},
+```
+&emsp;&emsp;初始化结束后，调用加载函数，这里需要搞清`Loading`和`LoadingComplete`两个参数的逻辑：  
+&emsp;&emsp;当每次返回的数据长度和单页最大数据量相等的时候（即使下一次查询的返回数据长度可能为0，只是会多出一次无效查询），说明“上拉加载”的状态是仍然可以持续的，当列表滚动到底部的时候，继续往上拉，就加载更多的内容。  
+&emsp;&emsp;当返回的数据长度小于单页最大数据量的时候（初始没有数据的时候返回空数据也属于这种状态），说明此时后端数据已经都查询完毕，即达成“加载已完成”的状态，此后不需要再访问api。
+```javascript
+//index.js
+loadImages: function() {
+    var scrollPage = this.data.scrollPage;
+    let Loading = this.data.Loading;
+    let LoadingComplete = this.data.LoadingComplete;
+    let scrollNum=this.data.scrollNum;
+    var that = this;
+
+    if (LoadingComplete) return;  //如果加载完成则不再进行网络请求
+    wx.request({
+      url: '...?page=' + scrollPage,
+      method: 'GET',
+      header: {'content-type':'application/json'},
+      success: function(res) {
+        let images = res.data;
+        if (images.length ==scrollNum) {
+          Loading = true;
+        } else {//如果返回的数据数目小于每页的预设加载数据量，则代表加载完成
+          Loading = false;
+          LoadingComplete = true;
+        }
+        that.setData({
+          scrollPage: scrollPage + 1,//页数自增
+          Loading: Loading,
+          LoadingComplete: LoadingComplete,
+        });
+      },
+    });
+  },
+```
+```html
+//index.wxml
+<scroll-view scroll-y="true" bindscrolltolower="loadImages" lower-threshold="50rpx">
+  ...
+  <view wx:if="{{Loading}}">
+    <image class="loading" src=""></image>
+    <text>正在载入更多...</text>
+  </view>
+  <view wx:if="{{LoadingComplete}}">
+    <text>已加载全部</text>
+  </view>
+</scroll-view>
+```
+&emsp;&emsp;另外，在这里为了让“正在载入更多”更加动态，可以加入动画效果，通过图片的转动实现loading的效果。这里采用类似**CSS3**中的`@keyframes`规则，在`@keyframes`中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果。当在 @keyframes 中创建动画时，需要将它捆绑到某个选择器，否则不会产生动画效果。通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：规定动画的名称、规定动画的时长。
+```css
+//index.wxss
+.loading{
+  animation: a 1s linear infinite;
+}
+@keyframes a{
+  from{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to{
+    -webkit-transform: rotate(1turn);
+    transform:rotate(1turn);
+  }
+}
+```  
+
+---
 ## <font color=red>**Template的使用**</font>  
->参考文档：Blog：微信小程序----模板 https://blog.csdn.net/m0_38082783/article/details/78909416CSDN   
+>参考文档：  
+>CSDN：微信小程序----模板 https://blog.csdn.net/m0_38082783/article/details/78909416CSDN   
 
 &emsp;&emsp;由于在同一个项目中需要在多处页面使用到类似的模块，这个时候创建模版就有助于减少代码量，使得代码高度复用。同一个WXML文件中创建多个类似模板用**name**属性来区分，模板的WXSS可以在全局引入也可以在使用页面引入。通过**template**标签使用模板，template标签的**is**属性与模板的name属性对应，**data**属性为传入模板的数据。
 ```javascript

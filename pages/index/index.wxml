@@ -1,27 +1,30 @@
-<import src="../../template/index_sections.wxml" />
-<import src="../../template/img_col.wxml" />
+<import src="../../template/index_sections/index_sections.wxml" />
+<import src="../../template/img_col/img_col.wxml" />
+<view>
+  
+  <scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:#f5f5f5" bindscrolltolower="loadImages" lower-threshold="50rpx">
 
-<!--显示首页img-->
-<view class="img_top">
-  <image src="/images/top_img.png" style="width:720rpx" mode="widthFix"></image>
+    <view style="background-color:#fff;padding:10rpx 0rpx">
+      <!--显示首页img-->
+      <view class="img_top">
+        <image src="/images/top_img.png" style="width:720rpx" mode="widthFix"></image>
+      </view>
+      <!--显示首页img-->
+
+      <!--显示分类-->
+      <view style="width:720rpx;margin:10rpx 15rpx 7.5rpx 15rpx;display:flex">
+        <template wx:for="{{sections1}}" wx:key="idx" is="index_sections" data="{{item}}"></template>
+      </view>
+
+      <view style="width:720rpx;margin:7.5rpx 15rpx 5rpx 15rpx;display:flex">
+        <template wx:for="{{sections2}}" wx:key="idx" is="index_sections" data="{{item}}"></template>
+      </view>
+      <!--显示分类-->
+    </view>
+
+    <!--两栏展示商品-->
+    <template is="img_col" data="{{col1,col2,imgHeight,Loading,LoadingComplete}}"></template>
+    <!--两栏展示商品-->
+
+  </scroll-view>
 </view>
-<!--显示首页img-->
-
-<!--显示分类-->
-<view style="width:720rpx;margin:10rpx 15rpx 7.5rpx 15rpx;display:flex">
-  <template wx:for="{{sections1}}" wx:key="idx" is="index_sections" data="{{item}}"></template>
-</view>
-
-<view style="width:720rpx;margin:7.5rpx 15rpx 10rpx 15rpx;display:flex">
-  <template wx:for="{{sections2}}" wx:key="idx" is="index_sections" data="{{item}}"></template>
-</view>
-<!--显示分类-->
-
-<scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:#f5f5f5">
-  <!-- bindscrolltolower="loadImages"> -->
-
-  <!--两栏展示商品-->
-  <template is="img_col" data="{{col1,col2,imgHeight,hasGood}}"></template>
-  <!--两栏展示商品-->
-
-</scroll-view>
