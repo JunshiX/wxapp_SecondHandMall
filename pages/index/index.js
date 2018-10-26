@@ -93,15 +93,15 @@ Page({
 
     if (LoadingComplete) return;  //如果加载完成则不再进行网络请求
     wx.request({ //获取json api
-      url: 'http://127.0.0.1:3000/goods?page=' + scrollPage,
+      url: app.globalData.requestUrl+'goods?page=' + scrollPage,
       method: 'GET',
       header: {
         'content-type': 'application/json'
       },
       success: function(res) {
-        //console.log(scrollPage);
+        console.log(scrollPage);
         let images = res.data;
-        //console.log(images);
+        console.log(images);
         let baseId = "img-" + (+new Date());
 
         if (images.length ==scrollNum) {
@@ -140,6 +140,7 @@ Page({
   //点击图片
   onGoodTap: function(e) {
     let _id = e.currentTarget.id;
+    console.log(e.currentTarget);
     wx.navigateTo({
       url: '../goods/goods?_id=' + _id,
     })

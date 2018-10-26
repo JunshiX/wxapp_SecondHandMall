@@ -12,10 +12,10 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     scrollPage: 0,
     scrollH: 0,
-    scrollNum: 8,//每次加载的数据量
+    scrollNum: 8, //每次加载的数据量
     imgWidth: 0,
     imgHeight: 0,
-    sectionsId:0,
+    sectionsId: 0,
     col1: [],
     col2: [],
 
@@ -39,13 +39,13 @@ Page({
             imgWidth: imgWidth,
             imgHeight: imgHeight,
             scrollPage: 0,
-            sectionsId:options.id,
+            sectionsId: options.id,
           });
         },
       }),
-    
+
       this.loadImages();
-    
+
   },
   //加载商品信息
 
@@ -55,14 +55,14 @@ Page({
     var col2 = this.data.col2;
     let Loading = this.data.Loading;
     let LoadingComplete = this.data.LoadingComplete;
-    let sectionsId=this.data.sectionsId;
-    let scrollNum=this.data.scrollNum;
+    let sectionsId = this.data.sectionsId;
+    let scrollNum = this.data.scrollNum;
     var that = this;
 
     if (LoadingComplete) return;
 
     wx.request({ //获取json api
-      url: 'http://127.0.0.1:3000/sections?page=' + scrollPage + '&id=' + sectionsId,
+      url: app.globalData.requestUrl + 'sections?page=' + scrollPage + '&id=' + sectionsId,
       method: 'GET',
       header: {
         'content-type': 'application/json'

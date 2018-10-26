@@ -18,7 +18,7 @@
       </view>
     </view>
     <!--商品左列-->
-  
+
     <!--商品右列-->
     <view class="img_col2">
       <view class="img_col_item" wx:for="{{col2}}" wx:key="id">
@@ -31,14 +31,14 @@
       </view>
     </view>
     <!--商品右列-->
-  </view>
 
-  <view wx:if="{{Loading}}" style="display:flex;justify-content:center;align-items:center;margin:10rpx 0rpx">
-    <image class="loading" src="/images/loading.png"></image>
-    <text>正在载入更多...</text>
-  </view>
-  <view wx:if="{{LoadingComplete}}" style="display:flex;justify-content:center;align-items:center;margin:10rpx 0rpx">
-    <text>已加载全部</text>
+    <view wx:if="{{Loading}}" style="display:flex;justify-content:center;align-items:center;margin:10rpx 0rpx">
+      <image class="loading" src="/images/loading.png"></image>
+      <text>正在载入更多...</text>
+    </view>
+    <view wx:if="{{LoadingComplete}}" style="display:flex;justify-content:center;align-items:center;margin:10rpx 0rpx">
+      <text>已加载全部</text>
+    </view>
   </view>
 
 </template>

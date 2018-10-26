@@ -84,3 +84,11 @@ firewall-cmd --reload     //重启firewall
 >参考文档：<a herf="https://jingyan.baidu.com/article/03b2f78c31bdea5ea237ae88.html">开启阿里云服务器端口</a>
 
 &emsp;&emsp;进入阿里云ECS服务器控制台，找到安全组配置，点击配置规则，再点击添加安全组规则，在弹出的窗口中输入端口27017/27017,授权对象为0.0.0.0/0即可。
+
+---
+## <font color=red>**配置小程序的HTTPS环境**</font>
+>参考文档：  
+>1.博客园：Nodejs+Express创建HTTPS服务器 https://www.cnblogs.com/handongyu/p/6260209.html  
+>2.关于NodeJS配置HTTPS服务、阿里云申请HTTPS证书Script https://www.aliyun.com/jiaocheng/992136.html  
+
+

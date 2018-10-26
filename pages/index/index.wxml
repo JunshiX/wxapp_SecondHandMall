@@ -2,7 +2,7 @@
 <import src="../../template/img_col/img_col.wxml" />
 <view>
   
-  <scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:#f7f7f9" bindscrolltolower="loadImages" lower-threshold="50rpx">
+  <scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:{{app.globalData.bgcolor}}" bindscrolltolower="loadImages" lower-threshold="50rpx">
 
     <view style="background-color:#fff;padding:15rpx 0rpx">
       <!--显示首页img-->

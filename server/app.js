@@ -1,8 +1,8 @@
 var express = require('express'),
-    queryRouter=require('./routes/query'),
-    insertRouter=require('./routes/insert'),
-    delRouter=require('./routes/delete'),
-    updateRouter=require('./routes/update'),
+    queryRouter = require('./routes/query'),
+    insertRouter = require('./routes/insert'),
+    delRouter = require('./routes/delete'),
+    updateRouter = require('./routes/update'),
     bodyParser = require('body-parser'),
     errorHandler = require('errorhandler'),
     methodOverride = require('method-override');
@@ -26,19 +26,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 
-var env = 'development';
+var env = 'development';//开发版
+//var env = 'stable';//正式版
 
 if ('development' == env) {
     app.use(errorHandler({ dumpExceptions: true, showStack: true }));
-    app.listen(3000);
-    console.log("server is listening in 3000");
+    app.listen(3000,function(){
+        console.log("server is listening in 3000");
+    });
+} else if ('stable' == env) {
+    var https = require('https');
+    fs = require('fs');
+    var options = {
+        key: fs.readFileSync('./cert-1540518146377_www.clhw.xyz.key'),
+        cert: fs.readFileSync('./cert-1540518146377_www.clhw.xyz.crt'),
+    };
+    var httpsServer = https.createServer(options, app);
+    httpsServer.listen(3000, function () {
+        console.log('Https server is running on 3000 port');
+    });
 }
 
 //查询路由
-app.use('/',queryRouter);
+app.use('/', queryRouter);
 //插入路由
-app.use('/',insertRouter);
+app.use('/', insertRouter);
 //删除路由
-app.use('/',delRouter);
+app.use('/', delRouter);
 //更新路由
-app.use('/',updateRouter);
+app.use('/', updateRouter);
