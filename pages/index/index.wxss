@@ -1,3 +1,6 @@
+page{
+  background-color: #fafafa
+}
 .img_top {
   width: 720rpx;
   margin: 7.5rpx 15rpx 7.5rpx 15rpx;

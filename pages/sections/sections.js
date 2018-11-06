@@ -7,12 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Loading: false, //上拉加载变量
-    LoadingComplete: false, //加载完成
+    Loading: true, //是否加载
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     scrollPage: 0,
     scrollH: 0,
-    scrollNum: 8, //每次加载的数据量
+    scrollNum: 0, //每次加载的数据量
     imgWidth: 0,
     imgHeight: 0,
     sectionsId: 0,
@@ -26,25 +25,25 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    wx.setNavigationBarTitle({
+      title: options.id,
+    })
+    //初始化
+    let ww = app.globalData.windowWidth;
+    let imgWidth = ww * 0.46;
+    let imgHeight = imgWidth * 0.69; //设置图片高度
+    let scrollH = app.globalData.windowHeight;
+    this.setData({
+      scrollNum: app.globalData.scrollNum,
+      scrollH: scrollH,
+      imgWidth: imgWidth,
+      imgHeight: imgHeight,
+      scrollPage: 0,
+      sectionsId: options.id,
+    });
 
-    wx.getSystemInfo({
-        success: (res) => { //初始化
-          let ww = res.windowWidth;
-          let wh = res.windowHeight;
-          let imgWidth = ww * 0.46;
-          let imgHeight = imgWidth * 0.69; //设置图片高度
-          let scrollH = wh;
-          this.setData({
-            scrollH: scrollH,
-            imgWidth: imgWidth,
-            imgHeight: imgHeight,
-            scrollPage: 0,
-            sectionsId: options.id,
-          });
-        },
-      }),
 
-      this.loadImages();
+    this.loadImages();
 
   },
   //加载商品信息
@@ -54,12 +53,11 @@ Page({
     var col1 = this.data.col1;
     var col2 = this.data.col2;
     let Loading = this.data.Loading;
-    let LoadingComplete = this.data.LoadingComplete;
     let sectionsId = this.data.sectionsId;
     let scrollNum = this.data.scrollNum;
     var that = this;
 
-    if (LoadingComplete) return;
+    if (!Loading) return;
 
     wx.request({ //获取json api
       url: app.globalData.requestUrl + 'sections?page=' + scrollPage + '&id=' + sectionsId,
@@ -68,16 +66,11 @@ Page({
         'content-type': 'application/json'
       },
       success: function(res) {
-        console.log(scrollPage);
         let images = res.data;
-        console.log(images);
         let baseId = "img-" + (+new Date());
 
-        if (images.length == scrollNum) {
-          Loading = true;
-        } else {
+        if (images.length != scrollNum) {
           Loading = false;
-          LoadingComplete = true;
         }
 
         for (let i = 0; i < images.length; i++) {
@@ -89,61 +82,16 @@ Page({
         that.setData({
           scrollPage: scrollPage + 1,
           Loading: Loading,
-          LoadingComplete: LoadingComplete,
           col1: col1,
           col2: col2
         });
       },
+      fail:function(){
+        that.setData({
+          Loading: true,
+        })
+      }
     });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   },
 
   onGoodTap: function(e) {
@@ -151,6 +99,6 @@ Page({
     wx.navigateTo({
       url: '../goods/goods?_id=' + _id,
     })
-  }
+  },
 
 })

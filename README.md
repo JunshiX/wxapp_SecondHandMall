@@ -7,9 +7,11 @@
 &emsp;&emsp;本次小程序的开发采用前后端分离的思想。  
 * 前端直接使用小程序官方的**WXML+WXSS+JS**框架。小程序框架如下：
 ```
-─images //图像资源
+─images //图片资源
 │  └─...
 ├─pages //视图资源
+│  └─...
+├─component //自定义组件
 │  └─...
 ├─template  //模板资源
 │  └─...
@@ -113,10 +115,8 @@ app.use('/user',user);
 ├─server
 │  │  app.js
 │  │  package.json
-│  │
 │  ├─models
 │  │      model.js
-│  │
 │  └─routes
 │          delete.js
 │          insert.js
@@ -128,15 +128,11 @@ app.use('/user',user);
 //query.js
 var express = require('express'),
 var router = express.Router();
-
-router.get('/goods', function (req,res) {
+router.get('/...', function (req,res) {
   //function
 });
-
-router.get('/sections', function (req, res) {
-  //function
-});
-
+router.get('/...', function (req,res) {});
+...
 module.exports = router;
 ```
 &emsp;&emsp;在对路由模块化后，需要在程序入口将这些路由关联起来。
@@ -155,9 +151,8 @@ app.use('/',updateRouter);
 
 ---
 ## <font color=red>**访问API接口**</font>
-&emsp;&emsp;首先新建服务器工程,安装完依赖之后在app.js中写入读取数据库的api.
+&emsp;&emsp;首先新建服务器工程,安装完依赖之后在app.js中写入路由对应的方法操作.
 ```javascript
-mongoose.connect('mongodb://localhost:27017/todo_development',{useNewUrlParser:true});
 app.listen(3000);
 app.get('/tasks',function(req,res,next){
     taskModel.find({},function(err,docs){
@@ -204,46 +199,40 @@ goodModel.find({}, function (err, docs) {
 ```
 ### **前端处理**  
 &emsp;&emsp;处理完后端的数据之后，还需要在前端实现对数据的渲染，基本的实现如下：  
-&emsp;&emsp;设置`Loading`和`LoadingComplete`两个参数分别来控制“上拉加载”和“已加载全部”两种状态，设置`scrollPage`和`scrollNum`两个参数来控制当前视图的页数以及每一页最大数据量。
+&emsp;&emsp;设置`Loading`参数分别来控制“是否加载数据”，设置`scrollPage`和`scrollNum`两个参数来控制当前视图的页数以及每一页最大数据量。
 ```js
 //index.js
 onLoad: function() {
   this.setData({
     scrollPage: 0,
-    LoadingComplete: false//初始设置未加载完成
+    Loading: true //默认加载
   });
   this.loadImages(); //加载图片数据
 },
 ```
-&emsp;&emsp;初始化结束后，调用加载函数，这里需要搞清`Loading`和`LoadingComplete`两个参数的逻辑：  
-&emsp;&emsp;当每次返回的数据长度和单页最大数据量相等的时候（即使下一次查询的返回数据长度可能为0，只是会多出一次无效查询），说明“上拉加载”的状态是仍然可以持续的，当列表滚动到底部的时候，继续往上拉，就加载更多的内容。  
+&emsp;&emsp;初始化结束后，调用加载函数，这里需要搞清`Loading`参数的逻辑状态：  
+&emsp;&emsp;当每次返回的数据长度和单页最大数据量相等的时候（即使下一次查询的返回数据长度可能为0，只是会多出一次无效查询），说明“继续加载”的状态是仍然可以持续的，当列表滚动到底部的时候，继续往上拉，就加载更多的内容。  
 &emsp;&emsp;当返回的数据长度小于单页最大数据量的时候（初始没有数据的时候返回空数据也属于这种状态），说明此时后端数据已经都查询完毕，即达成“加载已完成”的状态，此后不需要再访问api。
 ```javascript
 //index.js
 loadImages: function() {
     var scrollPage = this.data.scrollPage;
     let Loading = this.data.Loading;
-    let LoadingComplete = this.data.LoadingComplete;
     let scrollNum=this.data.scrollNum;
     var that = this;
-
-    if (LoadingComplete) return;  //如果加载完成则不再进行网络请求
+    if (!Loading) return;  //如果加载完成则不再进行网络请求
     wx.request({
       url: '...?page=' + scrollPage,
       method: 'GET',
       header: {'content-type':'application/json'},
       success: function(res) {
         let images = res.data;
-        if (images.length ==scrollNum) {
-          Loading = true;
-        } else {//如果返回的数据数目小于每页的预设加载数据量，则代表加载完成
+        if (images.length != scrollNum) { //如果返回的数据数目小于每页的预设加载数据量，则代表加载完成
           Loading = false;
-          LoadingComplete = true;
         }
         that.setData({
           scrollPage: scrollPage + 1,//页数自增
-          Loading: Loading,
-          LoadingComplete: LoadingComplete,
+          Loading: Loading
         });
       },
     });
@@ -257,12 +246,14 @@ loadImages: function() {
     <image class="loading" src=""></image>
     <text>正在载入更多...</text>
   </view>
-  <view wx:if="{{LoadingComplete}}">
+  <view wx:if="{{!Loading}}">
     <text>已加载全部</text>
   </view>
 </scroll-view>
 ```
-&emsp;&emsp;另外，在这里为了让“正在载入更多”更加动态，可以加入动画效果，通过图片的转动实现loading的效果。这里采用类似**CSS3**中的`@keyframes`规则，在`@keyframes`中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果。当在 @keyframes 中创建动画时，需要将它捆绑到某个选择器，否则不会产生动画效果。通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：规定动画的名称、规定动画的时长。
+&emsp;&emsp;另外，在这里为了让“正在载入更多”更加动态（见gif图），可以加入动画效果，通过图片的转动实现loading的效果。这里采用类似**CSS3**中的`@keyframes`规则，在`@keyframes`中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果。当在 @keyframes 中创建动画时，需要将它捆绑到某个选择器，否则不会产生动画效果。通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：规定动画的名称、规定动画的时长。  
+<center><img src="https://thumbnail0.baidupcs.com/thumbnail/b21088f28cdfc3b457b7ea048b0ebcd4?fid=1998016987-250528-15910787934382&time=1541491200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-2TecQ4IJAeTLLBvudbvfYauhKD8%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7182690927284426649&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"></center>
+
 ```css
 //index.wxss
 .loading{
@@ -309,7 +300,8 @@ loadImages: function() {
 
 ---
 ## <font color=red>**小程序的页面跳转和传值**</font>  
->参考文档：小程序官方开发文档——事件 https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html  
+>参考文档：  
+>小程序官方开发文档——事件 https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html  
 
 &emsp;&emsp;在小程序中：事件是视图层到逻辑层的通讯方式。事件可以将用户的行为反馈到逻辑层进行处理。事件可以绑定在组件上，当达到触发事件，就会执行逻辑层中对应的事件处理函数。事件对象可以携带额外信息，如id、dataset、touches。  
 &emsp;&emsp;具体事件的应用如下：
@@ -333,4 +325,80 @@ onGoodTap:function(e){
 onLoad: function (options) {
   console.log(options.id);  //得到前一个Pages传递的数据
 }
+```
+
+---
+## <font color=red>**自定义tabBar组件（component）**</font>  
+>参考文档：  
+>CSDN：微信小程序开发——自定义tabBar https://blog.csdn.net/qq_30817073/article/details/81450559  
+>小程序官方文档——路由 https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html
+
+&emsp;&emsp;由于小程序的tabBar不能支持自定义样式，而且不支持多级页面（即tab标签无法跳转到非tab标签的页面，具体的Tab切换对应的生命周期可以见参考文档中给出的小程序官方文档）。而本次开发的tabBar是类似于下图的。  
+<center><img src="https://thumbnail0.baidupcs.com/thumbnail/ef6b563be395b52c2925533aba553e98?fid=1998016987-250528-131504042432882&time=1541491200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-H%2BqAVm%2ByfHI%2F7xFu3fzNz3kyGBU%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7182665933009203582&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"></center>
+
+&emsp;&emsp;查了很多资料，发现网上大多数的自定义的做法是写成模板的形式，但是在页面切换的时候由于重新渲染，tabbar会出现闪动，所以这里采取写成组件的形式，这样在页面跳转的时候不会闪动。
+
+&emsp;&emsp;具体的实现方法:
+1. 封装tabBar组件属性列表，实现仿照官方tabBar定义。
+```js
+//  "../component/tabbar.js"
+Component({
+  // 组件的属性列表
+  properties: {
+    tabbar: {
+      type: Object,
+      value: {
+        "backgroundColor": "",
+        "color": "",
+        "selectedColor": "",
+        "list": [{
+            "pagePath": "",
+            "iconPath": "",
+            "selectedIconPath": "",
+            "text": ""
+          },
+          ...
+        ]
+      }
+    }
+  },
+})
+```
+2.在`App.js`中的`onLaunch()`方法中，用`wx.hideTabBar()`隐藏系统自带的tabbar，同时根据当前的页面栈判断是否选中tab标签，从而控制tab标签的selected状态。
+```js
+//app.js
+editTabbar: function () {
+    let tabbar = this.globalData.tabBar;
+    let currentPages = getCurrentPages(); //获取当前页面栈
+    let _this = currentPages[currentPages.length - 1];
+    let pagePath = _this.route;
+    (pagePath.indexOf('/') != 0) && (pagePath = '/' + pagePath)
+    for (let i in tabbar.list) {
+      tabbar.list[i].selected = false;
+      (tabbar.list[i].pagePath == pagePath) && (tabbar.list[i].selected = true);
+    }
+    _this.setData({
+      tabbar: tabbar
+    });
+  },
+```
+3.因为标签中涉及到两种不同的tab，“我要卖”的tab是要跳转到非tab页面的，所以在wxml中要设置不同的跳转方式。
+```html
+//tabbar.wxml
+<navigator wx:if="{{item.isSpecial}}" open-type="navigate" ···>
+  <!--跳转到非tab页面-->
+</navigator>
+<navigator wx:else open-type="switchTab">
+  <!--跳转到tab页面-->
+</navigator>
+```
+&emsp;&emsp;在上面的组件和状态切换方法写完后，在`app.json`中配置tabBar，因为点击“我要卖”是跳转到非tab页面，所以不需要配置在tabBar的list中。然后在tab标签（如首页和个人中心）的页面的`data`中加入`tabbar:{}`，并在`onLoad()`中调用`app.editTabbar()`方法，同时在tab标签的页面的json文件中加入以下代码:
+```json
+"usingComponents":{
+  "tabbar":"../../component/tabbar/tabbar"
+}
+```
+&emsp;&emsp;最后在wxml中调用组件。
+```html
+<tabbar tabbar="{{tabbar}}"></tabbar>
 ```

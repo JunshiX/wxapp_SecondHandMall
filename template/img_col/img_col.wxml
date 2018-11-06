@@ -32,12 +32,12 @@
     </view>
     <!--商品右列-->
 
-    <view wx:if="{{Loading}}" style="display:flex;justify-content:center;align-items:center;margin:10rpx 0rpx">
+    <view wx:if="{{Loading}}" style="display:flex;justify-content:center;align-items:center;margin:40rpx 0">
       <image class="loading" src="/images/loading.png"></image>
-      <text>正在载入更多...</text>
+      <text style="color:#979795">正在载入更多...</text>
     </view>
-    <view wx:if="{{LoadingComplete}}" style="display:flex;justify-content:center;align-items:center;margin:10rpx 0rpx">
-      <text>已加载全部</text>
+    <view wx:if="{{!Loading}}" style="display:flex;justify-content:center;align-items:center;margin:40rpx 0">
+      <text style="color:#979795">没有更多了</text>
     </view>
   </view>
 

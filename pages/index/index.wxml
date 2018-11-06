@@ -1,8 +1,8 @@
 <import src="../../template/index_sections/index_sections.wxml" />
 <import src="../../template/img_col/img_col.wxml" />
+
 <view>
-  
-  <scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:{{app.globalData.bgcolor}}" bindscrolltolower="loadImages" lower-threshold="50rpx">
+  <scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:#fafafa" bindscrolltolower="loadImages" lower-threshold="50rpx">
 
     <view style="background-color:#fff;padding:15rpx 0rpx">
       <!--显示首页img-->
@@ -23,8 +23,12 @@
     </view>
 
     <!--两栏展示商品-->
-    <template is="img_col" data="{{col1,col2,imgHeight,Loading,LoadingComplete}}"></template>
+    <template is="img_col" data="{{col1,col2,imgHeight,Loading}}"></template>
     <!--两栏展示商品-->
 
+    <!--占用自定义tabbar空间-->
+    <view style="height:98rpx"></view>
+    <!--占用自定义tabbar空间-->
   </scroll-view>
+  <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

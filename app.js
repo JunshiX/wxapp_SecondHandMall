@@ -1,7 +1,11 @@
 //app.js
 App({
   onLaunch: function() {
-    // 展示本地存储能力
+    var that = this;
+    //隐藏系统自带tabBar
+    wx.hideTabBar();
+
+    // 展示本地存储能力    
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -11,7 +15,14 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
-    })
+    });
+    //获取系统信息
+    wx.getSystemInfo({
+      success: (res) => {
+        that.globalData.windowWidth = res.screenWidth;
+        that.globalData.windowHeight = res.screenHeight;
+      },
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -33,10 +44,51 @@ App({
       }
     })
   },
+  //自定义tabbar组件
+  editTabbar: function() {
+    let tabbar = this.globalData.tabBar;
+    let currentPages = getCurrentPages();
+    let _this = currentPages[currentPages.length - 1];
+    let pagePath = _this.route;
+    (pagePath.indexOf('/') != 0) && (pagePath = '/' + pagePath);
+    for (let i in tabbar.list) {
+      tabbar.list[i].selected = false;
+      (tabbar.list[i].pagePath == pagePath) && (tabbar.list[i].selected = true);
+    }
+    _this.setData({
+      tabbar: tabbar
+    });
+  },
   globalData: {
     userInfo: null,
     //requestUrl: "https://www.clhw.xyz/",
-    requestUrl:"http://127.0.0.1:3000/",
-    bgcolor: '#f7f7f9',
+    requestUrl: "http://127.0.0.1:3000/",
+    scrollNum: 20,
+    windowHeight: null,
+    windowWidth: null,
+    tabBar: {
+      "backgroundColor": "#ffffff",
+      "color": "#979795",
+      "selectedColor": "#E74552",
+      "list": [{
+          "pagePath": "/pages/index/index",
+          "iconPath": "icon/home.png",
+          "selectedIconPath": "icon/home_selected.png",
+          "text": "我要买"
+        },
+        {
+          "pagePath": "/pages/sell/sell",
+          "iconPath": "icon/icon_release.png",
+          "isSpecial": true,
+          "text": "我要卖"
+        },
+        {
+          "pagePath": "/pages/mine/mine",
+          "iconPath": "icon/mine.png",
+          "selectedIconPath": "icon/mine_selected.png",
+          "text": "我的"
+        }
+      ]
+    }
   }
 })

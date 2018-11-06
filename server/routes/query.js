@@ -4,13 +4,13 @@ var express = require('express'),
 var router = express.Router();
 var goodModel = Model.goodModel;
 
-var pageNum=8;
+var pageNum=20;
 
 router.get('/goods', function (req,res) {
     var scrollPage=req.query.page;
     goodModel.find({}, function (err, docs) {
         res.json(docs);
-    }).limit(pageNum).skip(scrollPage*pageNum);
+    }).limit(pageNum).skip(scrollPage*pageNum).sort({'_id':-1});
 });
 
 router.get('/sections', function (req, res) {
@@ -18,7 +18,7 @@ router.get('/sections', function (req, res) {
     var scrollPage=req.query.page;
     goodModel.find({ 'SectionId': SectionId }, function (err, docs) {
         res.json(docs);
-    }).limit(pageNum).skip(scrollPage*pageNum);
+    }).limit(pageNum).skip(scrollPage*pageNum).sort({'_id':-1});
 });
 
 router.get('/good', function (req, res) {

@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/sections/sections",
     "pages/goods/goods",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/sell/sell",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -14,15 +16,15 @@
   "tabBar": {
     "list": [
       {
-        "selectedIconPath": "images/tabbar/home_selected.png",
-        "iconPath": "images/tabbar/home.png",
+        "selectedIconPath": "component/tabbar/icon/home_selected.png",
+        "iconPath": "component/tabbar/icon/home.png",
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "我要买"
       },
       {
-        "selectedIconPath": "images/tabbar/mine_selected.png",
-        "iconPath": "images/tabbar/mine.png",
-        "pagePath": "pages/index/index",
+        "selectedIconPath": "component/tabbar/icon/mine_selected.png",
+        "iconPath": "component/tabbar/icon/mine.png",
+        "pagePath": "pages/mine/mine",
         "text": "我的"
       }
     ],

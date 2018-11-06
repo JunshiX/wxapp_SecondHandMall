@@ -1,1 +1,4 @@
 /* pages/sections/sections.wxss */
+page{
+  background-color: #fafafa
+}

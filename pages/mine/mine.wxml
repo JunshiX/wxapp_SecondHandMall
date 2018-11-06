@@ -1,2 +1,5 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view>
+  <text>pages/mine/mine.wxml</text>
+  <tabbar tabbar="{{tabbar}}"></tabbar>
+</view>
