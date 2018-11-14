@@ -2,7 +2,7 @@
 ## <font color=red>**设计说明**</font>
 >参考文档：  
 >1.Node.js入门经典2013版  
->2.阮一峰的网络日志：理解RESTful架构 http://www.ruanyifeng.com/blog/2011/09/restful.html    
+>2.[阮一峰的网络日志：理解RESTful架构](http://www.ruanyifeng.com/blog/2011/09/restful.html)    
 
 &emsp;&emsp;本次小程序的开发采用前后端分离的思想。  
 * 前端直接使用小程序官方的**WXML+WXSS+JS**框架。小程序框架如下：
@@ -24,7 +24,7 @@ API应具备如下功能：
 
 ---
 ## <font color=red>**Express4.x新特性**</font>
->参考文档：Moving to Express 4 http://www.expressjs.com.cn/guide/migrating-4.html  
+>参考文档：[Moving to Express 4](http://www.expressjs.com.cn/guide/migrating-4.html)  
 
 * **更新所有依赖**  
 手动修改dependencies中包的版本号太过麻烦，所以需要借助**npm-check-updates**工具将package.json中的依赖包更新到最新版本。  
@@ -98,8 +98,7 @@ var MyModel = mongoose.model('MyModel', schema);
 ```
 ---
 ## <font color=red>**Express的路由分离**</font>
->参考文档：  
->博客园：express框架的路由模块化 https://www.cnblogs.com/lewis-messi/p/9087258.html  
+>参考文档：[express框架的路由模块化](https://www.cnblogs.com/lewis-messi/p/9087258.html)  
 
 &emsp;&emsp;路由是由一个**URL**和一个特定的**HTTP**方法（GET、POST等）组成的，它涉及到应用如何响应客户端对某个资源的访问。  
 &emsp;&emsp;在使用Express写代码的过程中，会根据类别，将路由分为多个不同的文件，然后在项目的入口文件（例如app.js）中将其依次挂载，例如：
@@ -183,9 +182,9 @@ onLoad: function () {
 ---
 ## <font color=red>**分页加载**</font>  
 >参考文档：  
->1.博客园：Mongoose分页查询优化 https://www.cnblogs.com/fayin/p/7028466.html  
->2.CSDN：微信小程序之加载更多(分页加载)实例 https://blog.csdn.net/michael_ouyang/article/details/56846185  
->3.CSDN：微信小程序中使用wxss加载图片并实现动画 https://blog.csdn.net/yaodong379/article/details/78848072?_u_u_u=0.19657183531671762  
+>1.[Mongoose分页查询优化](https://www.cnblogs.com/fayin/p/7028466.html)  
+>2.[微信小程序之加载更多(分页加载)实例](https://blog.csdn.net/michael_ouyang/article/details/56846185)  
+>3.[微信小程序中使用wxss加载图片并实现动画](https://blog.csdn.net/yaodong379/article/details/78848072?_u_u_u=0.19657183531671762)  
 
 &emsp;&emsp;随着后端的数据量越来越大，在前端和后端交互的过程中，一次性返回所有数据会使得页面的打开速度有所下降，同时也增大了前端渲染的难度，而且实际上用户只需要看到页面的部分数据而不需要看到所有的数据，所以需要对数据进行分页。
 
@@ -273,8 +272,7 @@ loadImages: function() {
 
 ---
 ## <font color=red>**Template的使用**</font>  
->参考文档：  
->CSDN：微信小程序----模板 https://blog.csdn.net/m0_38082783/article/details/78909416CSDN   
+>参考文档：[微信小程序----模板](https://blog.csdn.net/m0_38082783/article/details/78909416CSDN)   
 
 &emsp;&emsp;由于在同一个项目中需要在多处页面使用到类似的模块，这个时候创建模版就有助于减少代码量，使得代码高度复用。同一个WXML文件中创建多个类似模板用**name**属性来区分，模板的WXSS可以在全局引入也可以在使用页面引入。通过**template**标签使用模板，template标签的**is**属性与模板的name属性对应，**data**属性为传入模板的数据。
 ```javascript
@@ -300,8 +298,7 @@ loadImages: function() {
 
 ---
 ## <font color=red>**小程序的页面跳转和传值**</font>  
->参考文档：  
->小程序官方开发文档——事件 https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html  
+>参考文档：[小程序官方开发文档——事件](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html)  
 
 &emsp;&emsp;在小程序中：事件是视图层到逻辑层的通讯方式。事件可以将用户的行为反馈到逻辑层进行处理。事件可以绑定在组件上，当达到触发事件，就会执行逻辑层中对应的事件处理函数。事件对象可以携带额外信息，如id、dataset、touches。  
 &emsp;&emsp;具体事件的应用如下：
@@ -330,8 +327,8 @@ onLoad: function (options) {
 ---
 ## <font color=red>**自定义tabBar组件（component）**</font>  
 >参考文档：  
->CSDN：微信小程序开发——自定义tabBar https://blog.csdn.net/qq_30817073/article/details/81450559  
->小程序官方文档——路由 https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html
+>1.[微信小程序开发——自定义tabBar](https://blog.csdn.net/qq_30817073/article/details/81450559)  
+>2.[小程序官方文档——路由](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html)
 
 &emsp;&emsp;由于小程序的tabBar不能支持自定义样式，而且不支持多级页面（即tab标签无法跳转到非tab标签的页面，具体的Tab切换对应的生命周期可以见参考文档中给出的小程序官方文档）。而本次开发的tabBar是类似于下图的。  
 <center><img src="https://thumbnail0.baidupcs.com/thumbnail/ef6b563be395b52c2925533aba553e98?fid=1998016987-250528-131504042432882&time=1541491200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-H%2BqAVm%2ByfHI%2F7xFu3fzNz3kyGBU%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7182665933009203582&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"></center>
