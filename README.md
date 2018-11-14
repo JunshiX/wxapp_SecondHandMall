@@ -251,7 +251,7 @@ loadImages: function() {
 </scroll-view>
 ```
 &emsp;&emsp;另外，在这里为了让“正在载入更多”更加动态（见gif图），可以加入动画效果，通过图片的转动实现loading的效果。这里采用类似**CSS3**中的`@keyframes`规则，在`@keyframes`中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果。当在 @keyframes 中创建动画时，需要将它捆绑到某个选择器，否则不会产生动画效果。通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：规定动画的名称、规定动画的时长。  
-<center><img src="https://thumbnail0.baidupcs.com/thumbnail/b21088f28cdfc3b457b7ea048b0ebcd4?fid=1998016987-250528-15910787934382&time=1541491200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-2TecQ4IJAeTLLBvudbvfYauhKD8%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7182690927284426649&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"></center>
+<center><img src="https://tuchuang.nos-eastchina1.126.net/GIF.gif"></center>
 
 ```css
 //index.wxss
@@ -331,7 +331,7 @@ onLoad: function (options) {
 >2.[小程序官方文档——路由](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html)
 
 &emsp;&emsp;由于小程序的tabBar不能支持自定义样式，而且不支持多级页面（即tab标签无法跳转到非tab标签的页面，具体的Tab切换对应的生命周期可以见参考文档中给出的小程序官方文档）。而本次开发的tabBar是类似于下图的。  
-<center><img src="https://thumbnail0.baidupcs.com/thumbnail/ef6b563be395b52c2925533aba553e98?fid=1998016987-250528-131504042432882&time=1541491200&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-H%2BqAVm%2ByfHI%2F7xFu3fzNz3kyGBU%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=7182665933009203582&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"></center>
+<center><img src="https://tuchuang.nos-eastchina1.126.net/%E6%97%A0%E6%A0%87%E9%A2%98.png"></center>
 
 &emsp;&emsp;查了很多资料，发现网上大多数的自定义的做法是写成模板的形式，但是在页面切换的时候由于重新渲染，tabbar会出现闪动，所以这里采取写成组件的形式，这样在页面跳转的时候不会闪动。
 
