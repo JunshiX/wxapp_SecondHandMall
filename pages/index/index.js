@@ -57,13 +57,11 @@ Page({
     //初始化
     let ww = app.globalData.windowWidth;
     let imgWidth = ww * 0.46;
-    let imgHeight = imgWidth * 0.69; //设置图片高度
     let scrollH = app.globalData.windowHeight;
     this.setData({
       scrollNum: app.globalData.scrollNum,
       scrollH: scrollH,
       imgWidth: imgWidth,
-      imgHeight: imgHeight,
     });
 
     this.loadImages(); //加载图片数据
@@ -133,12 +131,12 @@ Page({
     })
   },
   onShow:function(){
-    this.setData({
+    /*this.setData({
       Loading:true,
       scrollPage:0,
       col1:[],
       col2:[]
     });
-    this.loadImages();
+    this.loadImages();*/
   }
 })

@@ -20,11 +20,8 @@
 .img_col_item {
   margin: 10rpx 0 0 0;
   border-radius: 5%;
-}
-
-.img_item_index {
   background-color: #fff;
-  display: block;
+  border-width:1px;
 }
 
 .user_avatar {
@@ -50,6 +47,12 @@
   width: 60rpx;
   color: #e74552;
   margin: 10rpx 0 10rpx 0;
+}
+
+.user_description{
+  display:inline-block;
+  vertical-align: middle;
+  width:48%;
 }
 
 .loading{

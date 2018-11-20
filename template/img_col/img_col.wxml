@@ -4,17 +4,15 @@
     <!--商品左列-->
     <view class="img_col1">
       <view class="img_col_item" wx:for="{{col1}}" wx:key="id">
-        <!--头像昵称定位-->
-        <view class="img_item_index">
           <image class="user_avatar" src="{{item.UserAvatar}}"></image>
           <text class="user_nickname">{{item.UserNickname}}</text>
           <text class="user_location">{{item.UserLocation}}</text>
-        </view>
-        <!--头像昵称定位-->
 
-        <!--物品图片-->
-        <image class="img-item" src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%;height:{{imgHeight}}px" mode="aspectFill"></image>
-        <!--物品图片-->
+          <!--物品图片-->
+          <image src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
+          <!--物品图片-->
+
+          <text class="user_description">{{item.Description}}</text>
       </view>
     </view>
     <!--商品左列-->
@@ -22,12 +20,17 @@
     <!--商品右列-->
     <view class="img_col2">
       <view class="img_col_item" wx:for="{{col2}}" wx:key="id">
-        <view class="img_item_index">
+
           <image class="user_avatar" src="{{item.UserAvatar}}"></image>
           <text class="user_nickname">{{item.UserNickname}}</text>
           <text class="user_location">{{item.UserLocation}}</text>
-        </view>
-        <image class="img-item" src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%;height:{{imgHeight}}px" mode="aspectFill"></image>
+
+          <!--物品图片-->
+          <image src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
+          <!--物品图片-->
+
+          <text class="user_description">{{item.Description}}</text>
+
       </view>
     </view>
     <!--商品右列-->
