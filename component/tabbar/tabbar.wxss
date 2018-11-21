@@ -48,6 +48,7 @@
   text-align: center;
   box-sizing: border-box;
   padding: 6rpx;
+  box-shadow:0px 0px 5px 0.5px #B2B2B2;
 }
 .special-wrapper .tabbar_icon{
     width: 84rpx;

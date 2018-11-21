@@ -1,5 +1,5 @@
 page{
-  background-color: #fafafa
+  background-color: #f7f7fa
 }
 .img_top {
   width: 720rpx;

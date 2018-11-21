@@ -1,5 +1,5 @@
 .img_container {
-  background-color: #fafafa;
+  background-color: #f7f7fa;
   width: 750rpx;
 }
 
@@ -21,7 +21,7 @@
   margin: 10rpx 0 0 0;
   border-radius: 5%;
   background-color: #fff;
-  border-width:1px;
+  border-width: 1px;
 }
 
 .user_avatar {
@@ -37,25 +37,58 @@
   display: inline-block;
   vertical-align: middle;
   width: 200rpx;
-  font-size: 13px;
   margin: 10rpx 0 10rpx 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .user_location {
   display: inline-block;
   vertical-align: middle;
-  width: 60rpx;
+  width: 70rpx;
   color: #e74552;
   margin: 10rpx 0 10rpx 0;
 }
 
-.user_description{
-  display:inline-block;
+.item_description {
+  display: inline-block;
   vertical-align: middle;
-  width:48%;
+  width: 340rpx;
+  margin: 0 10rpx 10rpx 10rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.loading{
+.item_price{
+  display:inline-block;
+  margin:5rpx 5rpx 10rpx 10rpx;
+  width:100rpx;
+  font-weight: bold;
+  color:#FF4F64;
+
+}
+
+.item_price_before{
+  display:inline-block;
+  width:95rpx;
+  margin:5rpx 10rpx 10rpx 0;
+  font-size: 10px;
+  text-decoration:line-through;
+  color:#B2B2B2;
+}
+
+.item_date{
+  display:inline-block;
+  text-align:right;
+  width:125rpx;
+  margin:5rpx 5rpx 10rpx 0;
+  font-size: 10px;
+  color:#B2B2B2;
+}
+
+.loading {
   display: inline-block;
   margin-right: 5rpx;
   width: 40rpx;
@@ -63,13 +96,14 @@
   animation: a 1s linear infinite;
 }
 
-@keyframes a{
-  from{
+@keyframes a {
+  from {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
-  to{
+
+  to {
     -webkit-transform: rotate(1turn);
-    transform:rotate(1turn);
+    transform: rotate(1turn);
   }
 }

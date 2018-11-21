@@ -80,7 +80,7 @@ App({
           "pagePath": "/pages/sell/sell",
           "iconPath": "icon/icon_release.png",
           "isSpecial": true,
-          "text": "我要卖"
+          "text": ""
         },
         {
           "pagePath": "/pages/mine/mine",

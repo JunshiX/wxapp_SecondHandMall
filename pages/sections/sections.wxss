@@ -1,4 +1,4 @@
 /* pages/sections/sections.wxss */
 page{
-  background-color: #fafafa
+  background-color: #f7f7fa
 }

@@ -12,7 +12,11 @@
           <image src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
           <!--物品图片-->
 
-          <text class="user_description">{{item.Description}}</text>
+          <text class="item_description">{{item.Description}}</text>
+          <text class="item_price">￥68000</text>
+          <text class="item_price_before">￥68000</text>
+          <text class="item_date">昨天15：20</text>
+
       </view>
     </view>
     <!--商品左列-->
@@ -29,7 +33,10 @@
           <image src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
           <!--物品图片-->
 
-          <text class="user_description">{{item.Description}}</text>
+          <text class="item_description">{{item.Description}}</text>
+          <text class="item_price">￥68000</text>
+          <text class="item_price_before">￥68000</text>
+          <text class="item_date">2018-11-12</text>
 
       </view>
     </view>

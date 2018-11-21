@@ -17,7 +17,6 @@ Page({
     sectionsId: 0,
     col1: [],
     col2: [],
-
   },
 
   /**
@@ -25,8 +24,9 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    var sectionName=["学习用品", "动植物", "生活美妆", "交通出行", "电子设备", "穿搭"];
     wx.setNavigationBarTitle({
-      title: options.id,
+      title: sectionName[options.id],
     })
     //初始化
     let ww = app.globalData.windowWidth;
