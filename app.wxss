@@ -15,3 +15,7 @@
 text{
   font-size: 13px;
 }
+
+page{
+  background-color:#F8F8F8;
+}

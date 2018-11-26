@@ -1,8 +1,8 @@
 <import src="../../template/index_sections/index_sections.wxml" />
 <import src="../../template/img_col/img_col.wxml" />
 
-<view>
-  <scroll-view scroll-y="true" style="height:{{scrollH}}px;background-color:#f7f7fa" bindscrolltolower="loadImages" lower-threshold="50rpx">
+<view class="page">
+  <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" lower-threshold="50rpx">
 
     <view style="background-color:#fff;padding:15rpx 0rpx">
       <!--显示首页img-->

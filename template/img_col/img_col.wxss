@@ -1,5 +1,4 @@
 .img_container {
-  background-color: #f7f7fa;
   width: 750rpx;
 }
 

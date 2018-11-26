@@ -1,2 +1,4 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view class="page">
+  <text>pages/login/login.wxml</text>
+</view>

@@ -1,1 +1,45 @@
 /* pages/sell/sell.wxss */
+
+.sell_cells {
+  margin: 30rpx 0;
+  padding: 0 30rpx;
+  background-color: #fff;
+}
+
+.sell_cell {
+  display: flex;
+  padding: 20rpx 0;
+  align-items: center;
+}
+
+.sell_title {
+  width: 40px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.placeholder{
+  font-size: 15px;
+  color: #b2b2b2;
+}
+
+
+.sell_input {
+  flex: 1;
+}
+
+.sell_select {
+  font-size: 16px;
+  color: #b2b2b2;
+  border-right: 2px solid #b2b2b2;
+  transform: rotate(45deg);
+}
+
+.sell_text{
+  color: #b2b2b2;
+}
+
+.sell_hint_text {
+  color: #FF4F64;
+  font-weight:bold;
+}

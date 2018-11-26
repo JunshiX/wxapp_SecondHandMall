@@ -3,7 +3,7 @@
   height: 235rpx;
   margin: 5rpx 7.5rpx 5rpx 7.5rpx;
   display: flex;
-  background-color: #f7f7fa;
+  background-color: #f8f8f8;
   border-radius: 5%;
 }
 .section_container {
@@ -15,7 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f7f7fa;
+  background-color: #f8f8f8;
 }
 .section_img {
   flex: 2;
@@ -26,5 +26,5 @@
 .section_name{
   flex:1;
   font-size:13px;
-  background-color: #f7f7fa;
+  background-color: #f8f8f8;
 }

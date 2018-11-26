@@ -1,6 +1,6 @@
 <!--pages/sections/sections.wxml-->
 <import src="../../template/img_col/img_col.wxml" />
-<view>
+<view class="page">
 
   <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" lower-threshold="50rpx">
     <!--两栏展示商品-->

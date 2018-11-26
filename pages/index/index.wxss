@@ -1,6 +1,3 @@
-page{
-  background-color: #f7f7fa
-}
 .img_top {
   width: 720rpx;
   margin: 7.5rpx 15rpx 7.5rpx 15rpx;

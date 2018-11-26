@@ -1,66 +1,29 @@
 // pages/sell/sell.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
+    Sections: ["学习用品", "动植物", "生活美妆", "交通出行", "电子设备", "穿搭"], //picker滚动选择器数据列表
+    SectionIndex: 0,
+    InputLength: 0, //文字输入框字数
+  },
+
+
+  onLoad: function(options) {
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  bindSectionChange: function(e) {
+    this.setData({
+      SectionIndex: e.detail.value
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  bindInput: function(e) {
+    var InputLength = e.detail.value.length;
+    this.setData({
+      InputLength: InputLength,
+    })
   }
+
+
 })
