@@ -1,5 +1,26 @@
 # 微信小程序设计日志  
-## <font color=red>**设计说明**</font>
+
+## **目录**
+
+- [设计说明](##设计说明)
+- 前端部分
+  - [Template的使用](##Template的使用)
+  - [小程序的页面跳转和传值](##小程序的页面跳转和传值)
+  - [自定义tabBar组件（component）](##自定义tabBar组件（component）)
+  - [表单的布局](##表单的布局)
+    - [Flex布局](###Flex布局)
+    - [picker滚动选择器](###picker滚动选择器)
+    - [textarea文本字数限定](###textarea文本字数限定)
+- 后端部分
+  - [Express4.x新特性](##Express4.x新特性)
+  - [Mongoose的model和Schema](##Mongoose的model和Schema)
+  - [Express的路由分离](##Express的路由分离)
+  - [RESTfulAPI接口](##RESTfulAPI接口)
+  - [数据的分页加载](##数据的分页加载)
+
+
+---
+## **设计说明**
 >参考文档：  
 >1.Node.js入门经典2013版  
 >2.[阮一峰的网络日志：理解RESTful架构](http://www.ruanyifeng.com/blog/2011/09/restful.html)    
@@ -23,7 +44,7 @@ API应具备如下功能：
   2. 数据储存在**MongoDB**中。  
 
 ---
-## <font color=red>**Express4.x新特性**</font>
+## **Express4.x新特性**
 >参考文档：[Moving to Express 4](http://www.expressjs.com.cn/guide/migrating-4.html)  
 
 * **更新所有依赖**  
@@ -79,7 +100,7 @@ if ('test' == env) {
 }
 ```
 ---
-## <font color=red>**Mongoose的model和Schema** </font>
+## **Mongoose的model和Schema** 
 
 &emsp;&emsp;**Schema**主要用于定义MongoDB中集合Collection里文档document的结构，通过`mongoose.Schema`来调用Schema，然后使用new方法来创建schema对象.
 ```javascript
@@ -97,7 +118,7 @@ var mySchema = new Schema({
 var MyModel = mongoose.model('MyModel', schema); 
 ```
 ---
-## <font color=red>**Express的路由分离**</font>
+## **Express的路由分离**
 >参考文档：[express框架的路由模块化](https://www.cnblogs.com/lewis-messi/p/9087258.html)  
 
 &emsp;&emsp;路由是由一个**URL**和一个特定的**HTTP**方法（GET、POST等）组成的，它涉及到应用如何响应客户端对某个资源的访问。  
@@ -149,7 +170,7 @@ app.use('/',updateRouter);
 **注**：`app.use(path,callback)`中的`callback`既可以是`router`对象也可以是函数，但是`app.get(path,callback)`中的`callback`只能是函数。`router`代表一个由`express.Router()`创建的对象，在路由对象中可以定义多个路由规则。
 
 ---
-## <font color=red>**访问API接口**</font>
+## **RESTfulAPI接口**
 &emsp;&emsp;首先新建服务器工程,安装完依赖之后在app.js中写入路由对应的方法操作.
 ```javascript
 app.listen(3000);
@@ -180,7 +201,7 @@ onLoad: function () {
 **注意**：由于`wx.request`方法之后会生成新的对象，所以要想传值给page的初始数据，需要在刚开始将this对象赋值给一个that对象。
 
 ---
-## <font color=red>**分页加载**</font>  
+## **数据的分页加载**  
 >参考文档：  
 >1.[Mongoose分页查询优化](https://www.cnblogs.com/fayin/p/7028466.html)  
 >2.[微信小程序之加载更多(分页加载)实例](https://blog.csdn.net/michael_ouyang/article/details/56846185)  
@@ -271,7 +292,7 @@ loadImages: function() {
 ```  
 
 ---
-## <font color=red>**Template的使用**</font>  
+## **Template的使用**  
 >参考文档：[微信小程序----模板](https://blog.csdn.net/m0_38082783/article/details/78909416CSDN)   
 
 &emsp;&emsp;由于在同一个项目中需要在多处页面使用到类似的模块，这个时候创建模版就有助于减少代码量，使得代码高度复用。同一个WXML文件中创建多个类似模板用**name**属性来区分，模板的WXSS可以在全局引入也可以在使用页面引入。通过**template**标签使用模板，template标签的**is**属性与模板的name属性对应，**data**属性为传入模板的数据。
@@ -293,7 +314,7 @@ loadImages: function() {
 ```
 
 ---
-## <font color=red>**小程序的页面跳转和传值**</font>  
+## **小程序的页面跳转和传值**  
 >参考文档：[小程序官方开发文档——事件](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html)  
 
 &emsp;&emsp;在小程序中：事件是视图层到逻辑层的通讯方式。事件可以将用户的行为反馈到逻辑层进行处理。事件可以绑定在组件上，当达到触发事件，就会执行逻辑层中对应的事件处理函数。事件对象可以携带额外信息，如id、dataset、touches。  
@@ -321,7 +342,7 @@ onLoad: function (options) {
 ```
 
 ---
-## <font color=red>**自定义tabBar组件（component）**</font>  
+## **自定义tabBar组件（component）**  
 >参考文档：  
 >1.[微信小程序开发——自定义tabBar](https://blog.csdn.net/qq_30817073/article/details/81450559)  
 >2.[小程序官方文档——路由](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/route.html)
@@ -398,13 +419,13 @@ editTabbar: function () {
 
 
 ---
-## <font color=red>**表单布局**</font> 
+## **表单的布局** 
 
 >参考文档：  
 >1.[菜鸟教程--Flex布局语法教程](https://www.runoob.com/w3cnote/flex-grammar.html)  
 >2.[WeUI官方文档](https://github.com/Tencent/weui-wxss)  
 
-### **布局**  
+### **Flex布局**  
 &emsp;&emsp;对于盒状模型的布局主要采用`Flex`布局，即“弹性布局”，菜鸟教程的教程写的非常详细。这里只强调分清Flex容器和Flex项目（容器的所有子元素自动成为容器成员，即Flex项目）的关系，对齐方式主要在容器属性中设置，因为容器划分了主轴和交叉轴；元素的比例之类的则是在项目属性中设置，并且项目的属性推荐直接使用`flex`属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
 
 ### **picker滚动选择器**  
@@ -432,7 +453,7 @@ bindSectionChange: function(e) {
 },
 ```
 
-## **textarea文本字数限定**  
+### **textarea文本字数限定**  
 &emsp;&emsp;如微博之类的软件，经常会使用文本输入区域的字数限定来防止数据量过大的出现，所以，这里也想对于用户发布的内容进行字数限定，并且能显示计数,超过一定字数的时候还能进行标红的提示的时候，实际效果如图：
 
 <img src="https://tuchuang.nos-eastchina1.126.net/%E5%AD%97%E6%95%B0%E9%99%90%E5%AE%9A.png" />
