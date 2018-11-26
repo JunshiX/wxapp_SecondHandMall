@@ -31,8 +31,17 @@
 .sell_select {
   font-size: 16px;
   color: #b2b2b2;
+}
+
+.sell_select:after{
+  content: " ";
+  display: inline-block;
+  height:6px;
+  width:6px;
+  border-top:2px solid #b2b2b2; 
   border-right: 2px solid #b2b2b2;
   transform: rotate(45deg);
+  margin-left: 5rpx;
 }
 
 .sell_text{
@@ -41,5 +50,16 @@
 
 .sell_hint_text {
   color: #FF4F64;
-  font-weight:bold;
+}
+
+.sell_btn{
+  width: 90%;
+  margin-top: 50rpx;
+  background-color: #FF4F64;
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }

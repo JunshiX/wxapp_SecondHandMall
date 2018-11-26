@@ -1,47 +1,50 @@
 <!--pages/sell/sell.wxml-->
 <view class="page">
-
-  <view class="sell_cells">
-    <view class="sell_cell" style="border-bottom:1px solid #e2e2e2">
-      <text class="sell_title">标题</text>
-      <input class="sell_input" placeholder="请输入您的商品名称（不超过15个字）" placeholder-class='placeholder' maxlength='15' />
-    </view>
-
-    <view class="sell_cell" style="align-items: flex-start">
-      <text class="sell_title">描述</text>
-      <textarea class="sell_input" placeholder="请简要的描述一下您的商品，新旧程度、出售原因等（不超过140个字）" placeholder-class='placeholder' maxlength='140' bindinput='bindInput'></textarea>
-    </view>
-
-    <!--字数提示，超过130字变红-->
-    <view class="sell_cell" style="justify-content:flex-end">
-      <view wx:if="{{InputLength>130}}">
-        <text class="sell_hint_text">{{InputLength}}</text>
+  <form bindsubmit='formSubmit'>
+    <view class="sell_cells">
+      <view class="sell_cell" style="border-bottom:1px solid #e2e2e2">
+        <text class="sell_title">标题</text>
+        <input name="ItemTitle" class="sell_input" placeholder="请输入您的商品名称（不超过15个字）" placeholder-class='placeholder' maxlength='15' />
       </view>
-      <view wx:else>
-        <text class="sell_text">{{InputLength}}</text>
+
+      <view class="sell_cell" style="align-items: flex-start">
+        <text class="sell_title">描述</text>
+        <textarea name="ItemDescription" class="sell_input" placeholder="请简要的描述一下您的商品，新旧程度、出售原因等（不超过140个字）" placeholder-class='placeholder' maxlength='140' bindinput='bindInput'></textarea>
+      </view>
+
+      <!--字数提示，超过130字变红-->
+      <view class="sell_cell" style="justify-content:flex-end">
+        <view wx:if="{{InputLength>130}}">
+          <text class="sell_hint_text">{{InputLength}}</text>
+          <text class="sell_text">/140</text>
+        </view>
+        <view wx:else>
+          <text class="sell_text">{{InputLength}}/140</text>
+        </view>
+      </view>
+      <!---->
+    </view>
+
+    <view class='sell_cells'>
+      <view class="sell_cell" style="border-bottom:1px solid #e2e2e2">
+        <text class="sell_title">价格</text>
+        <input name="ItemPrice" class="sell_input price" type="digit" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
+      </view>
+
+      <view class="sell_cell">
+        <text class="sell_title">原价</text>
+        <input name="BeforePrice" class="sell_input price" type="digit" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
       </view>
     </view>
-    <!---->
-  </view>
 
-  <view class='sell_cells'>
-    <view class="sell_cell" style="border-bottom:1px solid #e2e2e2">
-      <text class="sell_title">价格</text>
-      <input class="sell_input price" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
+    <view class='sell_cells'>
+      <view class="sell_cell">
+        <text class="sell_title">分类</text>
+        <picker style="flex:1;display:flex;justify-content:flex-end" bindchange="bindSectionChange" value="{{SectionIndex}}" range="{{Sections}}">
+          <text class="sell_select">{{Sections[SectionIndex]}}</text>
+        </picker>
+      </view>
     </view>
-
-    <view class="sell_cell">
-      <text class="sell_title">原价</text>
-      <input class="sell_input price" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
-    </view>
-  </view>
-
-  <view class='sell_cells'>
-    <view class="sell_cell">
-      <text class="sell_title">分类</text>
-      <picker style="flex:1;display:flex;justify-content:flex-end" bindchange="bindSectionChange" value="{{SectionIndex}}" range="{{Sections}}">
-        <text class="sell_select">{{Sections[SectionIndex]}}</text>
-      </picker>
-    </view>
-  </view>
+    <button class="sell_btn" form-type='submit'>确认发布</button>
+  </form>
 </view>
