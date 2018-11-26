@@ -293,10 +293,6 @@ loadImages: function() {
 ```
 
 ---
-## <font color=red>**flex属性的使用**</font>  
-
-
----
 ## <font color=red>**小程序的页面跳转和传值**</font>  
 >参考文档：[小程序官方开发文档——事件](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html)  
 
@@ -399,3 +395,71 @@ editTabbar: function () {
 ```html
 <tabbar tabbar="{{tabbar}}"></tabbar>
 ```
+
+
+---
+## <font color=red>**表单布局**</font> 
+
+>参考文档：  
+>1.[菜鸟教程--Flex布局语法教程](https://www.runoob.com/w3cnote/flex-grammar.html)  
+>2.[WeUI官方文档](https://github.com/Tencent/weui-wxss)  
+
+### **布局**  
+&emsp;&emsp;对于盒状模型的布局主要采用`Flex`布局，即“弹性布局”，菜鸟教程的教程写的非常详细。这里只强调分清Flex容器和Flex项目（容器的所有子元素自动成为容器成员，即Flex项目）的关系，对齐方式主要在容器属性中设置，因为容器划分了主轴和交叉轴；元素的比例之类的则是在项目属性中设置，并且项目的属性推荐直接使用`flex`属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
+
+### **picker滚动选择器**  
+&emsp;&emsp;picker选择器分为5种：分别为普通选择器、多列选择器、时间选择器、日期选择器以及省市区选择器，默认为普通，运行效果如下图：
+<img src="https://tuchuang.nos-eastchina1.126.net/Picker%E9%80%89%E6%8B%A9%E5%99%A8.png"/>
+
+&emsp;&emsp;picker的使用主要是在js文件中定义待选的列表`range` ，然后利用picker的`bindchange()`事件函数得到当前选择的`range`的下标`value`，然后根据返回的下标重新渲染并显示文本，代码如下：
+
+```html
+<!--.wxml文件-->
+<picker bindchange="bindSectionChange" value="{{SectionIndex}}" range="{{Sections}}">
+  <text class="sell_select">{{Sections[SectionIndex]}}</text>
+</picker>
+```
+```js
+//.js文件
+data: {
+  Sections: ["","","","","",...], //picker滚动选择器数据列表
+  SectionIndex: 0,
+}
+bindSectionChange: function(e) {
+    this.setData({
+      SectionIndex: e.detail.value
+    })
+},
+```
+
+## **textarea文本字数限定**  
+&emsp;&emsp;如微博之类的软件，经常会使用文本输入区域的字数限定来防止数据量过大的出现，所以，这里也想对于用户发布的内容进行字数限定，并且能显示计数,超过一定字数的时候还能进行标红的提示的时候，实际效果如图：
+
+<img src="https://tuchuang.nos-eastchina1.126.net/%E5%AD%97%E6%95%B0%E9%99%90%E5%AE%9A.png" />
+
+&emsp;&emsp;这里的实现主要利用textarea的`bindinput()`事件返回当前文本框中的元素长度，并且设置textarea的`maxlength`属性来控制输入的字数,代码如下：
+
+```html
+<!--.wxml文件-->
+ <textarea placeholder="文字描述" placeholder-class='placeholder' maxlength='140' bindinput='bindInput'></textarea>
+<!--当输入字数超过130个字，将右下角的提示数字标红-->
+ <view wx:if="{{InputLength>130}}">
+  <text class="sell_hint_text">{{InputLength}}</text>
+</view>
+<view wx:else>
+  <text class="sell_text">{{InputLength}}</text>
+</view>
+```
+**注：**`placeholder`为输入字段预期值的提示信息，该提示会在输入字段为空时显示，并会在字段获得焦点时消失，小程序也给出了`placeholder`的样式自定义，通过`placeholder-class`字段进行定义。
+
+```js
+bindInput: function(e) {
+  var InputLength = e.detail.value.length;
+  this.setData({
+    InputLength: InputLength,
+  })
+}
+```
+
+
+
