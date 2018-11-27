@@ -12,6 +12,7 @@
     - [picker滚动选择器](#picker滚动选择器)
     - [textarea文本字数限定](#textarea文本字数限定)
     - [表单数据验证](#表单数据验证)
+    - [伪元素实现上传图片的预览以及删除](#伪元素实现上传图片的预览以及删除)
 - 后端部分
   - [Express4.x新特性](#Express4.x新特性)
   - [Mongoose的model和Schema](#Mongoose的model和Schema)
@@ -427,7 +428,8 @@ editTabbar: function () {
 >2.[WeUI官方文档](https://github.com/Tencent/weui-wxss)  
 >3.[柳正来的博客园：从WeUI学习到的知识点](https://www.cnblogs.com/7z7chn/p/5727245.html)  
 >4.[微信小程序表单验证](https://blog.csdn.net/lq_lq314/article/details/72729957)  
->5.[金额的正则表达式校验](http://www.cnblogs.com/mr-wuxiansheng/p/6437133.html)
+>5.[金额的正则表达式校验](http://www.cnblogs.com/mr-wuxiansheng/p/6437133.html)  
+>6.[微信小程序实现图片上传、删除和预览功能的方法](https://www.jb51.net/article/130789.htm)  
 
 ### **Flex布局**  
 &emsp;&emsp;对于盒状模型的布局主要采用`Flex`布局，即“弹性布局”，菜鸟教程的教程写的非常详细。这里只强调分清Flex容器和Flex项目（容器的所有子元素自动成为容器成员，即Flex项目）的关系，对齐方式主要在容器属性中设置，因为容器划分了主轴和交叉轴；元素的比例之类的则是在项目属性中设置，并且项目的属性推荐直接使用`flex`属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
@@ -488,5 +490,6 @@ bindInput: function(e) {
 
 ### **表单数据验证**
 
+### **伪元素实现上传图片的预览以及删除**   
 
-
+<img src="https://tuchuang.nos-eastchina1.126.net/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0.gif"/>
