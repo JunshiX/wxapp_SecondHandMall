@@ -19,6 +19,7 @@
   - [Express的路由分离](#Express的路由分离)
   - [RESTfulAPI接口](#RESTfulAPI接口)
   - [数据的分页加载](#数据的分页加载)
+  - [小程序的用户信息](#小程序的用户信息)
 
 
 ---
@@ -492,4 +493,13 @@ bindInput: function(e) {
 
 ### **伪元素实现上传图片的预览以及删除**   
 
-<img src="https://tuchuang.nos-eastchina1.126.net/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0.gif"/>
+<img src=/>
+
+
+---
+## **小程序的用户信息**  
+>参考文档：  
+>1.[小程序：用户登录状态检查与更新实例](https://blog.csdn.net/qq_33594380/article/details/80508438)  
+>2.[小程序：授权、登录、session_key、unionId](https://blog.csdn.net/qq_33594380/article/details/80431582)  
+>3.[小程序官方文档：开放能力——用户信息](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html)
+

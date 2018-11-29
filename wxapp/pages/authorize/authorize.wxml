@@ -1,0 +1,6 @@
+<!--pages/authorize/authorize.wxml-->
+<view class="page">
+  <view class="authorize_text">1、同意获取我的微信头像；</view>
+  <view class="authorize_text">2、同意获取我的微信昵称等其他信息；</view>
+  <button open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' class="login_btn">授权登录</button>
+</view>

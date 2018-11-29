@@ -2,67 +2,28 @@
 const app=getApp();
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    tabbar:{}
+    tabbar:{},
+    mine1:[{id:1,name:"我的消息"},{id:2,name:"我的收藏"},{id:3,name:"我的发布"}],
+    mine2:[{id:4,name:"防骗指南"},{id:5,name:"用户协议"},{id:6,name:"关于我们"}],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     app.editTabbar();
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-
+    wx.checkSession({
+      success:function(){
+        //session_key未过期，在本生命周期一直有效
+        return ;
+      },
+      fail:function(){
+        wx.navigateTO({
+          url:"/pages/authorize/authorize"
+        })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

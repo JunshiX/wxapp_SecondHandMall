@@ -2,9 +2,9 @@
 Page({
 
   data: {
-    Sections: ["学习用品", "动植物", "生活美妆", "交通出行", "电子设备", "穿搭"], //picker滚动选择器数据列表
-    SectionIndex: 0,
-    InputLength: 0, //文字输入框字数
+    sections: ["学习用品", "动植物", "生活美妆", "交通出行", "电子设备", "穿搭"], //picker滚动选择器数据列表
+    sectionIndex: 0,
+    inputLength: 0, //文字输入框字数
     files: [], //图片路径
   },
 
@@ -16,36 +16,36 @@ Page({
   //滚动选择器事件监听
   bindSectionChange: function(e) {
     this.setData({
-      SectionIndex: e.detail.value
+      sectionIndex: e.detail.value
     })
   },
 
   //统计文本域字数
   bindInput: function(e) {
-    var InputLength = e.detail.value.length;
+    var inputLength = e.detail.value.length;
     this.setData({
-      InputLength: InputLength,
+      inputLength: inputLength,
     })
   },
 
   //表单验证和提交
   formSubmit: function(e) {
     var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/; //金额输入验证正则表达式
-    var ItemTitle = e.detail.value.ItemTitle;
-    var ItemPrice = e.detail.value.ItemPrice;
-    var ItemDescription = e.detail.value.ItemDescription;
-    var BeforePrice = e.detail.value.BeforePrice;
+    var itemTitle = e.detail.value.itemTitle;
+    var itemPrice = e.detail.value.itemPrice;
+    var itemDescription = e.detail.value.itemDescription;
+    var beforePrice = e.detail.value.beforePrice;
     var warn = "";
     var flag = false;
-    if (!ItemTitle) {
+    if (!itemTitle) {
       warn = "请填写标题！";
-    } else if (!ItemDescription) {
+    } else if (!itemDescription) {
       warn = "请填写描述！";
     } else if (this.data.files.length == 0) {
       warn = "请上传图片！";
-    } else if (!reg.test(ItemPrice)) {
+    } else if (!reg.test(itemPrice)) {
       warn = "请正确填写价格！";
-    } else if (!reg.test(BeforePrice)) {
+    } else if (!reg.test(beforePrice)) {
       warn = "请正确填写原价！";
     } else {
       flag = true;
@@ -67,7 +67,7 @@ Page({
   },
 
   //选择图片
-  ChooseImage: function(e) {
+  chooseImage: function(e) {
     var that = this;
     if (that.data.files.length < 3) {
       wx.chooseImage({
@@ -92,7 +92,7 @@ Page({
   },
 
   //预览图片
-  PreviewImage: function(e) {
+  previewImage: function(e) {
     wx.previewImage({
       current: this.data.files[e.currentTarget.dataset.index], // 当前显示图片的http链接
       urls: this.data.files // 需要预览的图片http链接列表
@@ -100,7 +100,7 @@ Page({
   },
 
   //删除已选图片
-  DeleteImage: function(e) {
+  deleteImage: function(e) {
     var that = this;
     var index = e.currentTarget.dataset.index;
     var files = that.data.files;

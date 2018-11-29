@@ -1,5 +1,23 @@
 <!--pages/mine/mine.wxml-->
 <view class="page">
-  <text>pages/mine/mine.wxml</text>
+  <view class="mine_top">
+  </view>
+
+  <view class='mine_cells'>
+    <navigator url="" wx:for="{{mine1}}" wx:key="item.id" class="mine_cell{{item.id==3?'_last':''}}">
+      <image class="mine_icon" src="/images/mine/m_{{item.id}}.png" />
+      <text class="mine_title">{{item.name}}</text>
+      <view class="mine_arrow"></view>
+    </navigator>
+  </view>
+
+  <view class='mine_cells'>
+    <navigator url="" wx:for="{{mine2}}" wx:key="item.id" class="mine_cell{{item.id==6?'_last':''}}">
+      <image class="mine_icon" src="/images/mine/m_{{item.id}}.png" />
+      <text class="mine_title">{{item.name}}</text>
+      <view class="mine_arrow"></view>
+    </navigator>
+  </view>
+
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>
