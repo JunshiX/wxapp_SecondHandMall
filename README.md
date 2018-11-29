@@ -501,5 +501,6 @@ bindInput: function(e) {
 >参考文档：  
 >1.[小程序：用户登录状态检查与更新实例](https://blog.csdn.net/qq_33594380/article/details/80508438)  
 >2.[小程序：授权、登录、session_key、unionId](https://blog.csdn.net/qq_33594380/article/details/80431582)  
->3.[小程序官方文档：开放能力——用户信息](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html)
+>3.[小程序官方文档：开放能力——用户信息](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html)  
+>4.[微信小程序中登录和登录态维护](https://www.jianshu.com/p/c5f6c98b2685)
 

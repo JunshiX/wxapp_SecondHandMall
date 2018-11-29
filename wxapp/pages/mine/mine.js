@@ -13,12 +13,15 @@ Page({
   },
 
   onShow: function () {
+    console.log(111),
     wx.checkSession({
       success:function(){
         //session_key未过期，在本生命周期一直有效
+        console.log(222);
         return ;
       },
       fail:function(){
+        console.log(333);
         wx.navigateTO({
           url:"/pages/authorize/authorize"
         })

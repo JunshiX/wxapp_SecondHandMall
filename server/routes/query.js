@@ -4,7 +4,7 @@ var express = require('express'),
 var router = express.Router();
 var goodModel = Model.goodModel;
 
-var pageNum=20;
+var pageNum=100;
 
 router.get('/goods', function (req,res) {
     var scrollPage=req.query.page;
