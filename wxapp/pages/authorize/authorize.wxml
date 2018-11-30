@@ -1,2 +1,4 @@
 <!--pages/authorize/authorize.wxml-->
-<text>pages/authorize/authorize.wxml</text>
+<view class="page">
+<button open-type='getUserInfo' bindtap="getUserInfo">授权登录</button>
+</view>
