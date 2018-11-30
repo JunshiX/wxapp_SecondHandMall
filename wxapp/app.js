@@ -50,8 +50,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    //requestUrl: "https://www.clhw.xyz/",
-    requestUrl: "http://127.0.0.1:3000/",
+    requestUrl: "https://www.clhw.xyz/",
+    //requestUrl: "http://127.0.0.1:3000/",
     scrollNum: 100,
     windowHeight: null,
     windowWidth: null,

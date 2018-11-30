@@ -24,4 +24,10 @@ Page({
   onShow: function () {
   },
 
+  bindLogin:function(){
+    wx.navigateTo({
+      url: '/pages/authorize/authorize',
+    })
+  }
+
 })

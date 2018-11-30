@@ -22,12 +22,12 @@
   display:flex;
   justify-content: center;
   align-items: center;
-  width:200rpx;
-  height:200rpx;
+  width:180rpx;
+  height:180rpx;
 }
 .mine_avatar{
-  width:200rpx;
-  height:200rpx;
+  width:180rpx;
+  height:180rpx;
   flex:1;
   border-radius: 50%;
 }
@@ -35,7 +35,7 @@
 .mine_nickName{
   flex:1;
   color:#fff;
-  font-size:15px;
+  font-size:16px;
 }
 
 .mine_cells {

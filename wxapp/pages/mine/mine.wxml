@@ -5,7 +5,8 @@
     <view class="mine_index">
       <view style="flex:0.5"></view>
       <view class="mine_avatar_bd">
-        <image class="mine_avatar" src="{{hasUserInfo===true?userInfo.avatarUrl:'/images/avatar.png'}}"/>
+        <image wx:if="{{hasUserInfo}}" class="mine_avatar" src="{{userInfo.avatarUrl}}"/>
+        <image wx:else class="mine_avatar" src="/images/avatar.png" bindtap='bindLogin'/>
       </view>
       <view class="mine_nickName">
         <text wx:if="{{hasUserInfo}}">{{userInfo.nickName}}</text>
