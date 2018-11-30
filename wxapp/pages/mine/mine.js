@@ -3,6 +3,8 @@ const app=getApp();
 
 Page({
   data: {
+    userInfo:{},
+    hasUserInfo:false,
     tabbar:{},
     mine1:[{id:1,name:"我的消息"},{id:2,name:"我的收藏"},{id:3,name:"我的发布"}],
     mine2:[{id:4,name:"防骗指南"},{id:5,name:"用户协议"},{id:6,name:"关于我们"}],
@@ -10,23 +12,16 @@ Page({
 
   onLoad: function (options) {
     app.editTabbar();
+    console.log(app.globalData.requestUrl);
+    if (app.globalData.userInfo!=null){
+      this.setData({
+        userInfo:app.globalData.userInfo,
+        hasUserInfo:true
+      })
+    }
   },
 
   onShow: function () {
-    console.log(111),
-    wx.checkSession({
-      success:function(){
-        //session_key未过期，在本生命周期一直有效
-        console.log(222);
-        return ;
-      },
-      fail:function(){
-        console.log(333);
-        wx.navigateTO({
-          url:"/pages/authorize/authorize"
-        })
-      }
-    })
   },
 
 })

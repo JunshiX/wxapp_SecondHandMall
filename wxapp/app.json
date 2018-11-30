@@ -4,8 +4,7 @@
     "pages/sections/sections",
     "pages/goods/goods",
     "pages/mine/mine",
-    "pages/sell/sell",
-    "pages/authorize/authorize"
+    "pages/sell/sell"
   ],
   "window": {
     "backgroundTextStyle": "light",

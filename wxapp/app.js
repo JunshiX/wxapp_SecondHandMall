@@ -6,7 +6,7 @@ App({
     wx.hideTabBar();
 
     //login
-    wx.login({
+    /*wx.login({
       success:function(res){
         var code = res.code;
         if (code){
@@ -14,7 +14,7 @@ App({
 
           //发送凭证
           wx.request({
-            url:app.globalData.requestUrl+'login',
+            url:that.globalData.requestUrl+'login',
             data:{code:code}
           })
 
@@ -22,7 +22,7 @@ App({
           console.log('获取用户登录态失败:'+res.errMsg);
         }
       }
-    })
+    })*/
 
     //获取系统信息
     wx.getSystemInfo({
