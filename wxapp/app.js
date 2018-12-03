@@ -6,23 +6,27 @@ App({
     wx.hideTabBar();
 
     //login
-    /*wx.login({
+    wx.login({
       success:function(res){
         var code = res.code;
         if (code){
-          console.log('用户凭证:'+code);
 
           //发送凭证
           wx.request({
             url:that.globalData.requestUrl+'login',
-            data:{code:code}
+            data:{code:code},
+            success:function(res){
+              console.log(res.data);
+              that.globalData.userInfo=res.data.openid;
+              console.log(that.globalData.userInfo);
+            }
           })
 
         }else{
           console.log('获取用户登录态失败:'+res.errMsg);
         }
       }
-    })*/
+    })
 
     //获取系统信息
     wx.getSystemInfo({
@@ -51,8 +55,8 @@ App({
   globalData: {
     userInfo: null,
     hasUserInfo:false,
-    requestUrl: "https://www.clhw.xyz/",
-    //requestUrl: "http://127.0.0.1:3000/",
+    //requestUrl: "https://www.clhw.xyz/",
+    requestUrl: "http://127.0.0.1:3000/",
     scrollNum: 100,
     windowHeight: null,
     windowWidth: null,

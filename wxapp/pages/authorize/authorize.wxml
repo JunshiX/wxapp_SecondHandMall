@@ -1,4 +1,27 @@
 <!--pages/authorize/authorize.wxml-->
 <view class="page">
-<button open-type='getUserInfo' bindtap="getUserInfo">授权登录</button>
+
+  <view style="padding:50rpx 0">
+    <text>请完善您的学号、校区以及学院信息</text>
+    <view class="auth_cells">
+      <input placeholder='请输入您的学号' placeholder-class='placeholder' bindinput='getStuId' type="number"></input>
+    </view>
+
+    <view class="auth_cells">
+      <picker style="flex:1" bindchange="bindLocation" value="{{locationIndex}}" range="{{location}}">
+        <text class="auth_text">{{location[locationIndex]}}校区</text>
+      </picker>
+      <view class="auth_arrow"></view>
+    </view>
+
+    <view class="auth_cells">
+      <picker style="flex:1" bindchange="bindCollege" value="{{collegeIndex}}" range="{{college}}">
+        <text class="auth_text">{{college[collegeIndex]}}学院</text>
+      </picker>
+      <view class="auth_arrow"></view>
+    </view>
+
+
+    <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="getUserInfo">微信授权登录</button>
+  </view>
 </view>

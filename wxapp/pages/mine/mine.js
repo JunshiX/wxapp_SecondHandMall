@@ -12,16 +12,16 @@ Page({
 
   onLoad: function (options) {
     app.editTabbar();
-    console.log(app.globalData.requestUrl);
-    if (app.globalData.userInfo!=null){
-      this.setData({
-        userInfo:app.globalData.userInfo,
-        hasUserInfo:true
-      })
-    }
+
   },
 
   onShow: function () {
+    if (app.globalData.userInfo != null) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    }
   },
 
   bindLogin:function(){

@@ -79,7 +79,8 @@ Page({
     if (!Loading) return; //如果加载完成则不再进行网络请求
 
     wx.request({ //获取json api
-      url: app.globalData.requestUrl + 'goods?page=' + scrollPage,
+      url: app.globalData.requestUrl + 'goods',
+      data:{page:scrollPage},
       method: 'GET',
       header: {
         'content-type': 'application/json'

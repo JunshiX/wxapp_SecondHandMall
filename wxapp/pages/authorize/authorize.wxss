@@ -1,1 +1,37 @@
 /* pages/authorize/authorize.wxss */
+
+.auth_cells {
+  margin: 30rpx 100rpx;
+  padding: 10rpx 30rpx;
+  display:flex;
+  align-items: center;
+  border:1px solid black;
+}
+
+.placeholder{
+  font-size:13px;
+  color: #b2b2b2;
+}
+
+.auth_text{
+  font-size:13px;
+  flex:1;
+}
+
+.auth_arrow{
+  text-align: right;
+}
+
+/*伪元素实现下箭头*/
+.auth_arrow:after{
+  content: " ";
+  display: inline-block;
+  height:7.5px;
+  width:7.5px;
+  border-bottom:1px solid; 
+  border-right: 1px solid;
+  transform: rotate(45deg);
+  margin-left: 5rpx;
+}
+
+

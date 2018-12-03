@@ -3,6 +3,7 @@ var express = require('express'),
     insertRouter = require('./routes/insert'),
     delRouter = require('./routes/delete'),
     updateRouter = require('./routes/update'),
+    loginRouter=require("./routes/login"),
     bodyParser = require('body-parser'),
     errorHandler = require('errorhandler'),
     methodOverride = require('method-override');
@@ -55,3 +56,5 @@ app.use('/', insertRouter);
 app.use('/', delRouter);
 //更新路由
 app.use('/', updateRouter);
+//登录路由
+app.use('/',loginRouter);
