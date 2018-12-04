@@ -2,6 +2,12 @@ var express = require('express'),
     request = require('request'),
     Model = require('../models/model');//调用自定义的Mongoose Model
 
+//redis
+var redis = require('redis'),
+    client = redis.createClient(6379, 'localhost');
+//生成uuid
+const uuidv1=require('uuid/v1');
+
 var router = express.Router();
 var userModel = Model.userModel;
 
@@ -19,23 +25,11 @@ router.get('/login', function (req, res, next) {
         }
     }, (err, response, data) => {
         if (response.statusCode === 200) {
-            console.log(data);
-            res.json(data);
-            let userInfo = {
-                uId: data.openid,
-            }
-            let userInsert = new userModel(userInfo);
-            userInsert.save(function (err) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('成功插入数据');
-                }
-            })
+            let redisKey=uuidv1();
+            client.set(redisKey,JSON.stringify({openid:data.openid,sessionKey:data.session_key}),'EX',30*24*60*60);
+            res.json(redisKey);
         }
     })
-
-
 });
 
 router.get('/authorize', function (req, res, next) {

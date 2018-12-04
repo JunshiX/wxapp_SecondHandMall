@@ -10,6 +10,18 @@ Page({
     files: [], //图片路径
   },
 
+  onLoad:function(){
+    app.login();
+  },
+  onShow: function() {
+    let userInfo = app.globalData.userInfo,
+        hasUserInfo = app.globalData.hasUserInfo;
+    if (!hasUserInfo) {
+      wx.navigateTo({
+        url: '/pages/authorize/authorize',
+      })
+    }
+  },
   //滚动选择器事件监听
   bindSectionChange: function(e) {
     this.setData({
@@ -27,9 +39,6 @@ Page({
 
   //表单验证和提交
   formSubmit: function(e) {
-    let userInfo = app.globalData.userInfo,
-      hasUserInfo = app.globalData.hasUserInfo;
-
     var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/; //金额输入验证正则表达式
     var itemTitle = e.detail.value.itemTitle;
     var itemPrice = e.detail.value.itemPrice;
@@ -59,16 +68,11 @@ Page({
         duration: 2000
       });
     } else {
-      if (!hasUserInfo) {
-        wx.navigateTo({
-          url: '/pages/authorize/authorize',
-        })
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: '请检查填写内容，确认发布',
-        })
-      }
+
+      wx.showModal({
+        title: '提示',
+        content: '请检查填写内容，确认发布',
+      })
     }
   },
 

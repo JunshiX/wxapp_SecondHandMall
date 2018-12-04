@@ -4,29 +4,7 @@ App({
     var that = this;
     //隐藏系统自带tabBar
     wx.hideTabBar();
-
-    //login
-    wx.login({
-      success:function(res){
-        var code = res.code;
-        if (code){
-
-          //发送凭证
-          wx.request({
-            url:that.globalData.requestUrl+'login',
-            data:{code:code},
-            success:function(res){
-              console.log(res.data);
-              that.globalData.userInfo=res.data.openid;
-              console.log(that.globalData.userInfo);
-            }
-          })
-
-        }else{
-          console.log('获取用户登录态失败:'+res.errMsg);
-        }
-      }
-    })
+    that.login();
 
     //获取系统信息
     wx.getSystemInfo({
@@ -36,6 +14,36 @@ App({
       },
     });
 
+  },
+  login: function() {
+    var that = this;
+    
+    //login
+    let sessionId = wx.getStorageSync("sessionId");
+    if (!sessionId) {
+      wx.login({
+        success: function(res) {
+          var code = res.code;
+          if (code) {
+
+            //发送凭证
+            wx.request({
+              url: that.globalData.requestUrl + 'login',
+              data: {
+                code: code
+              },
+              success: function(res) {
+                wx.setStorageSync("sessionId", res.data);
+                console.log(wx.getStorageSync("sessionId"));
+              }
+            })
+
+          } else {
+            console.log('获取用户登录态失败:' + res.errMsg);
+          }
+        }
+      })
+    }
   },
   //自定义tabbar组件
   editTabbar: function() {
@@ -52,9 +60,10 @@ App({
       tabbar: tabbar
     });
   },
+  //全局变量
   globalData: {
     userInfo: null,
-    hasUserInfo:false,
+    hasUserInfo: false,
     //requestUrl: "https://www.clhw.xyz/",
     requestUrl: "http://127.0.0.1:3000/",
     scrollNum: 100,

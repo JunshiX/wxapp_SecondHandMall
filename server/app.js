@@ -43,7 +43,7 @@ if ('development' == env) {
         cert: fs.readFileSync('./cert-1540518146377_www.clhw.xyz.crt'),
     };
     var httpsServer = https.createServer(options, app);
-    httpsServer.listen(3000, function () {
+    httpsServer.listen(443, function () {
         console.log('Https server is running on 3000 port');
     });
 }

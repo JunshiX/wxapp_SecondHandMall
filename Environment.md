@@ -1,6 +1,6 @@
 # 在阿里云ECS上部署nodejs环境
 
-## <font color=red>**安装依赖**</font>
+## **安装依赖**
 
 ```
 yum install git vim openssl wget curl
@@ -60,7 +60,7 @@ nginx -v
 cd /etc/nginx/conf.d
 ```
 ---
-## <font color=red>**Centos7远程连接MongoDB27017端口**</font>
+## **Centos7远程连接MongoDB27017端口**
 
 安装完mongodb之后，在本地使用compass可视化访问服务器的MongoDB的时候报错提示**timeout**，telnet 27017端口也失败。原因是Centos设置了防火墙，同时阿里云也设置了安全组。  
 * 首先，修改mongo.conf配置文件
@@ -86,9 +86,13 @@ firewall-cmd --reload     //重启firewall
 &emsp;&emsp;进入阿里云ECS服务器控制台，找到安全组配置，点击配置规则，再点击添加安全组规则，在弹出的窗口中输入端口27017/27017,授权对象为0.0.0.0/0即可。
 
 ---
-## <font color=red>**配置小程序的HTTPS环境**</font>
+## **配置小程序的HTTPS环境**
 >参考文档：  
->1.博客园：Nodejs+Express创建HTTPS服务器 https://www.cnblogs.com/handongyu/p/6260209.html  
->2.关于NodeJS配置HTTPS服务、阿里云申请HTTPS证书Script https://www.aliyun.com/jiaocheng/992136.html  
+>1.[博客园：Nodejs+Express创建HTTPS服务器](https://www.cnblogs.com/handongyu/p/6260209.html)  
+>2.[关于NodeJS配置HTTPS服务、阿里云申请HTTPS证书Script](https://www.aliyun.com/jiaocheng/992136.html)  
+
+---
+## **安装redis**
+>参考文档：[博客园：CENTOS7下安装REDIS](https://www.cnblogs.com/zuidongfeng/p/8032505.html)
 
 

@@ -13,9 +13,11 @@ Page({
 
 
   onLoad: function(options) {
+    app.login();
     wx.setNavigationBarTitle({
       title: "登录验证"
     });
+
   },
 
   //获取学号
@@ -38,41 +40,22 @@ Page({
 
   //获取用户信息
   getUserInfo: function() {
-    //login
-    wx.login({
+
+    wx.getUserInfo({
       success: function(res) {
-        var code = res.code;
-        if (code) {
-          wx.getUserInfo({
-            success: function(res) {
-              console.log(res.userInfo);
-              app.globalData.userInfo = res.userInfo;
-              app.globalData.hasUserInfo = true;
-            }
-          })
-          console.log(111);
-          //发送凭证
-          wx.request({
-            url: app.globalData.requestUrl + 'login',
-            method: 'GET',
-            data: {
-              code: code,
-              uname: app.globalData.userInfo.nickName,
-              uavatar: app.globalData.userInfo.avatarUrl,
-              lnum:locationIndex,
-              cnum:collegeIndex
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function(res) {
-
-            }
-          })
-
-        } else {
-          console.log('获取用户登录态失败:' + res.errMsg);
-        }
+        console.log(res);
+        app.globalData.userInfo = res.userInfo;
+        app.globalData.hasUserInfo = true;
+        wx.navigateBack();
+      },
+      fail:function(){
+        let currentPage=getCurrentPages();
+        let delta=0;
+        if (currentPage.length==3) delta=2;
+        else delta=1;
+        wx.navigateBack({
+          delta:delta
+        })
       }
     })
   }
