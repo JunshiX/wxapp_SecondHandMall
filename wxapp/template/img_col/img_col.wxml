@@ -4,18 +4,23 @@
     <!--商品左列-->
     <view class="img_col1">
       <view class="img_col_item" wx:for="{{col1}}" wx:key="id">
-          <image class="user_avatar" src="{{item.UserAvatar}}"></image>
-          <text class="user_nickname">{{item.UserNickname}}</text>
-          <text class="user_location">{{item.UserLocation}}</text>
+        
+        <view class="img_cell">
+          <image class="user_avatar" src="{{item.uAva}}"></image>
+          <text class="user_nickname">{{item.uName}}</text>
+          <text class="user_location">{{item.uPlace==0?'湖区':'牌区'}}</text>
+        </view>
 
-          <!--物品图片-->
-          <image src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
-          <!--物品图片-->
+        <!--物品图片-->
+        <image src="{{item.imgList[0]}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
+        <!--物品图片-->
 
-          <text class="item_description">{{item.Description}}</text>
-          <text class="item_price">￥68000</text>
-          <text class="item_price_before">￥68000</text>
-          <text class="item_date">昨天15：20</text>
+        <text class="item_description">{{item.describe}}</text>
+        <view class="img_cell">
+          <text class="item_price">￥{{item.price}}</text>
+          <text class="item_price_before">￥{{item.oriPrice}}</text>
+          <text class="item_date">{{item.createAt}}</text>
+        </view>
 
       </view>
     </view>
@@ -24,19 +29,22 @@
     <!--商品右列-->
     <view class="img_col2">
       <view class="img_col_item" wx:for="{{col2}}" wx:key="id">
+        <view class="img_cell">
+          <image class="user_avatar" src="{{item.uAva}}"></image>
+          <text class="user_nickname">{{item.uName}}</text>
+          <text class="user_location">{{item.uPlace==0?'湖区':'牌区'}}</text>
+        </view>
 
-          <image class="user_avatar" src="{{item.UserAvatar}}"></image>
-          <text class="user_nickname">{{item.UserNickname}}</text>
-          <text class="user_location">{{item.UserLocation}}</text>
+        <!--物品图片-->
+        <image src="{{item.imgList[0]}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
+        <!--物品图片-->
 
-          <!--物品图片-->
-          <image src="{{item.GoodImage}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
-          <!--物品图片-->
-
-          <text class="item_description">{{item.Description}}</text>
-          <text class="item_price">￥68000</text>
-          <text class="item_price_before">￥68000</text>
-          <text class="item_date">2018-11-12</text>
+        <text class="item_description">{{item.describe}}</text>
+        <view class="img_cell">
+          <text class="item_price">￥{{item.price}}</text>
+          <text class="item_price_before">￥{{item.oriPrice}}</text>
+          <text class="item_date">{{item.createAt}}</text>
+        </view>
 
       </view>
     </view>

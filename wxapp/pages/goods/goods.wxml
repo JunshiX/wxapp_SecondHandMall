@@ -1,4 +1,4 @@
 <!--pages/goods/goods.wxml-->
 <view class="page">
-  <image src="{{json_data[0].GoodImage}}"></image>
+  <image src="{{json_data[0].imgList[0]}}"></image>
 </view>

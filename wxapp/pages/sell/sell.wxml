@@ -6,12 +6,12 @@
     <view class="sell_cells">
       <view class="sell_cell" style="border-bottom:1px solid #e2e2e2">
         <text class="sell_title">标题</text>
-        <input name="itemTitle" class="sell_input" placeholder="请输入您的商品名称（不超过15个字）" placeholder-class='placeholder' maxlength='15' />
+        <input name="title" class="sell_input" placeholder="请输入您的商品名称（不超过15个字）" placeholder-class='placeholder' maxlength='15' />
       </view>
 
       <view class="sell_cell" style="align-items: flex-start">
         <text class="sell_title">描述</text>
-        <textarea name="itemDescription" class="sell_input" placeholder="请简要的描述一下您的商品，新旧程度、出售原因等（文字不超过140个字，附图不超过3张）" placeholder-class='placeholder' maxlength='140' bindinput='bindInput'></textarea>
+        <textarea name="describe" class="sell_input" placeholder="请简要的描述一下您的商品，新旧程度、出售原因等（文字不超过140个字，附图不超过3张）" placeholder-class='placeholder' maxlength='140' bindinput='bindInput'></textarea>
       </view>
 
       <!--字数提示，超过130字变红-->
@@ -45,12 +45,12 @@
     <view class='sell_cells'>
       <view class="sell_cell" style="border-bottom:1px solid #e2e2e2">
         <text class="sell_title">价格</text>
-        <input name="itemPrice" class="sell_input price" type="digit" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
+        <input name="price" class="sell_input price" type="digit" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
       </view>
 
       <view class="sell_cell">
         <text class="sell_title">原价</text>
-        <input name="beforePrice" class="sell_input price" type="digit" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
+        <input name="oriPrice" class="sell_input price" type="digit" placeholder="￥0.00" placeholder-class='placeholder' maxlength='15' />
       </view>
     </view>
     <!---->
@@ -59,8 +59,8 @@
     <view class='sell_cells'>
       <view class="sell_cell">
         <text class="sell_title">分类</text>
-        <picker style="flex:1;display:flex;justify-content:flex-end" bindchange="bindSectionChange" value="{{sectionIndex}}" range="{{sections}}">
-          <text class="sell_select">{{sections[sectionIndex]}}</text>
+        <picker style="flex:1;display:flex;justify-content:flex-end" bindchange="bindSectionChange" value="{{sId}}" range="{{sections}}">
+          <text class="sell_select">{{sections[sId]}}</text>
         </picker>
       </view>
     </view>

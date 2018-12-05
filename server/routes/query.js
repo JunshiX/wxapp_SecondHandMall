@@ -1,24 +1,29 @@
 var express = require('express'),
+    getDateDiff = require('../utils/utils'),
     Model = require('../models/model');//调用自定义的Mongoose Model
 
 var router = express.Router();
 var goodModel = Model.goodModel;
 
-var pageNum=100;
+var pageNum = 100;
 
-router.get('/goods', function (req,res) {
-    var scrollPage=req.query.page;
+router.get('/goods', function (req, res) {
+    var scrollPage = req.query.page;
     goodModel.find({}, function (err, docs) {
+        for (var item in docs) {
+            let time=getDateDiff(docs[item]["createAt"]);
+            docs[item]["createAt"]=time;
+        }
         res.json(docs);
-    }).limit(pageNum).skip(scrollPage*pageNum).sort({'_id':-1});
+    }).limit(pageNum).skip(scrollPage * pageNum).sort({ '_id': -1 }).lean();
 });
 
 router.get('/sections', function (req, res) {
-    var SectionId = req.query.id;
-    var scrollPage=req.query.page;
-    goodModel.find({ 'SectionId': SectionId }, function (err, docs) {
+    var sId = req.query.id;
+    var scrollPage = req.query.page;
+    goodModel.find({ 'sId': sId }, function (err, docs) {
         res.json(docs);
-    }).limit(pageNum).skip(scrollPage*pageNum).sort({'_id':-1});
+    }).limit(pageNum).skip(scrollPage * pageNum).sort({ '_id': -1 });
 });
 
 router.get('/good', function (req, res) {

@@ -3,16 +3,18 @@ mongoose.connect('mongodb://localhost:27017/goods', { useNewUrlParser: true });
 var Model = {};
 //商品Schema和Model
 var goodSchema = new mongoose.Schema({
-    UserId: { type: String, required: true, },
-    UserNickname: String,
-    UserAvatar: String,
-    UserLocation: String,
-    SectionId: String,
-    Description: String,
-    GoodImage: String,
-    GoodImgList: Array,
-    create_at: { type: Date, default: Date.now },
-    update_at: Date
+    uId: { type: String, required: true, },
+    uName: String,
+    uAva: String,
+    uPlace: Number,
+    sId: Number,
+    title:String,
+    describe: String,
+    price:Number,
+    oriPrice:Number,
+    imgList: Array,
+    createAt: { type: Date, default: Date.now },
+    comment:Array
 }, { versionKey: false });
 Model.goodModel = mongoose.model('goodModel', goodSchema);    //goodModel即collection名,在mongdb中会生成
 
@@ -20,8 +22,8 @@ Model.goodModel = mongoose.model('goodModel', goodSchema);    //goodModel即coll
 var userSchema = new mongoose.Schema({
     uId: { type: String, require: true, unique: true,dropDups: true},
     uName: String,
-    uAvatar: String,
-    uLocation: Number,
+    uAva: String,
+    uPlace: Number,
     uCollege: Number,
     uComment: Array,
     uFavor: Array

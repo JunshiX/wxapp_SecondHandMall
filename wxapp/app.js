@@ -20,6 +20,7 @@ App({
     
     //login
     let sessionId = wx.getStorageSync("sessionId");
+    console.log(sessionId);
     if (!sessionId) {
       wx.login({
         success: function(res) {

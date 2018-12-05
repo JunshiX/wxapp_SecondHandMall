@@ -8,15 +8,15 @@
     </view>
 
     <view class="auth_cells">
-      <picker style="flex:1" bindchange="bindLocation" value="{{locationIndex}}" range="{{location}}">
-        <text class="auth_text">{{location[locationIndex]}}校区</text>
+      <picker style="flex:1" bindchange="bindPlace" value="{{pId}}" range="{{place}}">
+        <text class="auth_text">{{place[pId]}}校区</text>
       </picker>
       <view class="auth_arrow"></view>
     </view>
 
     <view class="auth_cells">
-      <picker style="flex:1" bindchange="bindCollege" value="{{collegeIndex}}" range="{{college}}">
-        <text class="auth_text">{{college[collegeIndex]}}学院</text>
+      <picker style="flex:1" bindchange="bindCollege" value="{{cId}}" range="{{college}}">
+        <text class="auth_text">{{college[cId]}}学院</text>
       </picker>
       <view class="auth_arrow"></view>
     </view>

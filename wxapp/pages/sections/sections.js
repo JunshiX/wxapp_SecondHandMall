@@ -14,7 +14,7 @@ Page({
     scrollNum: 0, //每次加载的数据量
     imgWidth: 0,
     imgHeight: 0,
-    sectionsId: 0,
+    sId: 0,
     col1: [],
     col2: [],
   },
@@ -39,7 +39,7 @@ Page({
       imgWidth: imgWidth,
       imgHeight: imgHeight,
       scrollPage: 0,
-      sectionsId: options.id,
+      sId: options.id,
     });
 
 
@@ -53,14 +53,14 @@ Page({
     var col1 = this.data.col1;
     var col2 = this.data.col2;
     let Loading = this.data.Loading;
-    let sectionsId = this.data.sectionsId;
+    let sId = this.data.sId;
     let scrollNum = this.data.scrollNum;
     var that = this;
 
     if (!Loading) return;
 
     wx.request({ //获取json api
-      url: app.globalData.requestUrl + 'sections?page=' + scrollPage + '&id=' + sectionsId,
+      url: app.globalData.requestUrl + 'sections?page=' + scrollPage + '&id=' + sId,
       method: 'GET',
       header: {
         'content-type': 'application/json'

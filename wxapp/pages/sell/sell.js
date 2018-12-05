@@ -5,27 +5,26 @@ Page({
 
   data: {
     sections: ["学习用品", "动植物", "生活美妆", "交通出行", "电子设备", "穿搭"], //picker滚动选择器数据列表
-    sectionIndex: 0,
+    sId: 0,
     inputLength: 0, //文字输入框字数
     files: [], //图片路径
   },
 
   onLoad:function(){
     app.login();
-  },
-  onShow: function() {
     let userInfo = app.globalData.userInfo,
-        hasUserInfo = app.globalData.hasUserInfo;
+      hasUserInfo = app.globalData.hasUserInfo;
     if (!hasUserInfo) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/authorize/authorize',
       })
     }
   },
+
   //滚动选择器事件监听
   bindSectionChange: function(e) {
     this.setData({
-      sectionIndex: e.detail.value
+      sId: e.detail.value
     })
   },
 
@@ -40,21 +39,21 @@ Page({
   //表单验证和提交
   formSubmit: function(e) {
     var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/; //金额输入验证正则表达式
-    var itemTitle = e.detail.value.itemTitle;
-    var itemPrice = e.detail.value.itemPrice;
-    var itemDescription = e.detail.value.itemDescription;
-    var beforePrice = e.detail.value.beforePrice;
+    var title = e.detail.value.title;
+    var price = e.detail.value.price;
+    var desrcibe = e.detail.value.describe;
+    var oriPrice = e.detail.value.oriPrice;
     var warn = "";
     var flag = false;
-    if (!itemTitle) {
+    if (!title) {
       warn = "请填写标题！";
-    } else if (!itemDescription) {
+    } else if (!describe) {
       warn = "请填写描述！";
     } else if (this.data.files.length == 0) {
       warn = "请上传图片！";
-    } else if (!reg.test(itemPrice)) {
+    } else if (!reg.test(price)) {
       warn = "请正确填写价格！";
-    } else if (!reg.test(beforePrice)) {
+    } else if (!reg.test(oriPrice)) {
       warn = "请正确填写原价！";
     } else {
       flag = true;
