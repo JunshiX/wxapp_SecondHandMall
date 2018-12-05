@@ -1,0 +1,42 @@
+/* pages/goods/goods.wxss */
+.good_cell{
+  padding:20rpx;
+}
+
+.item_price{
+  display:inline-block;
+  margin:5rpx 5rpx 10rpx 10rpx;
+  font-weight: bold;
+  color:#FF4F64;
+
+}
+
+.item_price_before{
+  display:inline-block;
+  flex:1;
+  margin:5rpx 10rpx 10rpx 0;
+  font-size: 10px;
+  text-decoration:line-through;
+  color:#B2B2B2;
+}
+
+.user_avatar {
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  margin: 0 10rpx 0 0;
+  border-radius: 50%;
+}
+
+.user_nickname {
+  display: inline-block;
+  flex:1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user_location {
+  display: inline-block;
+  color: #e74552;
+}

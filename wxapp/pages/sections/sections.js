@@ -97,7 +97,7 @@ Page({
   onGoodTap: function(e) {
     let _id = e.currentTarget.id;
     wx.navigateTo({
-      url: '../goods/goods?_id=' + _id,
+      url: '../good/good?_id=' + _id,
     })
   },
 

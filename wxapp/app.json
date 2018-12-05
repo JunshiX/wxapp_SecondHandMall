@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/sections/sections",
-    "pages/goods/goods",
+    "pages/good/good",
     "pages/mine/mine",
     "pages/sell/sell",
     "pages/authorize/authorize"

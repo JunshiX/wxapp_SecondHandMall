@@ -1,0 +1,25 @@
+<!--pages/goods/goods.wxml-->
+<view class="page">
+  <!--滑块视图-->
+  <view class="good_cell">
+    <swiper indicator-dots="true">
+      <block wx:for="{{goodData.imgList}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!---->
+
+  <view class="good_cell">
+    <text class="item_price">￥{{goodData.price}}</text>
+    <text class="item_price_before">￥{{goodData.oriPrice}}</text>
+  </view>
+
+  <view class="good_cell" style="display:flex;align-item:center">
+    <image class="user_avatar " src="{{goodData.uAva}}" />
+    <text class="user_nickname">{{goodData.uName}}</text>
+    <text class="user_location">{{goodData.uPlace==0?'湖区':'牌区'}}</text>
+  </view>
+</view>

@@ -126,9 +126,8 @@ Page({
   //点击图片
   onGoodTap: function(e) {
     let _id = e.currentTarget.id;
-    console.log(e.currentTarget);
     wx.navigateTo({
-      url: '../goods/goods?_id=' + _id,
+      url: '../good/good?_id=' + _id,
     })
   },
   onShow:function(){
