@@ -1,36 +1,69 @@
 /* pages/goods/goods.wxss */
-.good_cell{
-  padding:20rpx;
+
+.good_block {
+  background-color: #fff;
+  margin: 0 0 20rpx 0;
 }
 
-.item_price{
-  display:inline-block;
-  margin:5rpx 5rpx 10rpx 10rpx;
+.good_cell, .good_swiper {
+  margin: 0 20rpx;
+  padding: 15rpx 0;
+  display: flex;
+  align-items: center;
+}
+
+.bottom_line {
+  border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+.cell_flex {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.cell_text {
+  font-size: 12px;
+  color: #b2b2b2;
+}
+
+.item_price {
+  font-size: 14px;
+  display: inline-block;
   font-weight: bold;
-  color:#FF4F64;
-
+  color: #ff4f64;
 }
 
-.item_price_before{
-  display:inline-block;
-  flex:1;
-  margin:5rpx 10rpx 10rpx 0;
-  font-size: 10px;
-  text-decoration:line-through;
-  color:#B2B2B2;
+.item_price_before {
+  display: inline-block;
+  font-size: 12px;
+  text-decoration: line-through;
+  color: #b2b2b2;
+}
+
+.dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin: 0 8rpx;
+  background-color: rgb(178, 178, 178);
+}
+
+.active {
+  background-color: rgb(53, 53, 53);
 }
 
 .user_avatar {
   display: inline-block;
-  width: 60rpx;
-  height: 60rpx;
-  margin: 0 10rpx 0 0;
+  width: 70rpx;
+  height: 70rpx;
+  margin: 0 15rpx 0 0;
   border-radius: 50%;
 }
 
 .user_nickname {
   display: inline-block;
-  flex:1;
+  flex: 1;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -40,3 +73,34 @@
   display: inline-block;
   color: #e74552;
 }
+
+.comment_in_wrap {
+  height: 70rpx;
+  width: 475rpx;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: rgb(237, 237, 237);
+  display: flex;
+}
+
+.comment_in {
+  flex:1;
+  height: 70rpx;
+  font-size:13px;
+  margin:0 20rpx;
+  background-color: rgb(237, 237, 237);
+}
+
+.comment_btn_wrap{
+  height: 70rpx;
+  width: 150rpx;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 79, 100);
+  color: #fff;
+  font-size:13px;
+}
+

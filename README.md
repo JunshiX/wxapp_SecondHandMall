@@ -7,6 +7,7 @@
   - [Template的使用](#Template的使用)
   - [小程序的页面跳转和传值](#小程序的页面跳转和传值)
   - [自定义tabBar组件（component）](#自定义tabBar组件（component）)
+  - [自定义轮播图dots样式](#自定义轮播图dots样式)
   - [表单的布局](#表单的布局)
     - [Flex布局](#Flex布局)
     - [picker滚动选择器](#picker滚动选择器)
@@ -504,3 +505,9 @@ bindInput: function(e) {
 >3.[小程序官方文档：开放能力——用户信息](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html)  
 >4.[微信小程序中登录和登录态维护](https://www.jianshu.com/p/c5f6c98b2685)
 
+
+---
+## **自定义轮播图dots样式**  
+>参考文档：  
+>1.[微信小程序自定义轮播图swiper dots默认样式](https://blog.csdn.net/rorntuck7/article/details/54378963)  
+>2.[微信小程序swiper控件卡死的解决方法](https://blog.csdn.net/oagnuygnef/article/details/80506442)

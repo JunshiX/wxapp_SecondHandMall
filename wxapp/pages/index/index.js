@@ -11,8 +11,7 @@ Page({
     scrollPage: 0, //控制分页
     scrollNum: 0, //每次加载的数据量
     scrollH: 0, //滚动窗口高度
-    imgWidth: 0,
-    imgHeight: 0,
+    imgWidth:0,
     tabbar: {}, //自定义tabbar
     col1: [], //左列
     col2: [], //右列

@@ -1,25 +1,80 @@
 <!--pages/goods/goods.wxml-->
 <view class="page">
-  <!--滑块视图-->
-  <view class="good_cell">
-    <swiper indicator-dots="true">
-      <block wx:for="{{goodData.imgList}}" wx:key="*this">
-        <swiper-item>
-          <image src="{{item}}" width="355" height="150" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!---->
+  <view class="good_block">
 
-  <view class="good_cell">
-    <text class="item_price">￥{{goodData.price}}</text>
-    <text class="item_price_before">￥{{goodData.oriPrice}}</text>
+    <!--滑块视图-->
+    <view>
+      <swiper current="{{swiperCurrent}}" bindchange="swiperChange" class="good_swiper">
+        <block wx:for="{{gData.imgList}}" wx:key="unique">
+          <swiper-item>
+            <image src="{{item}}" mode='widthFix' />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!---->
+
+    <!--价格+滑块指示点+收藏数-->
+    <view class="good_cell">
+
+      <view class="cell_flex">
+        <text class="item_price">￥{{gData.price}}</text>
+        <text class="item_price_before">￥{{gData.oriPrice}}</text>
+      </view>
+
+      <view class="cell_flex" style="justify-content:center">
+        <block wx:for="{{gData.imgList}}" wx:key="unique">
+          <view class="dot{{index==swiperCurrent?' active':''}}"></view>
+        </block>
+      </view>
+
+      <view class="cell_flex" style="justify-content:flex-end">
+        <text class="cell_text">收藏 3</text>
+      </view>
+    </view>
+    <!---->
+
+    <!--标题+介绍-->
+    <view class="good_cell" style="padding:0">
+      <text style="font-size:16px;font-weight:bold">{{gData.title}}</text>
+    </view>
+
+    <view class="good_cell bottom_line">
+      <text class="cell_text">{{gData.describe}}</text>
+    </view>
+    <!---->
+
+    <!--用户信息-->
+    <view class="good_cell">
+      <image class="user_avatar " src="{{gData.uAva}}" />
+      <text class="user_nickname">{{gData.uName}}  |  艺术学院</text>
+      <text class="user_location">{{gData.uPlace==0?'湖区':'牌区'}}</text>
+    </view>
+    <!---->
   </view>
 
-  <view class="good_cell" style="display:flex;align-item:center">
-    <image class="user_avatar " src="{{goodData.uAva}}" />
-    <text class="user_nickname">{{goodData.uName}}</text>
-    <text class="user_location">{{goodData.uPlace==0?'湖区':'牌区'}}</text>
+  <view class="good_block">
+    <view class="good_cell bottom_line">
+      <text style="font-size:14px;font-weight:bold">留言(0)</text>
+    </view>
+
+    <view class="good_cell" style="align-items:center">
+      <image wx:if="{{hasUserInfo}}" class="user_avatar" src="{{userInfo.avatarUrl}}" />
+      <image wx:else class="user_avatar" src="/images/avatar.png" bindtap='bindLogin' />
+
+      <view wx:if="{{hasUserInfo}}" class="cell_flex">
+        <view class="comment_in_wrap cell_flex">
+          <input class="comment_in" placeholder='询问更多，欢迎留个言'></input>
+        </view>
+        <view class="comment_btn_wrap">发送</view>
+      </view>
+      <view wx:else class="cell_flex">
+        <view class="comment_in_wrap cell_flex">
+          <input class="comment_in" placeholder='留言前请先登录'></input>
+        </view>
+        <view class="comment_btn_wrap">登录</view>
+      </view>
+      
+    </view>
   </view>
 </view>
