@@ -81,9 +81,6 @@ Page({
       url: app.globalData.requestUrl + 'goods',
       data:{page:scrollPage},
       method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
       success: function(res) {
         let images = res.data;
         let baseId = "img-" + (+new Date());

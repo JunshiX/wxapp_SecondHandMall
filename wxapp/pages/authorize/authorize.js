@@ -4,7 +4,8 @@ const app = getApp();
 Page({
 
   data: {
-    stuId: null,
+    stuId: "",
+    hasStuId:false,
     place: ["九龙湖", "四牌楼"],
     pId: 0,
     college: ["建筑", "机械", "能环", "信息", "土木", "电子", "数学", "自动化", "计算机", "物理", "生医", "材料", "人文", "经管", "电气", "外国语", "体育", "化工", "交通", "仪科", "艺术", "法", "医", "公卫", "吴健雄", "软件", "微电子", "网安", "其他"],
@@ -22,7 +23,16 @@ Page({
 
   //获取学号
   getStuId: function(e) {
-    this.data.stuId = e.detail.value;
+    if (e.detail.value!=""){
+      this.setData({
+        stuId: e.detail.value,
+        hasStuId:true
+      });
+    }else{
+      this.setData({
+        hasStuId: false
+      });
+    }
   },
 
   //选择校区
@@ -38,15 +48,39 @@ Page({
     })
   },
 
-  //获取用户信息
+  //获取并上传用户信息
   getUserInfo: function() {
-
+    let that=this;
     wx.getUserInfo({
       success: function(res) {
-        console.log(res);
+        let uName = res.userInfo.nickName,
+            uAva=res.userInfo.avatarUrl;
         app.globalData.userInfo = res.userInfo;
         app.globalData.hasUserInfo = true;
-        wx.navigateBack();
+        let sessionId=wx.getStorageSync("sessionId");
+        
+        wx.request({
+          url: app.globalData.requestUrl + 'authorize',
+          method:'POST',
+          data:{
+            sessionId:sessionId,
+            uName:uName,
+            uAva:uAva,
+            stuId:that.data.stuId,
+            uPlace:that.data.pId,
+            uCollege:that.data.cId
+          },
+          success:function(res){
+            console.log(res);
+            if (res.statusCode==200) console.log('用户登录成功');
+            else console.log(res.data);
+            wx.navigateBack();
+          },
+          fail(){
+            console.log("用户信息上传失败");
+          }
+
+        })
       },
       fail:function(){
         let currentPage=getCurrentPages();

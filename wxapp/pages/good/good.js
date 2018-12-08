@@ -14,7 +14,7 @@ Page({
     var that = this;
 
     wx.showLoading({
-      title: '记载中'
+      title: '加载中'
     });
 
     //请求某分类下的商品
@@ -50,5 +50,10 @@ Page({
       })
     }
   },
+  bindLogin:function(){
+    wx.navigateTo({
+      url: '/pages/authorize/authorize',
+    })
+  }
 
 })

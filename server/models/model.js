@@ -8,19 +8,20 @@ var goodSchema = new mongoose.Schema({
     uAva: String,
     uPlace: Number,
     sId: Number,
-    title:String,
+    title: String,
     describe: String,
-    price:Number,
-    oriPrice:Number,
+    price: Number,
+    oriPrice: Number,
     imgList: Array,
     createAt: { type: Date, default: Date.now },
-    comment:Array
+    comment: Array
 }, { versionKey: false });
 Model.goodModel = mongoose.model('goodModel', goodSchema);    //goodModel即collection名,在mongdb中会生成
 
 //用户Schema和Model
 var userSchema = new mongoose.Schema({
-    uId: { type: String, require: true, unique: true,dropDups: true},
+    uId: { type: String, require: true},
+    stuId: String,
     uName: String,
     uAva: String,
     uPlace: Number,

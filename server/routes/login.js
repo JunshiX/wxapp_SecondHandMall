@@ -6,7 +6,7 @@ var express = require('express'),
 var redis = require('redis'),
     client = redis.createClient(6379, 'localhost');
 //生成uuid
-const uuidv1=require('uuid/v1');
+const uuidv1 = require('uuid/v1');
 
 var router = express.Router();
 var userModel = Model.userModel;
@@ -25,33 +25,39 @@ router.get('/login', function (req, res, next) {
         }
     }, (err, response, data) => {
         if (response.statusCode === 200) {
-            let redisKey=uuidv1();
-            client.set(redisKey,JSON.stringify({openid:data.openid,sessionKey:data.session_key}),'EX',30*24*60*60);
+            let redisKey = uuidv1();
+            client.set(redisKey, JSON.stringify({ openid: data.openid, sessionKey: data.session_key }), 'EX', 30 * 24 * 60 * 60);
             res.json(redisKey);
         }
     })
 });
 
-router.get('/authorize', function (req, res, next) {
-    let openid = req.query.openid,
-        uname = req.query.uname,
-        uavatar = req.query.avatar,
-        lnum = req.query.lnum,
-        cnum = req.query.cnum;
-    let userInfo = {
-        uId: openid,
-        uName: uname,
-        uAvatar: uavatar,
-        uLocation: lnum,
-        uCollege: cnum,
-    }
-    let userInsert = new userModel(userInfo);
-    userInsert.save(function (err) {
+router.post('/authorize', function (req, res, next) {
+    let sessionId = req.body.sessionId;
+    client.get(sessionId, function (err, rep) {
+        let redisValue=JSON.parse(rep);
         if (err) {
-            console.log(err);
+            res.status(500).json({error:err});
         } else {
-            console.log('成功插入数据');
+            let uId=redisValue.openid;
+            let userInfo = {
+                uId: uId,
+                stuId: req.body.stuId,
+                uName: req.body.uName,
+                uAva: req.body.uAva,
+                uPlace: req.body.uPlace,
+                uCollege: req.body.uCollege,
+            }
+            let userInsert = new userModel(userInfo);
+            userInsert.save(function (error) {
+                if (error) {
+                    res.status(500).json({error:error});
+                } else {
+                    console.log("用户信息已载入");
+                    res.status(200);
+                }
+            })
         }
-    })
+    });
 })
 module.exports = router;

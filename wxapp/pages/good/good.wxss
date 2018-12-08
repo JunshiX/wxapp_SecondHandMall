@@ -87,7 +87,7 @@
   flex:1;
   height: 70rpx;
   font-size:13px;
-  margin:0 20rpx;
+  margin:0 25rpx;
   background-color: rgb(237, 237, 237);
 }
 

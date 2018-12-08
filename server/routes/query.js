@@ -22,8 +22,12 @@ router.get('/sections', function (req, res) {
     var sId = req.query.id;
     var scrollPage = req.query.page;
     goodModel.find({ 'sId': sId }, function (err, docs) {
+        for (var item in docs) {
+            let time=getDateDiff(docs[item]["createAt"]);
+            docs[item]["createAt"]=time;
+        }
         res.json(docs);
-    }).limit(pageNum).skip(scrollPage * pageNum).sort({ '_id': -1 });
+    }).limit(pageNum).skip(scrollPage * pageNum).sort({ '_id': -1 }).lean();
 });
 
 router.get('/good', function (req, res) {

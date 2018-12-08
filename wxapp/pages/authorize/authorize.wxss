@@ -34,4 +34,9 @@
   margin-left: 5rpx;
 }
 
+.auth_btn{
+  width:550rpx;
+  font-size:16px;
+}
+
 

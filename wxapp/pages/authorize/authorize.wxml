@@ -2,9 +2,9 @@
 <view class="page">
 
   <view style="padding:50rpx 0">
-    <text>请完善您的学号、校区以及学院信息</text>
+    <text>请完善您的一卡通号、校区以及学院信息，确认提交后无法修改，请认真填写（仅首次登录需要完善信息）</text>
     <view class="auth_cells">
-      <input placeholder='请输入您的学号' placeholder-class='placeholder' bindinput='getStuId' type="number"></input>
+      <input placeholder='请输入您的一卡通号' placeholder-class='placeholder' bindinput='getStuId' type="number"></input>
     </view>
 
     <view class="auth_cells">
@@ -21,7 +21,11 @@
       <view class="auth_arrow"></view>
     </view>
 
-
-    <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="getUserInfo">微信授权登录</button>
+    <view wx:if="{{hasStuId}}">
+      <button class="auth_btn" type="primary" open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="getUserInfo">微信授权登录</button>
+    </view>
+    <view wx:else>
+      <button class="auth_btn" type="primary" disabled="true" bindtap="">微信授权登录</button>
+    </view>
   </view>
 </view>

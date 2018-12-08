@@ -30,12 +30,12 @@ App({
             //发送凭证
             wx.request({
               url: that.globalData.requestUrl + 'login',
+              method:'GET',
               data: {
                 code: code
               },
               success: function(res) {
                 wx.setStorageSync("sessionId", res.data);
-                console.log(wx.getStorageSync("sessionId"));
               }
             })
 

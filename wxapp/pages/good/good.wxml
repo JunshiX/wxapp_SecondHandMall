@@ -66,13 +66,13 @@
         <view class="comment_in_wrap cell_flex">
           <input class="comment_in" placeholder='询问更多，欢迎留个言'></input>
         </view>
-        <view class="comment_btn_wrap">发送</view>
+        <view class="comment_btn_wrap" bindtap='submitComment'>发送</view>
       </view>
       <view wx:else class="cell_flex">
         <view class="comment_in_wrap cell_flex">
           <input class="comment_in" placeholder='留言前请先登录'></input>
         </view>
-        <view class="comment_btn_wrap">登录</view>
+        <view class="comment_btn_wrap" bindtap="bindLogin">登录</view>
       </view>
       
     </view>
