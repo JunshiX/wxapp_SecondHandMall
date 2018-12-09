@@ -55,8 +55,6 @@ Page({
       success: function(res) {
         let uName = res.userInfo.nickName,
             uAva=res.userInfo.avatarUrl;
-        app.globalData.userInfo = res.userInfo;
-        app.globalData.hasUserInfo = true;
         let sessionId=wx.getStorageSync("sessionId");
         
         wx.request({
@@ -71,9 +69,8 @@ Page({
             uCollege:that.data.cId
           },
           success:function(res){
-            console.log(res);
-            if (res.statusCode==200) console.log('用户登录成功');
-            else console.log(res.data);
+            console.log('用户登录成功');
+            app.globalData.hasAuth=true;
             wx.navigateBack();
           },
           fail(){

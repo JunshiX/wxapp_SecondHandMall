@@ -59,7 +59,7 @@
     </view>
 
     <view class="good_cell" style="align-items:center">
-      <image wx:if="{{hasUserInfo}}" class="user_avatar" src="{{userInfo.avatarUrl}}" />
+      <image wx:if="{{hasUserInfo}}" class="user_avatar" src="{{userInfo.uAva}}" />
       <image wx:else class="user_avatar" src="/images/avatar.png" bindtap='bindLogin' />
 
       <view wx:if="{{hasUserInfo}}" class="cell_flex">

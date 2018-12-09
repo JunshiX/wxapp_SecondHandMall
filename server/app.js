@@ -44,7 +44,7 @@ if ('development' == env) {
     };
     var httpsServer = https.createServer(options, app);
     httpsServer.listen(443, function () {
-        console.log('Https server is running on 3000 port');
+        console.log('Https server is running on 443 port');
     });
 }
 

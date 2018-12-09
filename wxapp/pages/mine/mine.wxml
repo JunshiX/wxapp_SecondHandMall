@@ -5,11 +5,11 @@
     <view class="mine_index">
       <view style="flex:0.5"></view>
       <view class="mine_avatar_bd">
-        <image wx:if="{{hasUserInfo}}" class="mine_avatar" src="{{userInfo.avatarUrl}}"/>
+        <image wx:if="{{hasUserInfo}}" class="mine_avatar" src="{{userInfo.uAva}}"/>
         <image wx:else class="mine_avatar" src="/images/avatar.png" bindtap='bindLogin'/>
       </view>
       <view class="mine_nickName">
-        <text wx:if="{{hasUserInfo}}">{{userInfo.nickName}}</text>
+        <text wx:if="{{hasUserInfo}}">{{userInfo.uName}}</text>
         <text wx:else>点击头像登录</text>
       </view>
     </view>

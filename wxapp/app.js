@@ -15,37 +15,69 @@ App({
     });
 
   },
+  //检查登录
   login: function() {
     var that = this;
-    
-    //login
+    //如果已经有sessionId，说明已经登录，直接根据sessionId向第三方服务器请求获取用户信息
+    //否则，先获取第三方服务器登录状态，再根据返回的sessionId向第三方服务器请求获取用户信息
     let sessionId = wx.getStorageSync("sessionId");
-    console.log(sessionId);
+
     if (!sessionId) {
       wx.login({
         success: function(res) {
-          var code = res.code;
-          if (code) {
-
+          if (res.code) {
             //发送凭证
             wx.request({
               url: that.globalData.requestUrl + 'login',
-              method:'GET',
               data: {
-                code: code
+                code: res.code
               },
               success: function(res) {
                 wx.setStorageSync("sessionId", res.data);
-              }
+                that.getUserInfo(res.data);
+              },
             })
-
           } else {
             console.log('获取用户登录态失败:' + res.errMsg);
           }
         }
       })
+    } else {
+      that.getUserInfo(sessionId);
     }
   },
+  //向第三方服务器获取用户信息
+  getUserInfo: function(param) {
+    let that = this;
+    if (that.globalData.hasUserInfo == false) {
+      if (that.globalData.hasAuth === true) {
+        wx.request({
+          url: that.globalData.requestUrl + 'getUserInfo',
+          data: {
+            sessionId: param
+          },
+          success: function(res) {
+            if (res.statusCode == 404) {
+              if (res.data.error == 0) {
+                console.log("服务器session失效");
+                wx.removeStorageSync("sessionId");
+              } else {
+                console.log("当前用户未授权使用个人信息");
+                that.globalData.hasAuth = false;
+              }
+            } else if (res.statusCode == 200) {
+
+              that.globalData.userInfo = res.data;
+              that.globalData.hasUserInfo = true;
+              console.log(that.globalData);
+            }
+          }
+        })
+      }
+    }
+
+  },
+
   //自定义tabbar组件
   editTabbar: function() {
     let tabbar = this.globalData.tabBar;
@@ -65,6 +97,7 @@ App({
   globalData: {
     userInfo: null,
     hasUserInfo: false,
+    hasAuth: true,
     requestUrl: "https://www.clhw.xyz/",
     //requestUrl: "http://127.0.0.1:3000/",
     scrollNum: 100,
