@@ -27,6 +27,7 @@ router.get('/login', function (req, res, next) {
         if (response.statusCode === 200) {
             let redisKey = uuidv1();//生成uuidv1
             client.set(redisKey, JSON.stringify({ openid: data.openid, sessionKey: data.session_key }), 'EX', 30 * 24 * 60 * 60, function (err, rep) {
+                console.log("已生成sessionkey");
                 res.json(redisKey);
             });
         }
@@ -38,7 +39,7 @@ router.get('/getUserInfo', function (req, res, next) {
     let sessionId = req.query.sessionId;
     client.get(sessionId, function (err, rep) {
         let redisValue = JSON.parse(rep);
-        if (err) {
+        if (!rep) {
             res.status(404).json({ error: 0 });
         } else {
             let uId = redisValue.openid;

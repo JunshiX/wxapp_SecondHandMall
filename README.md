@@ -20,7 +20,7 @@
   - [Express的路由分离](#Express的路由分离)
   - [RESTfulAPI接口](#RESTfulAPI接口)
   - [数据的分页加载](#数据的分页加载)
-  - [小程序的用户信息](#小程序的用户信息)
+  - [小程序的登录态和用户信息管理](#小程序的登录态和用户信息管理)
 
 
 ---
@@ -498,12 +498,21 @@ bindInput: function(e) {
 
 
 ---
-## **小程序的用户信息**  
+## **小程序的登录态和用户信息管理**  
 >参考文档：  
 >1.[小程序：用户登录状态检查与更新实例](https://blog.csdn.net/qq_33594380/article/details/80508438)  
 >2.[小程序：授权、登录、session_key、unionId](https://blog.csdn.net/qq_33594380/article/details/80431582)  
 >3.[小程序官方文档：开放能力——用户信息](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html)  
->4.[微信小程序中登录和登录态维护](https://www.jianshu.com/p/c5f6c98b2685)
+>4.[微信小程序中登录和登录态维护](https://www.jianshu.com/p/c5f6c98b2685)  
+
+&emsp;&emsp;实现小程序的登录态管理主要过程在官方文档中已经明确给出，如下图：  
+
+<img src="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/image/api-login.jpg"/>  
+
+1. 小程序端的任务就是检测本地是否存在登录态（即3rd_session），如存在登录态，则可以根据本地存储的3rd_session向第三方服务器端请求用户数据；如没有登录态，则发送凭证给第三方服务器换取登录态。
+2. 第三方服务器端（开发者的后台服务器）的任务就是接收小程序端的code凭证，并用code向微信服务器换取openid和session_key（虽然现在还没发现session_key的实际作用），将这些信息存储并向小程序返回3rd_session，并且以后均通过3rd_session来发送和更新用户信息。  
+
+所以，
 
 
 ---

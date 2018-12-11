@@ -71,6 +71,11 @@ Page({
           success:function(res){
             console.log('用户登录成功');
             app.globalData.hasAuth=true;
+            let userInfo={};
+            userInfo.uName=uName;
+            userInfo.uAva=uAva;
+            userInfo.uPlace=uPlace;
+            userInfo.uCollege=uCollege;
             wx.navigateBack();
           },
           fail(){

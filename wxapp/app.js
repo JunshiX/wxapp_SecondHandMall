@@ -61,15 +61,14 @@ App({
               if (res.data.error == 0) {
                 console.log("服务器session失效");
                 wx.removeStorageSync("sessionId");
+                that.login();
               } else {
                 console.log("当前用户未授权使用个人信息");
                 that.globalData.hasAuth = false;
               }
             } else if (res.statusCode == 200) {
-
               that.globalData.userInfo = res.data;
               that.globalData.hasUserInfo = true;
-              console.log(that.globalData);
             }
           }
         })
