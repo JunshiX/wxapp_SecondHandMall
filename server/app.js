@@ -4,6 +4,7 @@ var express = require('express'),
     delRouter = require('./routes/delete'),
     updateRouter = require('./routes/update'),
     loginRouter=require("./routes/login"),
+    uptokenRouter=require("./routes/uptoken"),
     bodyParser = require('body-parser'),
     errorHandler = require('errorhandler'),
     methodOverride = require('method-override');
@@ -56,5 +57,7 @@ app.use('/', insertRouter);
 app.use('/', delRouter);
 //更新路由
 app.use('/', updateRouter);
-//登录路由
+//用户登录授权
 app.use('/',loginRouter);
+//七牛图片上传凭证
+app.use('/',uptokenRouter);

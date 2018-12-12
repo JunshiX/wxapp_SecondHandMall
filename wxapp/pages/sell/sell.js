@@ -1,5 +1,6 @@
 // pages/sell/sell.js
 const app = getApp();
+const qiniuUploader = require("../../utils/qiniuUploader.js");
 
 Page({
 
@@ -10,7 +11,7 @@ Page({
     files: [], //图片路径
   },
 
-  onLoad:function(){
+  onLoad: function() {
     app.login();
     let userInfo = app.globalData.userInfo,
       hasUserInfo = app.globalData.hasUserInfo;
@@ -38,26 +39,21 @@ Page({
 
   //表单验证和提交
   formSubmit: function(e) {
-    var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/; //金额输入验证正则表达式
-    var title = e.detail.value.title;
-    var price = e.detail.value.price;
-    var desrcibe = e.detail.value.describe;
-    var oriPrice = e.detail.value.oriPrice;
-    var warn = "";
-    var flag = false;
-    if (!title) {
-      warn = "请填写标题！";
-    } else if (!describe) {
-      warn = "请填写描述！";
-    } else if (this.data.files.length == 0) {
-      warn = "请上传图片！";
-    } else if (!reg.test(price)) {
-      warn = "请正确填写价格！";
-    } else if (!reg.test(oriPrice)) {
-      warn = "请正确填写原价！";
-    } else {
-      flag = true;
-    }
+    let that = this;
+    let reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/; //金额输入验证正则表达式
+    let title = e.detail.value.title,
+      price = e.detail.value.price,
+      describe = e.detail.value.describe,
+      oriPrice = e.detail.value.oriPrice;
+    let warn = "";
+    let flag = false;
+
+    if (!title) warn = "请填写标题！";
+    else if (!describe) warn = "请填写描述！";
+    else if (this.data.files.length == 0) warn = "请上传图片！";
+    else if (!reg.test(price)) warn = "请正确填写价格！";
+    else if (!reg.test(oriPrice)) warn = "请正确填写原价！";
+    else flag = true;
 
     if (!flag) {
       wx.showToast({
@@ -71,9 +67,57 @@ Page({
       wx.showModal({
         title: '提示',
         content: '请检查填写内容，确认发布',
+        success: function(res) {
+          if (res.confirm) {
+            //上传图片到七牛服务器
+            let imgList = [];
+            let files = that.data.files;
+            for (let i = 0; i < files.length; i++) {
+              let filePath = files[i];
+              qiniuUploader.upload(filePath, (res) => {
+                imgList.push(res.imageURL);
+                if (imgList.length == files.length) {
+                  let sessionId = wx.getStorageSync("sessionId");
+                  wx.request({
+                    url: app.globalData.requestUrl + 'upload',
+                    method: 'POST',
+                    data: {
+                      sessionId: sessionId,
+                      title: title,
+                      describe: describe,
+                      price: price,
+                      oriPrice: oriPrice,
+                      sId: that.data.sId,
+                      imgList: imgList,
+                    },
+                    success() {
+                      console.log("上传成功");
+                      wx.navigateBack();
+                    },
+                    fail() {
+                      console.log("上传失败");
+                    }
+                  })
+                }
+              }, (error) => {
+                console.error('error:' + JSON.stringify(error));
+              }, {
+                region: 'ECN', // 华东区
+                uptokenURL: app.globalData.requestUrl + 'uptoken',
+                domain: 'http://res.clhw.xyz',
+                shouldUseQiniuFileName: false
+              }, (progress) => {
+                console.log('上传进度', progress.progress)
+                console.log('已经上传的数据长度', progress.totalBytesSent)
+                console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend)
+              })
+            }
+          }
+        }
       })
     }
   },
+
 
   //选择图片
   chooseImage: function(e) {

@@ -4,5 +4,8 @@ var express=require('express'),
 var router=express.Router();
 var goodModel=Model.goodModel;
 
+router.post('/upload',function(req,res,next){
+    console.log(req.body);
+})
 
 module.exports=router;

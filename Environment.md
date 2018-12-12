@@ -92,7 +92,17 @@ firewall-cmd --reload     //重启firewall
 >2.[关于NodeJS配置HTTPS服务、阿里云申请HTTPS证书Script](https://www.aliyun.com/jiaocheng/992136.html)  
 
 ---
-## **安装redis**
->参考文档：[博客园：CENTOS7下安装REDIS](https://www.cnblogs.com/zuidongfeng/p/8032505.html)
+## **用Redis缓存用户登录态**
+>参考文档：  
+>1.[博客园：CENTOS7下安装REDIS](https://www.cnblogs.com/zuidongfeng/p/8032505.html)   
+>2.[npm:redis](https://www.npmjs.com/package/redis)
+
+---
+## **七牛云对象存储**
+>参考文档：  
+>1.[Qiniu-wxapp-SDK](https://github.com/gpake/qiniu-wxapp-sdk#prepare)  
+>2.[Qiniu Cloud SDK for Node.js](https://github.com/qiniu/nodejs-sdk)  
+>3.[CSDN:七牛云外链绑定自己域名](https://blog.csdn.net/weixin_38187317/article/details/83987258)
 
 
+&emsp;&emsp;在参照参考文档3绑定域名前，搞清域名解析的概念，域名解析就是域名到IP地址的转换过程：其中，A记录就是制定域名对应的IP地址记录；CNAME记录就是别名指向，用子域名来代替IP地址。所以绑定域名就相当于把自己备案的二级域名解析到七牛的服务器上。
