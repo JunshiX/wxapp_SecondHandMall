@@ -8,12 +8,8 @@ Page({
    */
   data: {
     Loading: true, //是否加载
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     scrollPage: 0,
-    scrollH: 0,
     scrollNum: 0, //每次加载的数据量
-    imgWidth: 0,
-    imgHeight: 0,
     sId: 0,
     col1: [],
     col2: [],
@@ -29,15 +25,9 @@ Page({
       title: sectionName[options.id],
     })
     //初始化
-    let ww = app.globalData.windowWidth;
-    let imgWidth = ww * 0.46;
-    let imgHeight = imgWidth * 0.69; //设置图片高度
-    let scrollH = app.globalData.windowHeight;
+
     this.setData({
       scrollNum: app.globalData.scrollNum,
-      scrollH: scrollH,
-      imgWidth: imgWidth,
-      imgHeight: imgHeight,
       scrollPage: 0,
       sId: options.id,
     });
@@ -100,5 +90,17 @@ Page({
       url: '../good/good?_id=' + _id,
     })
   },
+
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
+    this.data.col1 = [];
+    this.data.col2 = [];
+    this.data.scrollPage = 0;
+    this.data.Loading = true;
+    this.loadImages();
+  },
+  onReachBottom: function () {
+    this.loadImages();
+  }
 
 })

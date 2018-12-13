@@ -5,6 +5,7 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
+    college:app.globalData.college,
     tabbar: {},
     mine1: [{
       id: 1,

@@ -47,7 +47,7 @@
     <!--用户信息-->
     <view class="good_cell">
       <image class="user_avatar " src="{{gData.uAva}}" />
-      <text class="user_nickname">{{gData.uName}}  |  艺术学院</text>
+      <text class="user_nickname">{{gData.uName}}  |  {{college[gData.uCollege]}}学院</text>
       <text class="user_location">{{gData.uPlace==0?'湖区':'牌区'}}</text>
     </view>
     <!---->
@@ -67,12 +67,6 @@
           <input class="comment_in" placeholder='询问更多，欢迎留个言'></input>
         </view>
         <view class="comment_btn_wrap" bindtap='submitComment'>发送</view>
-      </view>
-      <view wx:else class="cell_flex">
-        <view class="comment_in_wrap cell_flex">
-          <input class="comment_in" placeholder='留言前请先登录'></input>
-        </view>
-        <view class="comment_btn_wrap" bindtap="bindLogin">登录</view>
       </view>
       
     </view>

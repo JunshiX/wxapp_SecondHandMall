@@ -1,5 +1,7 @@
 {
   "usingComponents": {
     "tabbar": "../../component/tabbar/tabbar"
-  }
+  },
+  "enablePullDownRefresh":true,
+  "backgroundTextStyle": "dark"
 }

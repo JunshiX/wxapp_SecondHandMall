@@ -18,7 +18,7 @@
 }
 /*头像容器*/
 .mine_avatar_bd{
-  flex:2;
+  flex:1.5;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,6 @@
 .mine_avatar{
   width:180rpx;
   height:180rpx;
-  flex:1;
   border-radius: 50%;
 }
 /*昵称容器*/

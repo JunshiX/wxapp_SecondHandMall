@@ -5,6 +5,7 @@ Page({
 
   data: {
     gData: {},
+    college:app.globalData.college,
     swiperCurrent: 0,
     userInfo: {},
     hasUserInfo: false,
@@ -17,7 +18,7 @@ Page({
       title: '加载中'
     });
 
-    //请求某分类下的商品
+    //请求商品和评论信息
     wx.request({
       url: app.globalData.requestUrl + 'good?_id=' + options._id,
       method: 'GET',
@@ -42,6 +43,9 @@ Page({
     }
   },
 
+  //加载评论
+  loadComment:function(){
+  },
   //滑块视图切换事件
   swiperChange: function(e) {
     if (e.detail.source == 'touch') {
@@ -50,10 +54,19 @@ Page({
       })
     }
   },
-  bindLogin:function(){
-    wx.navigateTo({
-      url: '/pages/authorize/authorize',
-    })
+
+  //留言评论
+  submitComment:function(){
+    if (this.hasUserInfo==false){
+      wx.showToast({
+        title: '请您先登录！',
+        icon: 'none',
+        mask: true,
+        duration: 2000
+      });
+    }else{
+
+    }
   }
 
 })

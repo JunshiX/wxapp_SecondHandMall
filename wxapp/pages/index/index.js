@@ -10,8 +10,6 @@ Page({
     Loading: true, //是否加载
     scrollPage: 0, //控制分页
     scrollNum: 0, //每次加载的数据量
-    scrollH: 0, //滚动窗口高度
-    imgWidth:0,
     tabbar: {}, //自定义tabbar
     col1: [], //左列
     col2: [], //右列
@@ -54,13 +52,8 @@ Page({
   onLoad: function() {
     app.editTabbar(); //自定义tabbar
     //初始化
-    let ww = app.globalData.windowWidth;
-    let imgWidth = ww * 0.46;
-    let scrollH = app.globalData.windowHeight;
     this.setData({
       scrollNum: app.globalData.scrollNum,
-      scrollH: scrollH,
-      imgWidth: imgWidth,
     });
 
     this.loadImages(); //加载图片数据
@@ -126,13 +119,26 @@ Page({
       url: '../good/good?_id=' + _id,
     })
   },
+
   onShow:function(){
-    /*this.setData({
-      Loading:true,
-      scrollPage:0,
-      col1:[],
-      col2:[]
-    });
-    this.loadImages();*/
+    if (app.globalData.Loading==true){
+      this.data.Loading=true;
+      app.globalData.Loading = false;
+      this.loadImages();
+    }
+  },
+
+  onPullDownRefresh:function(){
+    wx.stopPullDownRefresh();
+    this.data.col1=[];
+    this.data.col2 = [];
+    this.data.scrollPage=0;
+    this.data.Loading=true;
+    this.loadImages();
+    console.log("上拉刷新");
+  },
+  onReachBottom:function(){
+    this.loadImages();
+    console.log("下拉加载");
   }
 })

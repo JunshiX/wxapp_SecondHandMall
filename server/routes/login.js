@@ -40,6 +40,7 @@ router.get('/getUserInfo', function (req, res, next) {
     client.get(sessionId, function (err, rep) {
         let redisValue = JSON.parse(rep);
         if (!rep) {
+            //服务器redis中的sessionId失效
             res.status(404).json({ error: 0 });
         } else {
             let uId = redisValue.openid;
@@ -65,10 +66,11 @@ router.post('/authorize', function (req, res, next) {
     let sessionId = req.body.sessionId;
     client.get(sessionId, function (err, rep) {
         let redisValue = JSON.parse(rep);
-        if (err) {
-            res.status(500).json({ error: err });
+        if (!rep) {
+            res.status(404).json({ error: 0 });
         } else {
             let uId = redisValue.openid;
+            //用户信息存入数据库
             let userInfo = {
                 uId: uId,
                 stuId: req.body.stuId,

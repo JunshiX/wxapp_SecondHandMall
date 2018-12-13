@@ -68,7 +68,12 @@ Page({
         title: '提示',
         content: '请检查填写内容，确认发布',
         success: function(res) {
+          console.log(that.data.files);
           if (res.confirm) {
+            wx.showLoading({
+              title: '上传中'
+            });
+
             //上传图片到七牛服务器
             let imgList = [];
             let files = that.data.files;
@@ -76,6 +81,7 @@ Page({
               let filePath = files[i];
               qiniuUploader.upload(filePath, (res) => {
                 imgList.push(res.imageURL);
+                //所有图片都上传完成将信息存入数据库
                 if (imgList.length == files.length) {
                   let sessionId = wx.getStorageSync("sessionId");
                   wx.request({
@@ -90,11 +96,14 @@ Page({
                       sId: that.data.sId,
                       imgList: imgList,
                     },
-                    success() {
+                    success(res) {
                       console.log("上传成功");
+                      app.globalData.Loading=true;
+                      wx.hideLoading();
                       wx.navigateBack();
                     },
                     fail() {
+                      wx.hideLoading();
                       console.log("上传失败");
                     }
                   })
@@ -129,6 +138,7 @@ Page({
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success: function(res) {
           // 返回选定照片的本地文件路径列表
+          console.log(res.tempFilePaths);
           that.setData({
             files: that.data.files.concat(res.tempFilePaths),
           });

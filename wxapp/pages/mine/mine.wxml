@@ -3,15 +3,27 @@
 
   <view class="mine_top">
     <view class="mine_index">
-      <view style="flex:0.5"></view>
+      <view style="flex:0.3"></view>
+
       <view class="mine_avatar_bd">
-        <image wx:if="{{hasUserInfo}}" class="mine_avatar" src="{{userInfo.uAva}}"/>
-        <image wx:else class="mine_avatar" src="/images/avatar.png" bindtap='bindLogin'/>
+        <image wx:if="{{hasUserInfo}}" class="mine_avatar" src="{{userInfo.uAva}}" />
+        <image wx:else class="mine_avatar" src="/images/avatar.png" bindtap='bindLogin' />
       </view>
+
       <view class="mine_nickName">
-        <text wx:if="{{hasUserInfo}}">{{userInfo.uName}}</text>
-        <text wx:else>点击头像登录</text>
+        
+        <view wx:if="{{hasUserInfo}}">
+          <view style="display:flex;justify-content:center;margin:0 0 10rpx 0">
+            <text style="font-weight:bold">{{userInfo.uName}}</text>
+          </view>
+          <view style="display:flex;justify-content:center">
+            <text style="font-size:11px">{{userInfo.uPlace==0?'九龙湖':'四牌楼'}}校区 | {{college[userInfo.uCollege]}}学院</text>
+          </view>
+        </view>
+
+        <view wx:else>点击头像登录</view>
       </view>
+
     </view>
   </view>
 

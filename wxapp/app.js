@@ -6,14 +6,6 @@ App({
     wx.hideTabBar();
     that.login();
 
-    //获取系统信息
-    wx.getSystemInfo({
-      success: (res) => {
-        that.globalData.windowWidth = res.screenWidth;
-        that.globalData.windowHeight = res.screenHeight;
-      },
-    });
-
   },
   //检查登录
   login: function() {
@@ -97,11 +89,11 @@ App({
     userInfo: null,
     hasUserInfo: false,
     hasAuth: true,
-    //requestUrl: "https://www.clhw.xyz/",
-    requestUrl: "http://127.0.0.1:3000/",
+    Loading:false,//是否加载
+    requestUrl: "https://www.clhw.xyz/",
+    //requestUrl: "http://127.0.0.1:3000/",
     scrollNum: 100,
-    windowHeight: null,
-    windowWidth: null,
+    college: ["建筑", "机械", "能环", "信息", "土木", "电子", "数学", "自动化", "计算机", "物理", "生医", "材料", "人文", "经管", "电气", "外国语", "体育", "化工", "交通", "仪科", "艺术", "法", "医", "公卫", "吴健雄", "软件", "微电子", "网安", "其他"],
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#979795",

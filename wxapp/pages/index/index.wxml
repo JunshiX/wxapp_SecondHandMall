@@ -2,7 +2,6 @@
 <import src="../../template/img_col/img_col.wxml" />
 
 <view class="page">
-  <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" lower-threshold="50rpx">
 
     <view style="background-color:#fff;padding:15rpx 0rpx">
       <!--显示首页img-->
@@ -30,6 +29,5 @@
     <!--占用自定义tabbar空间-->
     <view style="height:98rpx"></view>
     <!--占用自定义tabbar空间-->
-  </scroll-view>
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

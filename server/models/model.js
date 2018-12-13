@@ -7,6 +7,7 @@ var goodSchema = new mongoose.Schema({
     uName: String,
     uAva: String,
     uPlace: Number,
+    uCollege:Number,
     sId: Number,
     title: String,
     describe: String,
@@ -30,5 +31,10 @@ var userSchema = new mongoose.Schema({
     uFavor: Array
 }, { versionKey: false });
 Model.userModel = mongoose.model('userModel', userSchema);
+
+//商品评论表
+var commentSchema=new mongoose.Schema({
+    
+})
 
 module.exports = Model;
