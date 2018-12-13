@@ -5,10 +5,17 @@
   margin: 0 0 20rpx 0;
 }
 
-.good_cell, .good_swiper {
+.good_cell, .good_swiper, .good_cmt {
   margin: 0 20rpx;
-  padding: 15rpx 0;
   display: flex;
+}
+
+.good_cmt{
+  padding: 20rpx 0;
+  align-items: flex-start;
+}
+.good_cell, .good_swiper {
+  padding: 15rpx 0;
   align-items: center;
 }
 
@@ -40,7 +47,7 @@
   text-decoration: line-through;
   color: #b2b2b2;
 }
-
+/*自定义轮播图dot*/
 .dot {
   width: 16rpx;
   height: 16rpx;
@@ -52,6 +59,7 @@
 .active {
   background-color: rgb(53, 53, 53);
 }
+/*自定义轮播图dot*/
 
 .user_avatar {
   display: inline-block;
@@ -59,6 +67,7 @@
   height: 70rpx;
   margin: 0 15rpx 0 0;
   border-radius: 50%;
+  border:1px solid rgb(178, 178, 178);
 }
 
 .user_nickname {
@@ -84,23 +93,26 @@
 }
 
 .comment_in {
-  flex:1;
+  flex: 1;
   height: 70rpx;
-  font-size:13px;
-  margin:0 25rpx;
+  font-size: 13px;
+  margin: 0 25rpx;
   background-color: rgb(237, 237, 237);
 }
 
-.comment_btn_wrap{
+.comment_btn_wrap {
   height: 70rpx;
   width: 150rpx;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgb(255, 79, 100);
   color: #fff;
-  font-size:13px;
+  font-size: 13px;
 }
 
+swiper{
+  height:550rpx;
+}

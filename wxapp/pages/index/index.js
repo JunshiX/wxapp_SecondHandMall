@@ -73,7 +73,6 @@ Page({
     wx.request({ //获取json api
       url: app.globalData.requestUrl + 'goods',
       data:{page:scrollPage},
-      method: 'GET',
       success: function(res) {
         let images = res.data;
         let baseId = "img-" + (+new Date());

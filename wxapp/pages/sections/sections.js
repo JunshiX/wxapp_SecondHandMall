@@ -50,10 +50,10 @@ Page({
     if (!Loading) return;
 
     wx.request({ //获取json api
-      url: app.globalData.requestUrl + 'sections?page=' + scrollPage + '&id=' + sId,
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
+      url: app.globalData.requestUrl + 'sections',
+      data:{
+        page:scrollPage,
+        id:sId
       },
       success: function(res) {
         let images = res.data;

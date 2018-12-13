@@ -6,8 +6,8 @@
     <view>
       <swiper current="{{swiperCurrent}}" bindchange="swiperChange" class="good_swiper">
         <block wx:for="{{gData.imgList}}" wx:key="unique">
-          <swiper-item>
-            <image src="{{item}}" mode='widthFix' />
+          <swiper-item style="display:flex;justify-content:center">
+            <image src="{{item}}" mode='aspectFit' style="height:100%" bindtap="previewImage" data-index="{{index}}" />
           </swiper-item>
         </block>
       </swiper>
@@ -29,7 +29,7 @@
       </view>
 
       <view class="cell_flex" style="justify-content:flex-end">
-        <text class="cell_text">收藏 3</text>
+        <text class="cell_text">收藏 {{gData.favor}}</text>
       </view>
     </view>
     <!---->
@@ -47,7 +47,7 @@
     <!--用户信息-->
     <view class="good_cell">
       <image class="user_avatar " src="{{gData.uAva}}" />
-      <text class="user_nickname">{{gData.uName}}  |  {{college[gData.uCollege]}}学院</text>
+      <text class="user_nickname" decode="{{true}}" space="{{true}}">{{gData.uName}}&nbsp;|&nbsp;{{college[gData.uCollege]}}学院</text>
       <text class="user_location">{{gData.uPlace==0?'湖区':'牌区'}}</text>
     </view>
     <!---->
@@ -55,20 +55,57 @@
 
   <view class="good_block">
     <view class="good_cell bottom_line">
-      <text style="font-size:14px;font-weight:bold">留言(0)</text>
+      <text style="font-size:14px;font-weight:bold">留言({{cmtData.length}})</text>
     </view>
 
+    <!--留言输入框-->
     <view class="good_cell" style="align-items:center">
       <image wx:if="{{hasUserInfo}}" class="user_avatar" src="{{userInfo.uAva}}" />
       <image wx:else class="user_avatar" src="/images/avatar.png" bindtap='bindLogin' />
 
-      <view wx:if="{{hasUserInfo}}" class="cell_flex">
+      <view class="cell_flex">
         <view class="comment_in_wrap cell_flex">
-          <input class="comment_in" placeholder='询问更多，欢迎留个言'></input>
+          <input class="comment_in" placeholder='{{cmtAt}}' bindinput='inputChange'></input>
         </view>
         <view class="comment_btn_wrap" bindtap='submitComment'>发送</view>
       </view>
-      
     </view>
+    <!---->
+
+    <!--留言展示-->
+    <block wx:if="{{cmtData.length>0}}">
+      <view class="good_cmt bottom_line" style="align-items:flex-start" wx:for="{{cmtData}}" wx:key="unique">
+        <view>
+          <image class="user_avatar " src="{{item.uAva}}" />
+        </view>
+        <view style="flex:1" bindtap="commentAt" data-name="{{item.uName}}" data-uid="{{item.uId}}">
+          <!--头像昵称评论时间-->
+          <view class="cell_flex" style="height:70rpx">
+            <view class="user_nickname">
+              <text style="color:rgb(164,164,164);margin-right:10rpx">{{item.uName}}</text>
+              <text wx:if="{{item.uId==gData.uId}}" style="background-color:rgb(53,53,53);color:#fff;padding:0 15rpx;border-radius:10rpx">卖家</text>
+            </view>
+            <text style="color:rgb(164,164,164)">{{item.createAt}}</text>
+          </view>
+          <!---->
+
+          <!--评论内容-->
+          <view>
+            <text wx:if="{{item.cuName!=gData.uName}}">回复</text>
+            <text wx:if="{{item.cuName!=gData.uName}}" style="color:rgb(164,164,164);margin-right:10rpx">@{{item.cuName}}:</text>
+            <text style="word-wrap: break-word;word-break: break-all;">{{item.cmt}}</text>
+          </view>
+          <!---->
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="good_cmt" style="align-items:center;justify-content:center">
+        <text>暂无留言！</text>
+      </view>
+    </block>
+
+    <!---->
+
   </view>
 </view>

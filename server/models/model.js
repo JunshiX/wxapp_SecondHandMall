@@ -15,7 +15,7 @@ var goodSchema = new mongoose.Schema({
     oriPrice: Number,
     imgList: Array,
     createAt: { type: Date, default: Date.now },
-    comment: Array
+    favor: Number
 }, { versionKey: false });
 Model.goodModel = mongoose.model('goodModel', goodSchema);    //goodModel即collection名,在mongdb中会生成
 
@@ -27,14 +27,20 @@ var userSchema = new mongoose.Schema({
     uAva: String,
     uPlace: Number,
     uCollege: Number,
-    uComment: Array,
-    uFavor: Array
 }, { versionKey: false });
 Model.userModel = mongoose.model('userModel', userSchema);
 
 //商品评论表
 var commentSchema=new mongoose.Schema({
-    
-})
+    gId:{type:mongoose.Schema.ObjectId,ref:'goodSchema'},
+    uId:String,
+    uAva:String,
+    uName:String,
+    cuId:String,
+    cuName:String,
+    cmt:String,
+    createAt:{type:Date,default:Date.now}
+},{versionKey:false});
+Model.commentModel=mongoose.model('commentModel',commentSchema);
 
 module.exports = Model;
