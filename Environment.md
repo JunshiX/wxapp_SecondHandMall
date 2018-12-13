@@ -98,11 +98,65 @@ firewall-cmd --reload     //重启firewall
 >2.[npm:redis](https://www.npmjs.com/package/redis)
 
 ---
-## **七牛云对象存储**
->参考文档：  
->1.[Qiniu-wxapp-SDK](https://github.com/gpake/qiniu-wxapp-sdk#prepare)  
->2.[Qiniu Cloud SDK for Node.js](https://github.com/qiniu/nodejs-sdk)  
->3.[CSDN:七牛云外链绑定自己域名](https://blog.csdn.net/weixin_38187317/article/details/83987258)
+## **Express4.x新特性**
+>参考文档：[Moving to Express 4](http://www.expressjs.com.cn/guide/migrating-4.html)  
+
+* **更新所有依赖**  
+手动修改dependencies中包的版本号太过麻烦，所以需要借助**npm-check-updates**工具将package.json中的依赖包更新到最新版本。  
+```
+npm install -g npm-check-updates        //安装
+ncu -u      //更新dependencies到新版本
+```
+
+
+* **移除内置中间件**  
+4.x版本将之前内置的所有中间件除了`static`都分离为单独的模块。4.x中各个模块需要单独安装，并在js文件中导入依赖。  
+
+```javascript
+//3.x代码
+app.configure(funtcion(){
+    app.use(express.static(__dirname+'/public'));
+    app.use(express.logger('dev'));
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+})
+```
+  
+```javascript
+//4.x代码
+var express=require('express');
+var morgan=require('morgan');//logger模块的新名字
+var bodyParser=require('body-parser');
+var methodOverride=require('method-override');
+var app=express();
+
+app.use(express.static(__dirname+'/public'));
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride());
+```
+* **移除app.configure方法**  
+使用`process.env.NODE_ENV`或者`app.get('env')`来检测环境并相应的配置应用程序。  
+
+```javascript
+//3.x代码
+app.configure('development', function() {
+   // configure stuff here
+});
+```
+
+```javascript
+//4.x代码
+var env = process.env.NODE_ENV || 'development';            //控制台中需要设置环境变量set NODE_ENV=test
+if ('test' == env) {
+   // configure stuff here
+}
+```
+
+---
+## **七牛云对象存储绑定域名**
+>参考文档：[CSDN:七牛云外链绑定自己域名](https://blog.csdn.net/weixin_38187317/article/details/83987258)
 
 
 &emsp;&emsp;在参照参考文档3绑定域名前，搞清域名解析的概念，域名解析就是域名到IP地址的转换过程：其中，A记录就是制定域名对应的IP地址记录；CNAME记录就是别名指向，用子域名来代替IP地址。所以绑定域名就相当于把自己备案的二级域名解析到七牛的服务器上。
