@@ -17,6 +17,7 @@
 - 后端部分
   - [Mongoose的model和Schema](#Mongoose的model和Schema)
   - [存储表的设计](#存储表的设计)
+  - [小程序的性能优化](#小程序的性能优化)
   - [Express的路由分离](#Express的路由分离)
   - [RESTfulAPI接口](#RESTfulAPI接口)
   - [数据的分页加载](#数据的分页加载)
@@ -51,6 +52,7 @@ API应具备如下功能：
   1. 能够创建、更新、删除和读取数据。
   2. 数据储存在**MongoDB**中。  
 
+[返回目录](#目录)
 
 ---
 ## **Mongoose的model和Schema** 
@@ -70,6 +72,9 @@ var mySchema = new Schema({
 //在下面这个例子中，生成的集合名称为mymodels
 var MyModel = mongoose.model('MyModel', schema); 
 ```
+
+[返回目录](#目录)
+
 ---
 ## **Express的路由分离**
 >参考文档：[express框架的路由模块化](https://www.cnblogs.com/lewis-messi/p/9087258.html)  
@@ -122,6 +127,9 @@ app.use('/',updateRouter);
 ```
 **注**：`app.use(path,callback)`中的`callback`既可以是`router`对象也可以是函数，但是`app.get(path,callback)`中的`callback`只能是函数。`router`代表一个由`express.Router()`创建的对象，在路由对象中可以定义多个路由规则。
 
+
+[返回目录](#目录)
+
 ---
 ## **RESTfulAPI接口**
 &emsp;&emsp;首先新建服务器工程,安装完依赖之后在app.js中写入路由对应的方法操作.
@@ -152,6 +160,8 @@ onLoad: function () {
   },
 ```
 **注意**：由于`wx.request`方法之后会生成新的对象，所以要想传值给page的初始数据，需要在刚开始将this对象赋值给一个that对象。
+
+[返回目录](#目录)
 
 ---
 ## **数据的分页加载**  
@@ -244,6 +254,8 @@ loadImages: function() {
 }
 ```  
 
+[返回目录](#目录)
+
 ---
 ## **Template的使用**  
 >参考文档：[微信小程序----模板](https://blog.csdn.net/m0_38082783/article/details/78909416CSDN)   
@@ -265,6 +277,8 @@ loadImages: function() {
     <template wx:for="{{sections1}}" is="index_sections" data="{{item}}"></template>
 </view>
 ```
+
+[返回目录](#目录)
 
 ---
 ## **小程序的页面跳转和传值**  
@@ -293,6 +307,8 @@ onLoad: function (options) {
   console.log(options.id);  //得到前一个Pages传递的数据
 }
 ```
+
+[返回目录](#目录)
 
 ---
 ## **自定义tabBar组件（component）**  
@@ -370,6 +386,7 @@ editTabbar: function () {
 <tabbar tabbar="{{tabbar}}"></tabbar>
 ```
 
+[返回目录](#目录)
 
 ---
 ## **表单的布局** 
@@ -382,8 +399,10 @@ editTabbar: function () {
 >5.[金额的正则表达式校验](http://www.cnblogs.com/mr-wuxiansheng/p/6437133.html)  
 >6.[微信小程序实现图片上传、删除和预览功能的方法](https://www.jb51.net/article/130789.htm)  
 
+
 ### **Flex布局**  
 &emsp;&emsp;对于盒状模型的布局主要采用`Flex`布局，即“弹性布局”，菜鸟教程的教程写的非常详细。这里只强调分清Flex容器和Flex项目（容器的所有子元素自动成为容器成员，即Flex项目）的关系，对齐方式主要在容器属性中设置，因为容器划分了主轴和交叉轴；元素的比例之类的则是在项目属性中设置，并且项目的属性推荐直接使用`flex`属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
+
 
 ### **picker滚动选择器**  
 &emsp;&emsp;picker选择器分为5种：分别为普通选择器、多列选择器、时间选择器、日期选择器以及省市区选择器，默认为普通，运行效果如下图：
@@ -443,8 +462,8 @@ bindInput: function(e) {
 
 ### **伪元素实现上传图片的预览以及删除**   
 
-<img src=/>
 
+[返回目录](#目录)
 
 ---
 ## **小程序的登录态和用户信息管理**  
@@ -464,12 +483,15 @@ bindInput: function(e) {
 所以，
 
 
+[返回目录](#目录)
+
 ---
 ## **自定义轮播图dots样式**  
 >参考文档：  
 >1.[微信小程序自定义轮播图swiper dots默认样式](https://blog.csdn.net/rorntuck7/article/details/54378963)  
 >2.[微信小程序swiper控件卡死的解决方法](https://blog.csdn.net/oagnuygnef/article/details/80506442)
 
+[返回目录](#目录)
 
 ---
 ## **七牛云对象存储**
@@ -477,12 +499,46 @@ bindInput: function(e) {
 >1.[Qiniu-wxapp-SDK](https://github.com/gpake/qiniu-wxapp-sdk#prepare)  
 >2.[Qiniu Cloud SDK for Node.js](https://github.com/qiniu/nodejs-sdk)  
 
+[返回目录](#目录)
 
 ---
 ## **存储表的设计**
 >参考文档：  
 >[MongoDB 进阶模式设计](http://www.mongoing.com/mongodb-advanced-pattern-design)
 
+[返回目录](#目录)
 
 ---
 ## **小程序的上拉刷新和下拉加载**
+
+[返回目录](#目录)
+
+---
+## **小程序的性能优化**  
+>参考文档：  
+>1.[小程序官方文档：优化建议](http://www.huimin111.com/news/5650.html)  
+>2.[微信小程序：一些运行细节及针对性的优化策略](https://blog.csdn.net/i10630226/article/details/81042421)  
+>3.[小程序redux性能优化，提升三倍渲染速度](http://www.huimin111.com/news/5650.html)
+
+&emsp;&emsp;在之前开发的过程中，并没有考虑小程序运行性能的问题，昨天偶然发现小程序会偶然性地出现加载很慢，有时候甚至是长时间刷不出来的情况。这才考虑到性能的问题，如官方文档里面提到的：
+>`setData()`是小程序开发中使用最频繁的接口，也是最容易引发性能问题的接口。 
+> 
+>小程序的视图层目前使用 WebView 作为渲染载体，而逻辑层是由独立的 JavascriptCore 作为运行环境。在架构上，WebView 和 JavascriptCore 都是独立的模块，并不具备数据直接共享的通道。当前，视图层和逻辑层的数据传输，实际上通过两边提供的 evaluateJavascript 所实现。即用户传输的数据，需要将其转换为字符串形式传递，同时把转换后的数据内容拼接成一份 JS 脚本，再通过执行 JS 脚本的形式传递到两边独立环境。
+>
+>而 evaluateJavascript 的执行会受很多方面的影响，数据到达视图层并不是实时的。
+
+&emsp;&emsp;知道可能存在的问题，回到小程序端的代码查看了一下，果然在初始化数据的时候大量的使用了`setData()`，因此针对该过程加入一个callback，查看每一次的渲染时间，代码如下：
+```js
+let startTime=Date.now();
+this.setData({
+  data:data
+},()=>{
+  let endTime=Date.now();
+  console.log(endTime-startTime,"渲染时间");
+})
+```
+&emsp;&emsp;结果在log里面发现，初始化阶段的很多简单赋值语句都有可能占用上百ms，更何况原始的代码里多个页面初始化都使用了`setData()`，自然程序的加载耗时就会大幅增长。  
+&emsp;&emsp;所以修改逻辑就是，非视图层所需要的参数都不需要使用`setData()`，直接对`this.data.xxx`进行赋值即可，使同一个页面中的`setData()`尽可能的少。
+
+[返回目录](#目录)
+
