@@ -10,13 +10,19 @@
   display: flex;
 }
 
-.good_cmt{
+.good_cmt {
   padding: 20rpx 0;
   align-items: flex-start;
 }
-.good_cell, .good_swiper {
+
+.good_cell {
   padding: 15rpx 0;
   align-items: center;
+}
+
+.good_swiper {
+  align-items: center;
+  background: black;
 }
 
 .bottom_line {
@@ -47,7 +53,9 @@
   text-decoration: line-through;
   color: #b2b2b2;
 }
+
 /*自定义轮播图dot*/
+
 .dot {
   width: 16rpx;
   height: 16rpx;
@@ -59,6 +67,7 @@
 .active {
   background-color: rgb(53, 53, 53);
 }
+
 /*自定义轮播图dot*/
 
 .user_avatar {
@@ -67,7 +76,7 @@
   height: 70rpx;
   margin: 0 15rpx 0 0;
   border-radius: 50%;
-  border:1px solid rgb(178, 178, 178);
+  border: 1px solid rgb(178, 178, 178);
 }
 
 .user_nickname {
@@ -113,6 +122,6 @@
   font-size: 13px;
 }
 
-swiper{
-  height:550rpx;
+swiper {
+  height: 550rpx;
 }

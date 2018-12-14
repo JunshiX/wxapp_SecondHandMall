@@ -9,7 +9,7 @@ Page({
   data: {
     Loading: true, //是否加载
     scrollPage: 0,
-    scrollNum: 0, //每次加载的数据量
+    scrollNum: app.globalData.scrollNum, //每次加载的数据量
     sId: 0,
     col1: [],
     col2: [],
@@ -25,14 +25,8 @@ Page({
       title: sectionName[options.id],
     })
     //初始化
-
-    this.setData({
-      scrollNum: app.globalData.scrollNum,
-      scrollPage: 0,
-      sId: options.id,
-    });
-
-
+        
+    this.data.sId=options.id;
     this.loadImages();
 
   },

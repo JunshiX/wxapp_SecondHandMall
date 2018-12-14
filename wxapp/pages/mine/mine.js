@@ -36,7 +36,7 @@ Page({
   },
 
   onShow: function() {
-    app.login();
+    if (app.globalData.sessionId == null) app.login();
     if (app.globalData.hasUserInfo){
       this.setData({
         hasUserInfo:true,

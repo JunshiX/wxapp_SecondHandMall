@@ -86,7 +86,7 @@ Page({
       });
     } else {
       let gData = that.data.gData,
-        sessionId = wx.getStorageSync("sessionId"),
+        sessionId = app.globalData.sessionId,
         cuId = gData.uId,
         cuName = gData.uName;
       //评论回复其他买家，否则认为回复卖家
@@ -116,9 +116,10 @@ Page({
           that.setData({
             cmt:null
           })
-          that.loadComment();
+          
         },
-      })
+      });
+      that.loadComment();
     }
   },
 

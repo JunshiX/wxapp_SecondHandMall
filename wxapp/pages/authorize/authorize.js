@@ -14,7 +14,7 @@ Page({
 
 
   onLoad: function(options) {
-    app.login();
+    if (app.globalData.sessionId==null) app.login();
     wx.setNavigationBarTitle({
       title: "登录验证"
     });

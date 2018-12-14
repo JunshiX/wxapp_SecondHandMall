@@ -9,7 +9,7 @@ Page({
     hasUserInfo: false,
     Loading: true, //是否加载
     scrollPage: 0, //控制分页
-    scrollNum: 0, //每次加载的数据量
+    scrollNum: app.globalData.scrollNum, //每次加载的数据量
     tabbar: {}, //自定义tabbar
     col1: [], //左列
     col2: [], //右列
@@ -52,10 +52,6 @@ Page({
   onLoad: function() {
     app.editTabbar(); //自定义tabbar
     //初始化
-    this.setData({
-      scrollNum: app.globalData.scrollNum,
-    });
-
     this.loadImages(); //加载图片数据
   },
 
@@ -87,7 +83,7 @@ Page({
           if (i % 2 == 0) col1.push(images[i]);
           else col2.push(images[i]);
         }
-
+        
         that.setData({
           scrollPage: scrollPage + 1, //页数自增
           Loading: Loading,

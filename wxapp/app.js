@@ -12,7 +12,9 @@ App({
     var that = this;
     //如果已经有sessionId，说明已经登录，直接根据sessionId向第三方服务器请求获取用户信息
     //否则，先获取第三方服务器登录状态，再根据返回的sessionId向第三方服务器请求获取用户信息
-    let sessionId = wx.getStorageSync("sessionId");
+    let sessionId;
+    if (that.globalData.sessionId == null) sessionId = wx.getStorageSync("sessionId");
+    else sessionId = that.globalData.sessionId;
 
     if (!sessionId) {
       wx.login({
@@ -35,6 +37,7 @@ App({
         }
       })
     } else {
+      that.globalData.sessionId = sessionId;
       that.getUserInfo(sessionId);
     }
   },
@@ -53,6 +56,7 @@ App({
               if (res.data.error == 0) {
                 console.log("服务器session失效");
                 wx.removeStorageSync("sessionId");
+                that.globalData.sessionId = null;
                 that.login();
               } else {
                 console.log("当前用户未授权使用个人信息");
@@ -80,16 +84,18 @@ App({
       tabbar.list[i].selected = false;
       (tabbar.list[i].pagePath == pagePath) && (tabbar.list[i].selected = true);
     }
+    
     _this.setData({
       tabbar: tabbar
     });
   },
   //全局变量
   globalData: {
+    sessionId: null,
     userInfo: null,
     hasUserInfo: false,
     hasAuth: true,
-    Loading:false,//是否加载
+    Loading: false, //是否加载
     requestUrl: "https://www.clhw.xyz/",
     //requestUrl: "http://127.0.0.1:3000/",
     scrollNum: 20,

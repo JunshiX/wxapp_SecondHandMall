@@ -15,7 +15,7 @@
         <image src="{{item.imgList[0]}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
         <!--物品图片-->
 
-        <text class="item_description">{{item.describe}}</text>
+        <text class="item_description">{{item.title}}</text>
         <view class="img_cell">
           <text class="item_price">￥{{item.price}}</text>
           <text class="item_price_before">￥{{item.oriPrice}}</text>
@@ -39,7 +39,7 @@
         <image src="{{item.imgList[0]}}" bindtap='onGoodTap' id='{{item._id}}' style="width:100%" mode="widthFix"></image>
         <!--物品图片-->
 
-        <text class="item_description">{{item.describe}}</text>
+        <text class="item_description">{{item.title}}</text>
         <view class="img_cell">
           <text class="item_price">￥{{item.price}}</text>
           <text class="item_price_before">￥{{item.oriPrice}}</text>

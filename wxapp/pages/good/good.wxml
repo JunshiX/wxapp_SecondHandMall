@@ -7,7 +7,7 @@
       <swiper current="{{swiperCurrent}}" bindchange="swiperChange" class="good_swiper">
         <block wx:for="{{gData.imgList}}" wx:key="unique">
           <swiper-item style="display:flex;justify-content:center">
-            <image src="{{item}}" mode='aspectFit' style="height:100%" bindtap="previewImage" data-index="{{index}}" />
+            <image src="{{item}}" mode='aspectFit' style="width:100%;height:100%" bindtap="previewImage" data-index="{{index}}" />
           </swiper-item>
         </block>
       </swiper>
