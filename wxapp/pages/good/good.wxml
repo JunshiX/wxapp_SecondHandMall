@@ -98,14 +98,36 @@
           <!---->
         </view>
       </view>
+      <view class="good_cmt" style="align-items:center;justify-content:center;color:#979795">
+        <text>没有更多了</text>
+      </view>
     </block>
     <block wx:else>
-      <view class="good_cmt" style="align-items:center;justify-content:center">
+      <view class="good_cmt" style="align-items:center;justify-content:center;color:#979795">
         <text>暂无留言！</text>
       </view>
     </block>
-
     <!---->
-
   </view>
+
+  <!--占用自定义tabbar空间-->
+  <view style="height:108rpx"></view>
+  <!--占用自定义tabbar空间-->
+
+  <!--底部tab-->
+  <view class="bottom_tab_wrap">
+    <view class="bottom_tab">
+      <image class="tab_icon" src="/images/gtab/f_s.png" />
+      <text class="text_warp">收藏</text>
+    </view>
+    <view class="bottom_tab">
+      <image class="tab_icon" src="/images/gtab/m.png" />
+      <text class="text_warp">私信</text>
+    </view>
+    <view class="bottom_tab">
+      <image class="tab_icon" src="/images/gtab/s.png" />
+      <text class="text_warp">分享</text>
+    </view>
+  </view>
+  <!---->
 </view>

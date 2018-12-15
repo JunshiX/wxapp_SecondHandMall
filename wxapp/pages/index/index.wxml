@@ -27,7 +27,7 @@
     <!--两栏展示商品-->
 
     <!--占用自定义tabbar空间-->
-    <view style="height:98rpx"></view>
+    <view style="height:108rpx"></view>
     <!--占用自定义tabbar空间-->
   <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>

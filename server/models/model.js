@@ -32,7 +32,7 @@ Model.userModel = mongoose.model('userModel', userSchema);
 
 //商品评论表
 var commentSchema=new mongoose.Schema({
-    gId:{type:mongoose.Schema.ObjectId,ref:'goodSchema'},
+    gId:{type:mongoose.Schema.ObjectId,ref:'goodModel'},
     uId:String,
     uAva:String,
     uName:String,
@@ -42,5 +42,7 @@ var commentSchema=new mongoose.Schema({
     createAt:{type:Date,default:Date.now}
 },{versionKey:false});
 Model.commentModel=mongoose.model('commentModel',commentSchema);
+
+//收藏表
 
 module.exports = Model;

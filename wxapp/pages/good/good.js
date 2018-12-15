@@ -33,20 +33,24 @@ Page({
       },
       success: function(res) {
         wx.hideLoading();
-        that.loadComment();
         that.setData({
-          gData: res.data[0],
+          gData: res.data.gData,
+          cmtData: res.data.cmtData,
         })
+
       },
-    })
+    });
+
   },
 
   onShow: function() {
     if (app.globalData.userInfo != null) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
+      if (this.data.hasUserInfo == false) {
+        this.setData({
+          userInfo: app.globalData.userInfo,
+          hasUserInfo: true
+        })
+      }
     }
   },
 
@@ -103,7 +107,6 @@ Page({
           cuId: cuId,
           cuName: cuName,
           cmt: that.data.cmt
-
         },
         success: function(res) {
           //评论成功就将留言置空
@@ -114,9 +117,9 @@ Page({
             duration: 2000
           });
           that.setData({
-            cmt:null
+            cmt: null
           })
-          
+
         },
       });
       that.loadComment();
@@ -140,9 +143,7 @@ Page({
   },
 
   inputChange: function(e) {
-    this.setData({
-      cmt: e.detail.value
-    })
+    this.data.cmt = e.detail.value;
   }
 
 })

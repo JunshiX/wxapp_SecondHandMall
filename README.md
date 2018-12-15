@@ -504,7 +504,8 @@ bindInput: function(e) {
 ---
 ## **存储表的设计**
 >参考文档：  
->[MongoDB 进阶模式设计](http://www.mongoing.com/mongodb-advanced-pattern-design)
+>1.[MongoDB 进阶模式设计](http://www.mongoing.com/mongodb-advanced-pattern-design)  
+>2.[Mongoose官方文档——Populate](https://mongoosejs.com/docs/populate.html)
 
 [返回目录](#目录)
 
